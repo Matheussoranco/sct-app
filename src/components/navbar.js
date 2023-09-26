@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootswatch/dist/lux/bootstrap.css';
+
 function Navbar(props) {
   return (
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
