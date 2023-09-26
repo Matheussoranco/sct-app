@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootswatch/dist/lux/bootstrap.css';
-import 'toastr/build/toastr.min';
-import 'toastr/build/toastr.css';
+//import 'toastr/build/toastr.min';
+//import 'toastr/build/toastr.css';
 import Navbar from './components/navbar.js';
 //import Rotas from './rotas.js';
 
