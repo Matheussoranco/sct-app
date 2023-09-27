@@ -1,5 +1,5 @@
 import React from 'react';
-import 'bootswatch/dist/flatly/bootstrap.css';
+import 'bootswatch/dist/lux/bootstrap.css';
 
 import NavbarItem from './navbarItem';
 
@@ -8,7 +8,7 @@ function Navbar(props) {
     <div className='navbar navbar-expand-lg fixed-top navbar-dark bg-primary'>
       <div className='container'>
         <a href='/' className='navbar-brand'>
-          SAA
+          SCT
         </a>
         <button
           className='navbar-toggler'
@@ -25,8 +25,8 @@ function Navbar(props) {
           <ul className='navbar-nav'>
             <NavbarItem
               render='true'
-              href='/listagem-usuarios'
-              label='Usuários'
+              href='/listagem-Filmes'
+              label='Filmes'
             />
           </ul>
           <ul className='navbar-nav'>
@@ -35,12 +35,15 @@ function Navbar(props) {
           <ul className='navbar-nav'>
             <NavbarItem
               render='true'
-              href='/listagem-professores'
-              label='Professores'
+              href='/listagem-sessoes'
+              label='Sessões'
             />
           </ul>
           <ul className='navbar-nav'>
-            <NavbarItem render='true' href='/listagem-alunos' label='Alunos' />
+            <NavbarItem render='true'
+            href='/listagem-cinemas'
+            label='Cinemas' 
+            />
           </ul>
           <ul className='navbar-nav'>
             <NavbarItem render='true' href='/login' label='Entrar' />
