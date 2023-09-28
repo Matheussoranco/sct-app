@@ -1,0 +1,12 @@
+.form-inline .nav-search-bar {
+    height: 5px; /* You can adjust the height as needed */
+  }
+  
+  /* Adjust the height of the search button */
+  .form-inline .nav-search-button {
+    height: 24px; /* You can adjust the height as needed */
+    line-height: 1; /* Center the text vertically */
+    padding: 0.25rem 0.5rem; /* Adjust padding as needed */
+    padding-left: 0.50rem;
+  }
+
