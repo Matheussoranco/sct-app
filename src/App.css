@@ -37,4 +37,13 @@
   }
 }
 
+.user-avatar-button {
+  background-color: transparent; /* Remove any background color from the button */
+  border: none; /* Remove the button border if present */
+  padding: 0; /* Remove padding to eliminate extra spacing */
+}
+
+.user-avatar {
+  background-color: transparent !important; /* Remove any background color from the image */
+}
 
