@@ -60,7 +60,7 @@ function Navbar(props) {
             <NavbarItem render="true" href="/listagem-sessoes" label="Sessões" />
           </ul>
           <ul className="navbar-nav">
-            <NavbarItem render="true" href="/listagem-cursos" label="Comprar" />
+            <NavbarItem render="true" href="/Comprar" label="Comprar" />
           </ul>
           <NavSearchBar onSearch={handleSearch} />
         </div>

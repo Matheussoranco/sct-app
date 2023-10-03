@@ -1,16 +1,45 @@
-import React from 'react';
+// App.js
+import React, { Component } from 'react';
 import 'bootswatch/dist/lux/bootstrap.css';
-//import 'toastr/build/toastr.min';
-//import 'toastr/build/toastr.css';
 import Navbar from './components/navbar.js';
+import AdmNavBar from './components/AdmNavBar.js';
 import './styles.css'; 
-//import Rotas from './rotas.js';
+import AdminLogin from './components/AdmLogin.js';
 
-class App extends React.Component {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showAdminLogin: false,
+      isAdminLoggedIn: false,
+    };
+  }
+
+  componentDidMount() {
+    this.checkRoute();
+    window.addEventListener('popstate', this.checkRoute);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('popstate', this.checkRoute);
+  }
+
+  checkRoute = () => {
+    const currentRoute = window.location.pathname;
+    this.setState({ showAdminLogin: currentRoute === '/adm' });
+  }
+
+  handleAdminLogin = (isLoggedIn) => {
+    this.setState({ isAdminLoggedIn: isLoggedIn, showAdminLogin: !isLoggedIn });
+  }
+
   render() {
     return (
       <div className='container'>
-        <Navbar />
+        {this.state.isAdminLoggedIn ? <AdmNavBar /> : <Navbar />}
+        {this.state.showAdminLogin && !this.state.isAdminLoggedIn ? (
+          <AdminLogin onAdminLogin={this.handleAdminLogin} />
+        ) : null}
       </div>
     );
   }
