@@ -1,10 +1,10 @@
-// App.js
 import React, { Component } from 'react';
 import 'bootswatch/dist/lux/bootstrap.css';
 import Navbar from './components/navbar.js';
 import AdmNavBar from './components/AdmNavBar.js';
 import './styles.css'; 
 import AdminLogin from './components/AdmLogin.js';
+import StarryBackground from "./components/StarryBackground.js";
 
 class App extends Component {
   constructor(props) {
@@ -35,11 +35,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className='container'>
-        {this.state.isAdminLoggedIn ? <AdmNavBar /> : <Navbar />}
-        {this.state.showAdminLogin && !this.state.isAdminLoggedIn ? (
-          <AdminLogin onAdminLogin={this.handleAdminLogin} />
-        ) : null}
+      <div>
+          <StarryBackground />
+        <div className='container'>
+          {this.state.isAdminLoggedIn ? <AdmNavBar /> : <Navbar />}
+          {this.state.showAdminLogin && !this.state.isAdminLoggedIn ? (
+            <AdminLogin onAdminLogin={this.handleAdminLogin} />
+          ) : null}
+        </div>
       </div>
     );
   }

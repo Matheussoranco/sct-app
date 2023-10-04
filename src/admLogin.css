@@ -1,16 +1,24 @@
-/* src/AdminLogin.css */
+src/AdminLogin.css
 .admin-login-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
     min-height: 100vh; /* Ensure the container takes the full height of the viewport */
+    z-index: 1;
   }
   
   form {
     width: 300px; /* Adjust the width of the form container as needed */
   }
-  
+
+  .button-size {
+    width: 8vh;
+  }
+  .admin-login-heading {
+    color: white;
+  }
   /* Apply styles only to inputs with the admin-input class */
   .admin-input {
     width: 100%; /* Both input fields with this class will have the same width */
@@ -22,4 +30,19 @@
   
   .button-container {
     margin-top: 20px; /* Add some spacing between the form and the button */
+  }
+  .admin-login-container {
+    position: relative;
+    z-index: 2; /* Ensure the admin login container appears above the stars */
+    /* Other styles for the admin login container */
+  }
+  
+  .stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    transform: rotate(-45deg);
+    z-index: 1; /* Set a lower z-index to position the stars behind the admin login container */
   }

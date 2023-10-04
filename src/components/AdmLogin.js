@@ -25,10 +25,10 @@ const AdminLogin = ({ onAdminLogin }) => {
 
   return (
     <div className="admin-login-container">
-      <h2>Admin Login</h2>
+      <h2  className="admin-login-heading">Adm Login</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
+        <div className="admin-login-heading">
+          <label htmlFor="username">Usuário:</label>
           <input
             type="text"
             id="username"
@@ -38,8 +38,8 @@ const AdminLogin = ({ onAdminLogin }) => {
             required
           />
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
+        <div className="admin-login-heading">
+          <label htmlFor="password">Senha:</label>
           <input
             type="password"
             id="password"
@@ -50,7 +50,7 @@ const AdminLogin = ({ onAdminLogin }) => {
           />
         </div>
         <div className="button-container">
-          <button type="submit">Login</button>
+          <button className="button-size" type="submit">Entrar</button>
         </div>
       </form>
     </div>
