@@ -82,7 +82,7 @@ function Navbar(props) {
                    type="email"
                    className="form-control form-control-sm"
                    id="email"
-                   placeholder="Enter email"
+                   placeholder="Email"
                  />
                </div>
                <div className="form-group">
@@ -91,7 +91,7 @@ function Navbar(props) {
                    type="password"
                    className="form-control form-control-sm"
                    id="password"
-                   placeholder="Password"
+                   placeholder="Senha"
                  />
                </div>
                <div className="mt-2"> {/* Add margin-top to create space */}

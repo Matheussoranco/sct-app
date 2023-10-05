@@ -67,22 +67,22 @@ function Navbar(props) {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownCinema"
               >
-                <a className="dropdown-item" href="/listagem-Cinemas">
+                <a className="dropdown-item" href="/listagem-cinemas">
                   Cinemas
                 </a>
                 <a className="dropdown-item" href="/listagem-salas">
                   Salas
                 </a>
-                <a className="dropdown-item" href="/listagem-Assentos">
+                <a className="dropdown-item" href="/listagem-assentos">
                   Assentos
                 </a>
-                <a className="dropdown-item" href="/listagem-TipoAssento">
+                <a className="dropdown-item" href="/listagem-tipoDeAssento">
                   Tipos de assento
                 </a>
-                <a className="dropdown-item" href="/listagem-Filmes">
+                <a className="dropdown-item" href="/listagem-filmes">
                   Filmes
                 </a>
-                <a className="dropdown-item" href="/listagem-Categorias">
+                <a className="dropdown-item" href="/listagem-categorias">
                   Categorias
                 </a>
               </div>
@@ -103,13 +103,13 @@ function Navbar(props) {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownCinema"
               >
-                <a className="dropdown-item" href="/listagem-Sessões">
+                <a className="dropdown-item" href="/listagem-sessões">
                   Sessões
                 </a>
-                <a className="dropdown-item" href="/listagem-TipoExibicao">
+                <a className="dropdown-item" href="/listagem-tipoDeExibicao">
                   Tipos de exibição
                 </a>
-                <a className="dropdown-item" href="/listagem-TipoTicket">
+                <a className="dropdown-item" href="/listagem-TipoDeTicket">
                   Tipos de ticket
                 </a>
               </div>
@@ -119,15 +119,22 @@ function Navbar(props) {
           <ul className="navbar-nav">
             <NavbarItem
               render="true"
-              href="/listagem-Produtoras"
+              href="/listagem-produtoras"
               label="Produtoras"
             />
           </ul>
           <ul className="navbar-nav">
             <NavbarItem
               render="true"
-              href="/listagem-Proprietarios"
-              label="Proprietarios"
+              href="/listagem-proprietarios"
+              label="Proprietários"
+            />
+          </ul>
+          <ul className="navbar-nav">
+            <NavbarItem
+              render="true"
+              href="/listagem-usuarios"
+              label="Usuários"
             />
           </ul>
           <NavSearchBar onSearch={handleSearch} />

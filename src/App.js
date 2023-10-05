@@ -5,6 +5,9 @@ import AdmNavBar from './components/AdmNavBar.js';
 import './styles.css'; 
 import AdminLogin from './components/AdmLogin.js';
 import StarryBackground from "./components/StarryBackground.js";
+import 'toastr/build/toastr.min';
+import 'toastr/build/toastr.css';
+import Rotas from './rotas.js';
 
 class App extends Component {
   constructor(props) {
@@ -36,6 +39,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Rotas/>
           <StarryBackground />
         <div className='container'>
           {this.state.isAdminLoggedIn ? <AdmNavBar /> : <Navbar />}
