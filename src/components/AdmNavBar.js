@@ -67,22 +67,22 @@ function Navbar(props) {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownCinema"
               >
-                <a className="dropdown-item" href="/listagem-cinemas">
+                <a className="dropdown-item" href="/adm/listagem-cinemas">
                   Cinemas
                 </a>
-                <a className="dropdown-item" href="/listagem-salas">
+                <a className="dropdown-item" href="/adm/listagem-salas">
                   Salas
                 </a>
-                <a className="dropdown-item" href="/listagem-assentos">
+                <a className="dropdown-item" href="/adm/listagem-assentos">
                   Assentos
                 </a>
-                <a className="dropdown-item" href="/listagem-tipoDeAssento">
+                <a className="dropdown-item" href="/adm/listagem-tipoDeAssento">
                   Tipos de assento
                 </a>
-                <a className="dropdown-item" href="/listagem-filmes">
+                <a className="dropdown-item" href="/adm/listagem-filmes">
                   Filmes
                 </a>
-                <a className="dropdown-item" href="/listagem-categorias">
+                <a className="dropdown-item" href="/adm/listagem-categorias">
                   Categorias
                 </a>
               </div>
@@ -103,13 +103,13 @@ function Navbar(props) {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownCinema"
               >
-                <a className="dropdown-item" href="/listagem-sessões">
+                <a className="dropdown-item" href="/adm/listagem-sessoes">
                   Sessões
                 </a>
-                <a className="dropdown-item" href="/listagem-tipoDeExibicao">
+                <a className="dropdown-item" href="/adm/listagem-tipoDeExibicao">
                   Tipos de exibição
                 </a>
-                <a className="dropdown-item" href="/listagem-TipoDeTicket">
+                <a className="dropdown-item" href="/adm/listagem-TipoDeTicket">
                   Tipos de ticket
                 </a>
               </div>
@@ -119,21 +119,21 @@ function Navbar(props) {
           <ul className="navbar-nav">
             <NavbarItem
               render="true"
-              href="/listagem-produtoras"
+              href="/adm/listagem-produtoras"
               label="Produtoras"
             />
           </ul>
           <ul className="navbar-nav">
             <NavbarItem
               render="true"
-              href="/listagem-proprietarios"
+              href="/adm/listagem-proprietarios"
               label="Proprietários"
             />
           </ul>
           <ul className="navbar-nav">
             <NavbarItem
               render="true"
-              href="/listagem-usuarios"
+              href="/adm/listagem-usuarios"
               label="Usuários"
             />
           </ul>

@@ -61,7 +61,7 @@ function ListagemCinemas() {
   if (!dados) return null;
 
   return (
-    <div className='container'>
+    <div className='listContainer'>
       <Card title='Listagem de cinemas'>
         <div className='row'>
           <div className='col-lg-12'>
@@ -84,6 +84,7 @@ function ListagemCinemas() {
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
+                      <td>{dado.id}</td>
                       <td>{dado.nome}</td>
                       <td>{dado.cnpj}</td>
                       <td>

@@ -1,4 +1,4 @@
-// src/AdminLogin.js
+
 import React, { useState } from 'react';
 import '../admLogin.css'; // Import a CSS file for styling
 
@@ -12,16 +12,14 @@ const AdminLogin = ({ onAdminLogin }) => {
     // In a real application, you would perform authentication here
     // For this example, let's assume username: "admin" and password: "password"
     if (username === 'adm' && password === '123') {
+      
       setLoggedIn(true);
       onAdminLogin(true); // Call the callback function with the login status
+  
     } else {
       alert('Invalid credentials');
     }
   };
-
-  if (loggedIn) {
-    return <div>Welcome, Admin!</div>;
-  }
 
   return (
     <div className="admin-login-container">

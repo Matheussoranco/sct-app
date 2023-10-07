@@ -11,10 +11,10 @@ function Rotas(props) {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/listagem-usuarios' element={<ListagemUsuarios />} />
-        <Route path='/listagem-cinemas' element={<ListagemCinemas />} />
-        <Route path='/listagem-filmes' element={<ListagemFilmes />} />
-        <Route path='/listagem-sessoes' element={<ListagemSessoes />} />
+        <Route path='/adm/listagem-usuarios' element={<ListagemUsuarios />} />
+        <Route path='/adm/listagem-cinemas' element={<ListagemCinemas />} />
+        <Route path='/adm/listagem-filmes' element={<ListagemFilmes />} />
+        <Route path='/adm/listagem-sessoes' element={<ListagemSessoes />} />
       </Routes>
     </BrowserRouter>
   );

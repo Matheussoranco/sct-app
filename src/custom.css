@@ -1,5 +1,6 @@
 body {
     padding-top: 120px;
+    
   }
   pre {
     background: #f7f7f9;
@@ -245,3 +246,12 @@ body {
       text-align: center;
     }
   }
+
+  .listContainer {
+  width: 100vw ;
+  padding: 0; /* Remove any padding */
+  margin: 0; /* Remove any margin */
+  height: 100vh;
+}
+ 
+  

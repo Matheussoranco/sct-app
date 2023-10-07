@@ -9,15 +9,14 @@ import 'toastr/build/toastr.min';
 import 'toastr/build/toastr.css';
 import Rotas from './rotas.js';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showAdminLogin: false,
-      isAdminLoggedIn: false,
-    };
-  }
 
+class App extends Component {
+  
+  state = {
+    showAdminLogin: false,
+    isAdminLoggedIn: false, // Initialize based on prop
+  };
+  
   componentDidMount() {
     this.checkRoute();
     window.addEventListener('popstate', this.checkRoute);
@@ -28,20 +27,29 @@ class App extends Component {
   }
 
   checkRoute = () => {
-    const currentRoute = window.location.pathname;
-    this.setState({ showAdminLogin: currentRoute === '/adm' });
-  }
+  const currentRoute = window.location.pathname;
+  const isAdminRoute = currentRoute.includes('adm') && currentRoute !== '/adm';
+  this.setState({ showAdminLogin: currentRoute === '/adm', isAdminLoggedIn: isAdminRoute });
+}
 
   handleAdminLogin = (isLoggedIn) => {
-    this.setState({ isAdminLoggedIn: isLoggedIn, showAdminLogin: !isLoggedIn });
+    if (isLoggedIn) {
+      // If isLoggedIn is true, set isAdminLoggedIn to true and showAdminLogin to false
+      this.setState({ isAdminLoggedIn: true, showAdminLogin: false });
+    } else {
+      // If isLoggedIn is false, don't change the state of isAdminLoggedIn
+      // Only update showAdminLogin to false
+      this.setState({ showAdminLogin: false });
+    }
   }
 
   render() {
+    
     return (
-      <div>
-        <Rotas/>
-          <StarryBackground />
-        <div className='container'>
+      <div className={`app-container ${this.state.isAdminLoggedIn ? 'adm-background' : ''}`}>
+        <Rotas />
+        {this.state.isAdminLoggedIn ? null : <StarryBackground />}
+        <div className={`container ${this.state.isAdminLoggedIn ? 'adm-background' : ''}`}>
           {this.state.isAdminLoggedIn ? <AdmNavBar /> : <Navbar />}
           {this.state.showAdminLogin && !this.state.isAdminLoggedIn ? (
             <AdminLogin onAdminLogin={this.handleAdminLogin} />
@@ -50,6 +58,7 @@ class App extends Component {
       </div>
     );
   }
+  
 }
 
 export default App;
