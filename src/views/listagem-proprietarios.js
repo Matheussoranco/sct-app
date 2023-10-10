@@ -115,4 +115,4 @@ function ListagemUsuarios() {
   );
 }
 
-export default ListagemUsuarios;
+export default ListagemProprietarios;
