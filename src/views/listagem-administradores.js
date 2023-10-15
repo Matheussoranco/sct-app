@@ -16,17 +16,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import { BASE_URL } from '../config/axios';
 
-const baseURL = `${BASE_URL}/salas`;
+const baseURL = `${BASE_URL}/administradores`;
 
-function ListagemSalas() {
+function ListagemAdm() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-salas`);
+    navigate(`/cadastro-administradores`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-salas/${id}`);
+    navigate(`/cadastro-administradores/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -40,7 +40,7 @@ function ListagemSalas() {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(function (response) {
-        mensagemSucesso(`Sala excluído com sucesso!`);
+        mensagemSucesso(`administradores excluído com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -48,7 +48,7 @@ function ListagemSalas() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir o sala`);
+        mensagemErro(`Erro ao excluir o administradores`);
       });
   }
 
@@ -62,7 +62,7 @@ function ListagemSalas() {
 
   return (
     <div className='listContainer'>
-      <Card title='Listagem de salas'>
+      <Card title='Listagem de administradores'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
@@ -71,22 +71,22 @@ function ListagemSalas() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Assentos disponíveis
+                Administradores 
               </button>
               <table className='table table-hover'>
                 <thead>
                   <tr>
                     <th scope='col'>Código</th>
-                    <th scope='col'>número</th>
-                    <th scope='col'>Quantidade de Assentos</th>
+                    <th scope='col'>Nome</th>
+                    <th scope='col'>Email</th>
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
-                      <td>{dado.numeroSala}</td>
-                      <td>{dado.qtdAssentos}</td>
+                      <td>{dado.nome}</td>
+                      <td>{dado.email}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
@@ -115,4 +115,4 @@ function ListagemSalas() {
   );
 }
 
-export default ListagemSalas;
+export default ListagemAdm;

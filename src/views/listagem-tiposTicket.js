@@ -18,7 +18,7 @@ import { BASE_URL } from '../config/axios';
 
 const baseURL = `${BASE_URL}/TipoTicket`;
 
-function ListagemAssentos() {
+function ListagemTipoTicket() {
   const navigate = useNavigate();
 
   const cadastrar = () => {

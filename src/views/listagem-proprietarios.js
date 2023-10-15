@@ -18,7 +18,7 @@ import { BASE_URL } from '../config/axios';
 
 const baseURL = `${BASE_URL}/proprietarios`;
 
-function ListagemUsuarios() {
+function ListagemProprietarios() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
@@ -71,7 +71,7 @@ function ListagemUsuarios() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Novo usuario
+                Novo proprietario
               </button>
               <table className='table table-hover'>
                 <thead>

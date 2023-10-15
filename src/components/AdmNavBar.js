@@ -76,7 +76,7 @@ function Navbar(props) {
                 <a className="dropdown-item" href="/adm/listagem-assentos">
                   Assentos
                 </a>
-                <a className="dropdown-item" href="/adm/listagem-tipoDeAssento">
+                <a className="dropdown-item" href="/adm/listagem-tiposAssento">
                   Tipos de assento
                 </a>
                 <a className="dropdown-item" href="/adm/listagem-filmes">
@@ -106,11 +106,41 @@ function Navbar(props) {
                 <a className="dropdown-item" href="/adm/listagem-sessoes">
                   Sessões
                 </a>
-                <a className="dropdown-item" href="/adm/listagem-tipoDeExibicao">
+                <a className="dropdown-item" href="/adm/listagem-tiposExibicao">
                   Tipos de exibição
                 </a>
-                <a className="dropdown-item" href="/adm/listagem-TipoDeTicket">
+                <a className="dropdown-item" href="/adm/listagem-tiposTicket">
                   Tipos de ticket
+                </a>
+                <a className="dropdown-item" href="/adm/listagem-formasPagamento">
+                  Formas de pagamento
+                </a>
+              </div>
+            </li>
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownCinema"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Pessoas
+              </a>
+              <div
+                className="dropdown-menu"
+                aria-labelledby="navbarDropdownCinema"
+              >
+                <a className="dropdown-item" href="/adm/listagem-administradores">
+                  Administradores
+                </a>
+                <a className="dropdown-item" href="/adm/listagem-usuarios">
+                  Usuarios
+                </a>
+                <a className="dropdown-item" href="/adm/listagem-proprietarios">
+                  Proprietarios
                 </a>
               </div>
             </li>
@@ -123,20 +153,7 @@ function Navbar(props) {
               label="Produtoras"
             />
           </ul>
-          <ul className="navbar-nav">
-            <NavbarItem
-              render="true"
-              href="/adm/listagem-proprietarios"
-              label="Proprietários"
-            />
-          </ul>
-          <ul className="navbar-nav">
-            <NavbarItem
-              render="true"
-              href="/adm/listagem-usuarios"
-              label="Usuários"
-            />
-          </ul>
+         
           <NavSearchBar onSearch={handleSearch} />
         </div>
         <div className="navbar-nav ml-auto custom-right-content">

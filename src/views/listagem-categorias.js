@@ -18,7 +18,7 @@ import { BASE_URL } from '../config/axios';
 
 const baseURL = `${BASE_URL}/categorias`;
 
-function ListagemAssentos() {
+function ListagemCategorias() {
   const navigate = useNavigate();
 
   const cadastrar = () => {

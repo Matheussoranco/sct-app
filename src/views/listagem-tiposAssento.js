@@ -16,9 +16,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import { BASE_URL } from '../config/axios';
 
-const baseURL = `${BASE_URL}/TipoAssentos`;
+const baseURL = `${BASE_URL}/tiposAssento`;
 
-function ListagemAssentos() {
+function ListagemTipoAssentos() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
@@ -71,7 +71,7 @@ function ListagemAssentos() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Assentos disponíveis
+                 Tipos de assento
               </button>
               <table className='table table-hover'>
                 <thead>
@@ -84,7 +84,7 @@ function ListagemAssentos() {
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
-                      <td>{dado.disponivel}</td>
+                      <td>{dado.nome}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton

@@ -71,13 +71,13 @@ function ListagemAssentos() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Assentos disponíveis
+                Assentos 
               </button>
               <table className='table table-hover'>
                 <thead>
                   <tr>
                     <th scope='col'>Código</th>
-                    <th scope='col'>disponivel</th>
+                    <th scope='col'>disponível</th>
                   </tr>
                 </thead>
                 <tbody>

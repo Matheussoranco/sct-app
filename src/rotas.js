@@ -12,6 +12,9 @@ import ListagemSalas from './views/listagem-salas';
 import ListagemTiposAssento from './views/listagem-tiposAssento';
 import ListagemTiposExibicao from './views/listagem-tiposExibicao';
 import ListagemTiposTicket from './views/listagem-tiposTicket';
+import ListagemAdministradores from './views/listagem-administradores';
+import ListagemFormasPagamento from './views/listagem-formasPagamento';
+
 
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
@@ -23,7 +26,7 @@ function Rotas(props) {
         <Route path='/adm/listagem-cinemas' element={<ListagemCinemas />} />
         <Route path='/adm/listagem-filmes' element={<ListagemFilmes />} />
         <Route path='/adm/listagem-sessoes' element={<ListagemSessoes />} />
-        <Route path='/adm/listagem-assetos' element={<ListagemAssentos />} />
+        <Route path='/adm/listagem-assentos' element={<ListagemAssentos />} />
         <Route path='/adm/listagem-categorias' element={<ListagemCategorias />} />
         <Route path='/adm/listagem-produtoras' element={<ListagemProdutoras />} />
         <Route path='/adm/listagem-proprietarios' element={<ListagemProprietarios />} />
@@ -31,6 +34,8 @@ function Rotas(props) {
         <Route path='/adm/listagem-tiposAssento' element={<ListagemTiposAssento />} />
         <Route path='/adm/listagem-tiposExibicao' element={<ListagemTiposExibicao />} />
         <Route path='/adm/listagem-tiposTicket' element={<ListagemTiposTicket />} />
+        <Route path='/adm/listagem-administradores' element={<ListagemAdministradores />} />
+        <Route path='/adm/listagem-formasPagamento' element={<ListagemFormasPagamento />} />
       </Routes>
     </BrowserRouter>
   );
