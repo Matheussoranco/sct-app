@@ -1,20 +1,21 @@
 import React from 'react';
 
-import ListagemCinemas from './views/listagem-cinemas';
-import ListagemFilmes from './views/listagem-filmes';
-import ListagemSessoes from './views/listagem-sessoes';
-import ListagemUsuarios from './views/listagem-usuarios';
-import ListagemAssentos from './views/listagem-assentos';
-import ListagemCategorias from './views/listagem-categorias';
-import ListagemProdutoras from './views/listagem-produtoras';
-import ListagemProprietarios from './views/listagem-proprietarios';
-import ListagemSalas from './views/listagem-salas';
-import ListagemTiposAssento from './views/listagem-tiposAssento';
-import ListagemTiposExibicao from './views/listagem-tiposExibicao';
-import ListagemTiposTicket from './views/listagem-tiposTicket';
-import ListagemAdministradores from './views/listagem-administradores';
-import ListagemFormasPagamento from './views/listagem-formasPagamento';
+import ListagemCinemas from './views/listagem/listagem-cinemas';
+import ListagemFilmes from './views/listagem/listagem-filmes';
+import ListagemSessoes from './views/listagem/listagem-sessoes';
+import ListagemUsuarios from './views/listagem/listagem-usuarios';
+import ListagemAssentos from './views/listagem/listagem-assentos';
+import ListagemCategorias from './views/listagem/listagem-categorias';
+import ListagemProdutoras from './views/listagem/listagem-produtoras';
+import ListagemProprietarios from './views/listagem/listagem-proprietarios';
+import ListagemSalas from './views/listagem/listagem-salas';
+import ListagemTiposAssento from './views/listagem/listagem-tiposAssento';
+import ListagemTiposExibicao from './views/listagem/listagem-tiposExibicao';
+import ListagemTiposTicket from './views/listagem/listagem-tiposTicket';
+import ListagemAdministradores from './views/listagem/listagem-administradores';
+import ListagemFormasPagamento from './views/listagem/listagem-formasPagamento';
 
+import CadastroCinemas from './views/cadastro/cadastro-cinemas';
 
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
@@ -22,6 +23,10 @@ function Rotas(props) {
   return (
     <BrowserRouter>
       <Routes>
+      <Route
+          path='/cadastro-cinemas/:idParam?'
+          element={<CadastroCinemas />}
+        />
         <Route path='/adm/listagem-usuarios' element={<ListagemUsuarios />} />
         <Route path='/adm/listagem-cinemas' element={<ListagemCinemas />} />
         <Route path='/adm/listagem-filmes' element={<ListagemFilmes />} />
