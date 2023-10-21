@@ -253,5 +253,9 @@ body {
   margin: 0; /* Remove any margin */
   height: 100vh;
 }
+
+.bs-component .form-group {
+  margin-bottom: 10px; /* You can adjust this value to control the spacing */
+}
  
   

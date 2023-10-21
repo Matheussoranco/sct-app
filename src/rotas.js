@@ -24,9 +24,10 @@ function Rotas(props) {
     <BrowserRouter>
       <Routes>
       <Route
-          path='/cadastro-cinemas/:idParam?'
+          path='/adm/cadastro/cadastro-cinemas/:idParam?'
           element={<CadastroCinemas />}
         />
+
         <Route path='/adm/listagem-usuarios' element={<ListagemUsuarios />} />
         <Route path='/adm/listagem-cinemas' element={<ListagemCinemas />} />
         <Route path='/adm/listagem-filmes' element={<ListagemFilmes />} />

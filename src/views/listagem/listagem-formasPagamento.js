@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Card from '../components/card';
+import Card from '../../components/card';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -14,19 +14,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios';
+import { BASE_URL } from '../../config/axios';
 
-const baseURL = `${BASE_URL}/TipoTicket`;
+const baseURL = `${BASE_URL}/formasPagamento`;
 
-function ListagemTipoTicket() {
+function ListagemFormaPagamento() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-TipoTicket`);
+    navigate(`/cadastro-formaPagamento`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-TipoTicket/${id}`);
+    navigate(`/cadastro-formaPagamento/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -40,7 +40,7 @@ function ListagemTipoTicket() {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(function (response) {
-        mensagemSucesso(`Tipo de ticket excluído com sucesso!`);
+        mensagemSucesso(`formaPagamento excluído com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -48,7 +48,7 @@ function ListagemTipoTicket() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir o Tipo de ticket`);
+        mensagemErro(`Erro ao excluir o formaPagamento`);
       });
   }
 
@@ -62,7 +62,7 @@ function ListagemTipoTicket() {
 
   return (
     <div className='listContainer'>
-      <Card title='Listagem de tickets'>
+      <Card title='Listagem de formasPagamento'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
@@ -71,20 +71,20 @@ function ListagemTipoTicket() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Assentos disponíveis
+                formasPagamento 
               </button>
               <table className='table table-hover'>
                 <thead>
                   <tr>
                     <th scope='col'>Código</th>
-                    <th scope='col'>Nome</th>
+                    <th scope='col'>nome</th>
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
-                      <td>{dado.disponivel}</td>
+                      <td>{dado.nome}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
@@ -113,4 +113,4 @@ function ListagemTipoTicket() {
   );
 }
 
-export default ListagemTipoTicket;
+export default ListagemFormaPagamento;

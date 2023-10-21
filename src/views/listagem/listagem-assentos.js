@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Card from '../components/card';
+import Card from '../../components/card';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -14,19 +14,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios';
+import { BASE_URL } from '../../config/axios';
 
-const baseURL = `${BASE_URL}/tiposAssento`;
+const baseURL = `${BASE_URL}/assentos`;
 
-function ListagemTipoAssentos() {
+function ListagemAssentos() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-TipoAssento`);
+    navigate(`/cadastro-assento`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-TipoAssento/${id}`);
+    navigate(`/cadastro-assentos/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -40,7 +40,7 @@ function ListagemTipoAssentos() {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(function (response) {
-        mensagemSucesso(`Tipo de assento excluído com sucesso!`);
+        mensagemSucesso(`Assento excluído com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -48,7 +48,7 @@ function ListagemTipoAssentos() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir o Tipo de Assento`);
+        mensagemErro(`Erro ao excluir o assento`);
       });
   }
 
@@ -71,20 +71,20 @@ function ListagemTipoAssentos() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                 Tipos de assento
+                Assentos 
               </button>
               <table className='table table-hover'>
                 <thead>
                   <tr>
                     <th scope='col'>Código</th>
-                    <th scope='col'>Nome</th>
+                    <th scope='col'>disponível</th>
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
-                      <td>{dado.nome}</td>
+                      <td>{dado.disponivel}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
@@ -113,4 +113,4 @@ function ListagemTipoAssentos() {
   );
 }
 
-export default ListagemTipoAssentos;
+export default ListagemAssentos;

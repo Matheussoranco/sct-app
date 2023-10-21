@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Card from '../components/card';
+import Card from '../../components/card';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -14,19 +14,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios';
+import { BASE_URL } from '../../config/axios';
 
-const baseURL = `${BASE_URL}/administradores`;
+const baseURL = `${BASE_URL}/salas`;
 
-function ListagemAdm() {
+function ListagemSalas() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-administradores`);
+    navigate(`/cadastro-salas`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-administradores/${id}`);
+    navigate(`/cadastro-salas/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -40,7 +40,7 @@ function ListagemAdm() {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(function (response) {
-        mensagemSucesso(`administradores excluído com sucesso!`);
+        mensagemSucesso(`Sala excluído com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -48,7 +48,7 @@ function ListagemAdm() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir o administradores`);
+        mensagemErro(`Erro ao excluir o sala`);
       });
   }
 
@@ -62,7 +62,7 @@ function ListagemAdm() {
 
   return (
     <div className='listContainer'>
-      <Card title='Listagem de administradores'>
+      <Card title='Listagem de salas'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
@@ -71,22 +71,22 @@ function ListagemAdm() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Administradores 
+                Assentos disponíveis
               </button>
               <table className='table table-hover'>
                 <thead>
                   <tr>
                     <th scope='col'>Código</th>
-                    <th scope='col'>Nome</th>
-                    <th scope='col'>Email</th>
+                    <th scope='col'>número</th>
+                    <th scope='col'>Quantidade de Assentos</th>
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
-                      <td>{dado.nome}</td>
-                      <td>{dado.email}</td>
+                      <td>{dado.numeroSala}</td>
+                      <td>{dado.qtdAssentos}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
@@ -115,4 +115,4 @@ function ListagemAdm() {
   );
 }
 
-export default ListagemAdm;
+export default ListagemSalas;

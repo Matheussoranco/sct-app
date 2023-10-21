@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Card from '../components/card';
+import Card from '../../components/card';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -14,19 +14,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios';
+import { BASE_URL } from '../../config/axios';
 
-const baseURL = `${BASE_URL}/tiposExibicao`;
+const baseURL = `${BASE_URL}/proprietarios`;
 
-function ListagemTipoExibicao() {
+function ListagemProprietarios() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-TipoExibicao`);
+    navigate(`/cadastro-proprietarios`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-TipoExibicao/${id}`);
+    navigate(`/cadastro-proprietarios/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -40,7 +40,7 @@ function ListagemTipoExibicao() {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(function (response) {
-        mensagemSucesso(`Tipo de exibicao excluído com sucesso!`);
+        mensagemSucesso(`proprietario excluído com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -48,7 +48,7 @@ function ListagemTipoExibicao() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir o Tipo de exibicao`);
+        mensagemErro(`Erro ao excluir o proprietario`);
       });
   }
 
@@ -62,7 +62,7 @@ function ListagemTipoExibicao() {
 
   return (
     <div className='listContainer'>
-      <Card title='Listagem de exibições'>
+      <Card title='Listagem de proprietarios'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
@@ -71,13 +71,14 @@ function ListagemTipoExibicao() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Tipos de exibição
+                Novo proprietario
               </button>
               <table className='table table-hover'>
                 <thead>
                   <tr>
                     <th scope='col'>Código</th>
                     <th scope='col'>Nome</th>
+                    <th scope='col'>email</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -85,6 +86,7 @@ function ListagemTipoExibicao() {
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
                       <td>{dado.nome}</td>
+                      <td>{dado.email}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
@@ -113,4 +115,4 @@ function ListagemTipoExibicao() {
   );
 }
 
-export default ListagemTipoExibicao;
+export default ListagemProprietarios;

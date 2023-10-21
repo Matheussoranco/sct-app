@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Card from '../components/card';
+import Card from '../../components/card';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -14,19 +14,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios';
+import { BASE_URL } from '../../config/axios';
 
-const baseURL = `${BASE_URL}/usuarios`;
+const baseURL = `${BASE_URL}/categorias`;
 
-function ListagemUsuarios() {
+function ListagemCategorias() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-usuarios`);
+    navigate(`/cadastro-categoria`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-usuarios/${id}`);
+    navigate(`/cadastro-categorias/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -40,7 +40,7 @@ function ListagemUsuarios() {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(function (response) {
-        mensagemSucesso(`usuario excluído com sucesso!`);
+        mensagemSucesso(`Categoria excluída com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -48,7 +48,7 @@ function ListagemUsuarios() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir o usuario`);
+        mensagemErro(`Erro ao excluir o categoria`);
       });
   }
 
@@ -62,7 +62,7 @@ function ListagemUsuarios() {
 
   return (
     <div className='listContainer'>
-      <Card title='Listagem de usuarios'>
+      <Card title='Listagem de categorias'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
@@ -71,14 +71,13 @@ function ListagemUsuarios() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Novo usuario
+                Assentos disponíveis
               </button>
               <table className='table table-hover'>
                 <thead>
                   <tr>
                     <th scope='col'>Código</th>
-                    <th scope='col'>Nome</th>
-                    <th scope='col'>email</th>
+                    <th scope='col'>nome</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -86,7 +85,6 @@ function ListagemUsuarios() {
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
                       <td>{dado.nome}</td>
-                      <td>{dado.email}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
@@ -115,4 +113,4 @@ function ListagemUsuarios() {
   );
 }
 
-export default ListagemUsuarios;
+export default ListagemCategorias;

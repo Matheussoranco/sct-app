@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Card from '../components/card';
+import Card from '../../components/card';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -14,19 +14,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios';
+import { BASE_URL } from '../../config/axios';
 
-const baseURL = `${BASE_URL}/proprietarios`;
+const baseURL = `${BASE_URL}/tiposAssento`;
 
-function ListagemProprietarios() {
+function ListagemTipoAssentos() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-proprietarios`);
+    navigate(`/cadastro-TipoAssento`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-proprietarios/${id}`);
+    navigate(`/cadastro-TipoAssento/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -40,7 +40,7 @@ function ListagemProprietarios() {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(function (response) {
-        mensagemSucesso(`proprietario excluído com sucesso!`);
+        mensagemSucesso(`Tipo de assento excluído com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -48,7 +48,7 @@ function ListagemProprietarios() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir o proprietario`);
+        mensagemErro(`Erro ao excluir o Tipo de Assento`);
       });
   }
 
@@ -62,7 +62,7 @@ function ListagemProprietarios() {
 
   return (
     <div className='listContainer'>
-      <Card title='Listagem de proprietarios'>
+      <Card title='Listagem de assentos'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
@@ -71,14 +71,13 @@ function ListagemProprietarios() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Novo proprietario
+                 Tipos de assento
               </button>
               <table className='table table-hover'>
                 <thead>
                   <tr>
                     <th scope='col'>Código</th>
                     <th scope='col'>Nome</th>
-                    <th scope='col'>email</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -86,7 +85,6 @@ function ListagemProprietarios() {
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
                       <td>{dado.nome}</td>
-                      <td>{dado.email}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
@@ -115,4 +113,4 @@ function ListagemProprietarios() {
   );
 }
 
-export default ListagemProprietarios;
+export default ListagemTipoAssentos;

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Card from '../components/card';
+import Card from '../../components/card';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -14,19 +14,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios';
+import { BASE_URL } from '../../config/axios';
 
-const baseURL = `${BASE_URL}/categorias`;
+const baseURL = `${BASE_URL}/administradores`;
 
-function ListagemCategorias() {
+function ListagemAdm() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-categoria`);
+    navigate(`/cadastro-administradores`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-categorias/${id}`);
+    navigate(`/cadastro-administradores/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -40,7 +40,7 @@ function ListagemCategorias() {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(function (response) {
-        mensagemSucesso(`Categoria excluída com sucesso!`);
+        mensagemSucesso(`administradores excluído com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -48,7 +48,7 @@ function ListagemCategorias() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir o categoria`);
+        mensagemErro(`Erro ao excluir o administradores`);
       });
   }
 
@@ -62,7 +62,7 @@ function ListagemCategorias() {
 
   return (
     <div className='listContainer'>
-      <Card title='Listagem de categorias'>
+      <Card title='Listagem de administradores'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
@@ -71,13 +71,14 @@ function ListagemCategorias() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Assentos disponíveis
+                Administradores 
               </button>
               <table className='table table-hover'>
                 <thead>
                   <tr>
                     <th scope='col'>Código</th>
-                    <th scope='col'>nome</th>
+                    <th scope='col'>Nome</th>
+                    <th scope='col'>Email</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -85,6 +86,7 @@ function ListagemCategorias() {
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
                       <td>{dado.nome}</td>
+                      <td>{dado.email}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
@@ -113,4 +115,4 @@ function ListagemCategorias() {
   );
 }
 
-export default ListagemCategorias;
+export default ListagemAdm;
