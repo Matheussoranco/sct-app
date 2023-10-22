@@ -1,5 +1,6 @@
 // NavSearchBar.js
 import React, { useState } from 'react';
+import "../App.css";
 
 function NavSearchBar({ onSearch }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -27,9 +28,11 @@ function NavSearchBar({ onSearch }) {
           onChange={handleSearchChange}
         />
         <div className='input-group-append'>
-          <button className='btn btn-outline-light nav-search-button' type='submit'>
+          <div className='button-size'>
+          <button  className='btn btn-outline-light nav-search-button ml-10' type='submit' >
             Procurar
           </button>
+          </div>
         </div>
       </div>
     </form>

@@ -106,7 +106,7 @@ function CadastroUsuarios() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label='Telefone:' htmlFor='inputTelefone'>
+              <FormGroup label='Telefone: *' htmlFor='inputTelefone'>
                 <input
                   type="text"
                   id='inputTelefone'
@@ -116,9 +116,9 @@ function CadastroUsuarios() {
                   onChange={(e) => setTelefone(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label='Senha:' htmlFor='inputSenha'>
+              <FormGroup label='Senha: *' htmlFor='inputSenha'>
                 <input
-                  type="text" 
+                  type="password" 
                   name='senha'
                   className='form-control'
                   value={senha}
@@ -126,9 +126,9 @@ function CadastroUsuarios() {
                 />
              
               </FormGroup>
-              <FormGroup label='Senha Repetição:' htmlFor='inputSenhaRepeticao'>
+              <FormGroup label='Senha Repetição: *' htmlFor='inputSenhaRepeticao'>
                 <input
-                  type="text" 
+                  type="password" 
                   name='senhaRepeticao'
                   className='form-control'
                   value={senhaRepeticao}

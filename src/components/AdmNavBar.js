@@ -112,7 +112,10 @@ function Navbar(props) {
                 <a className="dropdown-item" href="/adm/listagem-tiposTicket">
                   Tipos de ticket
                 </a>
-                <a className="dropdown-item" href="/adm/listagem-formasPagamento">
+                <a
+                  className="dropdown-item"
+                  href="/adm/listagem-formasPagamento"
+                >
                   Formas de pagamento
                 </a>
               </div>
@@ -133,7 +136,10 @@ function Navbar(props) {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownCinema"
               >
-                <a className="dropdown-item" href="/adm/listagem-administradores">
+                <a
+                  className="dropdown-item"
+                  href="/adm/listagem-administradores"
+                >
                   Administradores
                 </a>
                 <a className="dropdown-item" href="/adm/listagem-usuarios">
@@ -145,7 +151,7 @@ function Navbar(props) {
               </div>
             </li>
           </ul>
-          
+
           <ul className="navbar-nav">
             <NavbarItem
               render="true"
@@ -153,8 +159,7 @@ function Navbar(props) {
               label="Produtoras"
             />
           </ul>
-         
-          <NavSearchBar onSearch={handleSearch} />
+          <NavSearchBar onSearch={handleSearch} /> 
         </div>
         <div className="navbar-nav ml-auto custom-right-content">
           <div
@@ -170,7 +175,22 @@ function Navbar(props) {
             </button>
             {modalOpen && (
               <div className="modal-form">
-                {/* Add your modal content here */}
+                <button
+                  type="submit"
+                  className="btn btn-secondary btn-sm border border-dark"
+                  onClick={toggleModal}
+                >
+                  Informações
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-secondary btn-sm border border-dark"
+                  onClick={() =>
+                    (window.location.href = "http://localhost:3000/")
+                  }
+                >
+                  sair
+                </button>
               </div>
             )}
           </div>
