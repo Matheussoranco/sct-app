@@ -22,11 +22,11 @@ function ListagemFilmes() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-filmes`);
+    navigate(`../adm/cadastro/cadastro-filmes`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-filmes/${id}`);
+    navigate(`../adm/cadastro/cadastro-filmes/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);

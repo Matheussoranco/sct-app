@@ -3,138 +3,89 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 
-import Card from '../components/card';
-import FormGroup from '../components/form-group';
+import Card from '../../components/card';
+import FormGroup from '../../components/form-group';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+//import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios';
+import { BASE_URL } from '../../config/axios';
 
-function CadastroAluno() {
+function CadastroUsuarios() {
   const { idParam } = useParams();
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/alunos`;
+  const baseURL = `${BASE_URL}/cadastro`;
 
   const [id, setId] = useState('');
-  const [matricula, setMatricula] = useState(0);
   const [nome, setNome] = useState('');
   const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState('');
-  const [celular, setCelular] = useState('');
-  const [idCurso, setIdCurso] = useState(0);
+  const [telefone, setTelefone] = useState('');
+  const [senha, setSenha] = useState('');
+  const [senhaRepeticao, setSenhaRepeticao] = useState('');
+  // const [logradouro, setLogradouro] = useState('');
+  // const [numeroResidencia, setNumeroResidencia] = useState('');
+  // const [complemento, setComplemento] = useState('');
+  // const [bairro, setBairro] = useState('');
+  // const [cidade, setCidade] = useState('');
+  // const [UF, setUF] = useState('');
+  // const [CEP, setCep] = useState('');
 
   const [dados, setDados] = React.useState([]);
 
   function inicializar() {
     if (idParam == null) {
       setId('');
-      setMatricula(0);
       setNome('');
       setCpf('');
       setEmail('');
-      setCelular('');
-      setIdCurso(0);
+      setTelefone('');
+      setSenha('');
+      setSenhaRepeticao('')
+      // setLogradouro('');
+      // setNumeroResidencia('');
+      // setBairro('')
+      // setCidade('')
+      // setUF('')
+      // setCep('')
     } else {
       setId(dados.id);
-      setMatricula(dados.matricula);
       setNome(dados.nome);
       setCpf(dados.cpf);
       setEmail(dados.email);
-      setCelular(dados.celular);
-      setIdCurso(dados.idCurso);
+      setTelefone(dados.telefone);
+      setSenha('');
+      setSenhaRepeticao('')
+      // setLogradouro(dados.logradouro);
+      // setNumeroResidencia(dados.numeroResidencia);
+      // setBairro(dados.bairro);
+      // setCidade(dados.cidade);
+      // setUF(dados.uf);
+      // setCep(dados.cep)
     }
   }
-
-  async function salvar() {
-    let data = { id, matricula, nome, cpf, email, celular, idCurso };
-    data = JSON.stringify(data);
-    if (idParam == null) {
-      await axios
-        .post(baseURL, data, {
-          headers: { 'Content-Type': 'application/json' },
-        })
-        .then(function (response) {
-          mensagemSucesso(`Aluno ${nome} cadastrado com sucesso!`);
-          navigate(`/listagem-alunos`);
-        })
-        .catch(function (error) {
-          mensagemErro(error.response.data);
-        });
-    } else {
-      await axios
-        .put(`${baseURL}/${idParam}`, data, {
-          headers: { 'Content-Type': 'application/json' },
-        })
-        .then(function (response) {
-          mensagemSucesso(`Aluno ${nome} alterado com sucesso!`);
-          navigate(`/listagem-alunos`);
-        })
-        .catch(function (error) {
-          mensagemErro(error.response.data);
-        });
-    }
-  }
-
-  async function buscar() {
-    await axios.get(`${baseURL}/${idParam}`).then((response) => {
-      setDados(response.data);
-    });
-    setId(dados.id);
-    setMatricula(dados.matricula);
-    setNome(dados.nome);
-    setCpf(dados.cpf);
-    setEmail(dados.email);
-    setCelular(dados.celular);
-    setIdCurso(dados.idCurso);
-  }
-
-  const [dadosCursos, setDadosCursos] = React.useState(null);
-
-  useEffect(() => {
-    axios.get(`${BASE_URL}/cursos`).then((response) => {
-      setDadosCursos(response.data);
-    });
-  }, []);
-
-  useEffect(() => {
-    buscar(); // eslint-disable-next-line
-  }, [id]);
-
-  if (!dados) return null;
-  if (!dadosCursos) return null;
 
   return (
-    <div className='container'>
-      <Card title='Cadastro de Aluno'>
+    <div className='listContainer'>
+      <Card title='Cadastro'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
-              <FormGroup label='Matrícula: *' htmlFor='inputMatricula'>
-                <input
-                  type='text'
-                  id='inputMatricula'
-                  value={matricula}
-                  className='form-control'
-                  name='matricula'
-                  onChange={(e) => setMatricula(e.target.value)}
-                />
-              </FormGroup>
               <FormGroup label='Nome: *' htmlFor='inputNome'>
                 <input
                   type='text'
                   id='inputNome'
                   value={nome}
                   className='form-control'
-                  name='nome'
+                  name='nome '
                   onChange={(e) => setNome(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label='CPF: *' htmlFor='inputCpf'>
+              <FormGroup label='CPF : *' htmlFor='inputCpf'>
                 <input
                   type='text'
                   maxLength='11'
@@ -147,45 +98,47 @@ function CadastroAluno() {
               </FormGroup>
               <FormGroup label='Email: *' htmlFor='inputEmail'>
                 <input
-                  type='email'
+                  type='text'
                   id='inputEmail'
                   value={email}
                   className='form-control'
-                  name='email'
+                  name=' email'
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label='Celular:' htmlFor='inputCelular'>
+              <FormGroup label='Telefone:' htmlFor='inputTelefone'>
                 <input
-                  type='text'
-                  id='inputCelular'
-                  value={celular}
+                  type="text"
+                  id='inputTelefone'
+                  value={telefone}
                   className='form-control'
-                  name='celular'
-                  onChange={(e) => setCelular(e.target.value)}
+                  name='Telefone '
+                  onChange={(e) => setTelefone(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label='Curso: *' htmlFor='selectCurso'>
-                <select
-                  className='form-select'
-                  id='selectCurso'
-                  name='idCurso'
-                  value={idCurso}
-                  onChange={(e) => setIdCurso(e.target.value)}
-                >
-                  <option key='0' value='0'>
-                    {' '}
-                  </option>
-                  {dadosCursos.map((dado) => (
-                    <option key={dado.id} value={dado.id}>
-                      {dado.nome}
-                    </option>
-                  ))}
-                </select>
+              <FormGroup label='Senha:' htmlFor='inputSenha'>
+                <input
+                  type="text" 
+                  name='senha'
+                  className='form-control'
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                />
+             
+              </FormGroup>
+              <FormGroup label='Senha Repetição:' htmlFor='inputSenhaRepeticao'>
+                <input
+                  type="text" 
+                  name='senhaRepeticao'
+                  className='form-control'
+                  value={senhaRepeticao}
+                  onChange={(e) => setSenhaRepeticao(e.target.value)}
+                />
+             
               </FormGroup>
               <Stack spacing={1} padding={1} direction='row'>
                 <button
-                  onClick={salvar}
+                  onClick={''}
                   type='button'
                   className='btn btn-success'
                 >
@@ -207,4 +160,4 @@ function CadastroAluno() {
   );
 }
 
-export default CadastroAluno;
+export default CadastroUsuarios;

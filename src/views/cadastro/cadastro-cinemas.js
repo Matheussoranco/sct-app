@@ -40,7 +40,7 @@ function CadastroCinemas() {
     } else {
       setId(dados.id);
       setNome(dados.nome);
-      setCnpj(dados.cpf);
+      setCnpj(dados.cnpj);
       setEmail(dados.email);
       setNumSala(dados.numSala);
       setTelefone(dados.telefone);
@@ -84,7 +84,7 @@ function CadastroCinemas() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label='NumSala:' htmlFor='inputNumSala'>
+              <FormGroup label='Número de salas:' htmlFor='inputNumSala'>
                 <input
                   type='text'
                   id='inputNumSala'
@@ -97,7 +97,7 @@ function CadastroCinemas() {
               <FormGroup label='Telefone:' htmlFor='inputTelefone'>
                 <input
                   type='text'
-                  id='selectTelefone'
+                  id='inputTelefone'
                   name='idTelefone'
                   className='form-control'
                   value={telefone}

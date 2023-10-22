@@ -3,189 +3,113 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 
-import Card from '../components/card';
-import FormGroup from '../components/form-group';
+import Card from '../../components/card';
+import FormGroup from '../../components/form-group';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+//import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios';
+import { BASE_URL } from '../../config/axios';
 
-function CadastroAluno() {
+function CadastroSessoes() {
   const { idParam } = useParams();
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/alunos`;
+  const baseURL = `${BASE_URL}/cinemas`;
 
   const [id, setId] = useState('');
-  const [matricula, setMatricula] = useState(0);
-  const [nome, setNome] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [email, setEmail] = useState('');
-  const [celular, setCelular] = useState('');
-  const [idCurso, setIdCurso] = useState(0);
+  const [dtExibicao, setDTExibicao] = useState('');
+  const [horarioInicial, setHorarioInicial] = useState('');
+  const [valorTicketInteiro, setValorTicketInteiro] = useState('');
+  const [reservaAssentoMeia, setReservaAssentoMeia] = useState('');
+  const [descontoMeia, setDescontoMeia] = useState('');
 
   const [dados, setDados] = React.useState([]);
 
   function inicializar() {
     if (idParam == null) {
       setId('');
-      setMatricula(0);
-      setNome('');
-      setCpf('');
-      setEmail('');
-      setCelular('');
-      setIdCurso(0);
+      setDTExibicao('');
+      setHorarioInicial('');
+      setValorTicketInteiro('');
+      setReservaAssentoMeia('');
+      setDescontoMeia('')
     } else {
       setId(dados.id);
-      setMatricula(dados.matricula);
-      setNome(dados.nome);
-      setCpf(dados.cpf);
-      setEmail(dados.email);
-      setCelular(dados.celular);
-      setIdCurso(dados.idCurso);
+      setDTExibicao(dados.dtExibicao);
+      setHorarioInicial(dados.horarioInicial);
+      setValorTicketInteiro(dados.valorTicketInteiro);
+      setReservaAssentoMeia(dados.reservaAssentoMeia);
+      setDescontoMeia(dados.descontoMeia);
     }
   }
-
-  async function salvar() {
-    let data = { id, matricula, nome, cpf, email, celular, idCurso };
-    data = JSON.stringify(data);
-    if (idParam == null) {
-      await axios
-        .post(baseURL, data, {
-          headers: { 'Content-Type': 'application/json' },
-        })
-        .then(function (response) {
-          mensagemSucesso(`Aluno ${nome} cadastrado com sucesso!`);
-          navigate(`/listagem-alunos`);
-        })
-        .catch(function (error) {
-          mensagemErro(error.response.data);
-        });
-    } else {
-      await axios
-        .put(`${baseURL}/${idParam}`, data, {
-          headers: { 'Content-Type': 'application/json' },
-        })
-        .then(function (response) {
-          mensagemSucesso(`Aluno ${nome} alterado com sucesso!`);
-          navigate(`/listagem-alunos`);
-        })
-        .catch(function (error) {
-          mensagemErro(error.response.data);
-        });
-    }
-  }
-
-  async function buscar() {
-    await axios.get(`${baseURL}/${idParam}`).then((response) => {
-      setDados(response.data);
-    });
-    setId(dados.id);
-    setMatricula(dados.matricula);
-    setNome(dados.nome);
-    setCpf(dados.cpf);
-    setEmail(dados.email);
-    setCelular(dados.celular);
-    setIdCurso(dados.idCurso);
-  }
-
-  const [dadosCursos, setDadosCursos] = React.useState(null);
-
-  useEffect(() => {
-    axios.get(`${BASE_URL}/cursos`).then((response) => {
-      setDadosCursos(response.data);
-    });
-  }, []);
-
-  useEffect(() => {
-    buscar(); // eslint-disable-next-line
-  }, [id]);
-
-  if (!dados) return null;
-  if (!dadosCursos) return null;
 
   return (
-    <div className='container'>
-      <Card title='Cadastro de Aluno'>
+    <div className='listContainer'>
+      <Card title='Cadastro de Sessões'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
-              <FormGroup label='Matrícula: *' htmlFor='inputMatricula'>
+              <FormGroup label='data de exibição: *' htmlFor='inputDTExibicao'>
                 <input
-                  type='text'
-                  id='inputMatricula'
-                  value={matricula}
+                  type='date'
+                  id='inputDTExibicao'
+                  value={dtExibicao}
                   className='form-control'
-                  name='matricula'
-                  onChange={(e) => setMatricula(e.target.value)}
+                  name='dtExibicao '
+                  onChange={(e) => setDTExibicao(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label='Nome: *' htmlFor='inputNome'>
+              <FormGroup label='Horário Inicial : *' htmlFor='inputHorarioInicial'>
                 <input
-                  type='text'
-                  id='inputNome'
-                  value={nome}
-                  className='form-control'
-                  name='nome'
-                  onChange={(e) => setNome(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup label='CPF: *' htmlFor='inputCpf'>
-                <input
-                  type='text'
+                  type='time'
                   maxLength='11'
-                  id='inputCpf'
-                  value={cpf}
+                  id='inputHorarioInicial'
+                  value={horarioInicial}
                   className='form-control'
-                  name='cpf'
-                  onChange={(e) => setCpf(e.target.value)}
+                  name='horarioInicial'
+                  onChange={(e) => setHorarioInicial(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label='Email: *' htmlFor='inputEmail'>
+              <FormGroup label='Valor Ticket Inteiro: *' htmlFor='inputValorTicketInteiro'>
                 <input
-                  type='email'
-                  id='inputEmail'
-                  value={email}
+                  min="1" 
+                  step="any"
+                  type='number'
+                  id='inputValorTicketInteiro'
+                  value={valorTicketInteiro}
                   className='form-control'
-                  name='email'
-                  onChange={(e) => setEmail(e.target.value)}
+                  name=' ValorTicketInteiro'
+                  onChange={(e) => setValorTicketInteiro(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label='Celular:' htmlFor='inputCelular'>
+              <FormGroup label='Reserva para assentos meia entrada:' htmlFor='inputReservaAssentoMeia'>
                 <input
-                  type='text'
-                  id='inputCelular'
-                  value={celular}
+                  type="number" min="1" max="100"
+                  id='inputReservaAssentoMeia'
+                  value={reservaAssentoMeia}
                   className='form-control'
-                  name='celular'
-                  onChange={(e) => setCelular(e.target.value)}
+                  name='ReservaAssentoMeia '
+                  onChange={(e) => setReservaAssentoMeia(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label='Curso: *' htmlFor='selectCurso'>
-                <select
-                  className='form-select'
-                  id='selectCurso'
-                  name='idCurso'
-                  value={idCurso}
-                  onChange={(e) => setIdCurso(e.target.value)}
-                >
-                  <option key='0' value='0'>
-                    {' '}
-                  </option>
-                  {dadosCursos.map((dado) => (
-                    <option key={dado.id} value={dado.id}>
-                      {dado.nome}
-                    </option>
-                  ))}
-                </select>
+              <FormGroup label='Desconto para meia entrada:' htmlFor='inputDescontoMeia'>
+                <input
+                  type="number" min="1" max="100"
+                  id='inputDescontoMeia'
+                  name='DescontoMeia'
+                  className='form-control'
+                  value={descontoMeia}
+                  onChange={(e) => setDescontoMeia(e.target.value)}
+                />
+             
               </FormGroup>
               <Stack spacing={1} padding={1} direction='row'>
                 <button
-                  onClick={salvar}
+                  onClick={''}
                   type='button'
                   className='btn btn-success'
                 >
@@ -207,4 +131,4 @@ function CadastroAluno() {
   );
 }
 
-export default CadastroAluno;
+export default CadastroSessoes;
