@@ -16,17 +16,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import { BASE_URL } from '../../config/axios';
 
-const baseURL = `${BASE_URL}/tiposExibicao`;
+const baseURL = `${BASE_URL}/tipoExibicao`;
 
 function ListagemTipoExibicao() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-TipoExibicao`);
+    navigate(`../adm/cadastro/cadastro-tipoExibicao`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-TipoExibicao/${id}`);
+    navigate(`../adm/cadastro/cadastro-tipoExibicao/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);

@@ -18,7 +18,7 @@ function CadastroExibicao() {
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/Exibicoes`;
+  const baseURL = `${BASE_URL}/tiposExibicao`;
 
   const [id, setId] = useState('');
   const [nome, setNome] = useState('');

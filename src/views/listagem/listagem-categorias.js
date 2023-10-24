@@ -22,11 +22,11 @@ function ListagemCategorias() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-categoria`);
+    navigate(`../adm/cadastro/cadastro-categorias`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-categorias/${id}`);
+    navigate(`../adm/cadastro/cadastro-categorias/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);

@@ -18,7 +18,7 @@ function CadastrotipoTicket() {
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/tipo-tickets`;
+  const baseURL = `${BASE_URL}/tiposTicket`;
 
   const [id, setId] = useState('');
   const [nome, setNome] = useState('');

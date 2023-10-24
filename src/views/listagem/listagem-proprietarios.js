@@ -22,11 +22,11 @@ function ListagemProprietarios() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-proprietarios`);
+    navigate(`../adm/cadastro/cadastro-proprietarios`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-proprietarios/${id}`);
+    navigate(`../adm/cadastro/cadastro-proprietarios/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);

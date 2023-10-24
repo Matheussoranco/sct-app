@@ -21,6 +21,10 @@ import CadastroCinemas from "./views/cadastro/cadastro-cinemas";
 import CadastroSessoes from "./views/cadastro/cadastro-sessoes";
 import CadastroFilmes from "./views/cadastro/cadastro-filmes";
 import CadastroUsuarios from "./views/cadastro/cadastro-usuarios";
+import CadastroUsuarios from "./views/cadastro/cadastro-categorias";
+import CadastroUsuarios from "./views/cadastro/cadastro-produtoras";
+import CadastroUsuarios from "./views/cadastro/cadastro-tipoExibicao";
+import CadastroUsuarios from "./views/cadastro/cadastro-tipoTicket";
 
 
 
