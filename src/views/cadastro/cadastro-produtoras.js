@@ -18,7 +18,7 @@ function CadastroProdutora() {
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/categorias`;
+  const baseURL = `${BASE_URL}/produtoras`;
 
   const [id, setId] = useState('');
   const [nome, setNome] = useState('');
@@ -65,13 +65,13 @@ function CadastroProdutora() {
     }
   }
 
-  async function buscar() {
+  /*async function buscar() {
     await axios.get(`${baseURL}/${idParam}`).then((response) => {
       setDados(response.data);
     });
     setId(dados.id);
     setNome(dados.nome);
-  }
+  }*/
 
   /*const [dadosCursos, setDadosCursos] = React.useState(null);
 
