@@ -3,15 +3,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 
-import Card from '../components/card';
-import FormGroup from '../components/form-group';
+import Card from '../../components/card';
+import FormGroup from '../../components/form-group';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios';
+import { BASE_URL } from '../../config/axios';
 
 function CadastroCategoria() {
   const { idParam } = useParams();
@@ -35,35 +35,35 @@ function CadastroCategoria() {
     }
   }
 
-  async function salvar() {
-    let data = { id, nome};
-    data = JSON.stringify(data);
-    if (idParam == null) {
-      await axios
-        .post(baseURL, data, {
-          headers: { 'Content-Type': 'application/json' },
-        })
-        .then(function (response) {
-          mensagemSucesso(`Categoria ${nome} cadastrada com sucesso!`);
-          navigate(`/listagem-categoria`);
-        })
-        .catch(function (error) {
-          mensagemErro(error.response.data);
-        });
-    } else {
-      await axios
-        .put(`${baseURL}/${idParam}`, data, {
-          headers: { 'Content-Type': 'application/json' },
-        })
-        .then(function (response) {
-          mensagemSucesso(`Categoria ${nome} alterado com sucesso!`);
-          navigate(`/listagem-categoria`);
-        })
-        .catch(function (error) {
-          mensagemErro(error.response.data);
-        });
-    }
-  }
+  // async function salvar() {
+  //   let data = { id, nome};
+  //   data = JSON.stringify(data);
+  //   if (idParam == null) {
+  //     await axios
+  //       .post(baseURL, data, {
+  //         headers: { 'Content-Type': 'application/json' },
+  //       })
+  //       .then(function (response) {
+  //         mensagemSucesso(`Categoria ${nome} cadastrada com sucesso!`);
+  //         navigate(`/listagem-categoria`);
+  //       })
+  //       .catch(function (error) {
+  //         mensagemErro(error.response.data);
+  //       });
+  //   } else {
+  //     await axios
+  //       .put(`${baseURL}/${idParam}`, data, {
+  //         headers: { 'Content-Type': 'application/json' },
+  //       })
+  //       .then(function (response) {
+  //         mensagemSucesso(`Categoria ${nome} alterado com sucesso!`);
+  //         navigate(`/listagem-categoria`);
+  //       })
+  //       .catch(function (error) {
+  //         mensagemErro(error.response.data);
+  //       });
+  //   }
+  // }
 
   /*async function buscar() {
     await axios.get(`${baseURL}/${idParam}`).then((response) => {
@@ -89,7 +89,7 @@ function CadastroCategoria() {
   if (!dadosCursos) return null;*/
 
   return (
-    <div className='container'>
+    <div className='listContainer'>
       <Card title='Cadastro de Categorias'>
         <div className='row'>
           <div className='col-lg-12'>
@@ -106,7 +106,7 @@ function CadastroCategoria() {
               </FormGroup>
               <Stack spacing={1} padding={1} direction='row'>
                 <button
-                  onClick={salvar}
+                  onClick={''}
                   type='button'
                   className='btn btn-success'
                 >

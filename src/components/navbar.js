@@ -97,6 +97,7 @@ function Navbar(props) {
                    placeholder="Senha"
                  />
                </div>
+               <a className="senha-rep" href='http://localhost:3000/recuperarSenha' > Esqueci minha senha</a>
                <div className="mt-2"> {/* Add margin-top to create space */}
                  <button
                    type="submit"

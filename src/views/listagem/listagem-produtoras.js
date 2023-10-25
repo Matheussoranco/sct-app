@@ -26,7 +26,7 @@ function ListagemProdutoras() {
   };
 
   const editar = (id) => {
-    navigate(`../adm/cadastro/cadastro-Produtoras/${id}`);
+    navigate(`../adm/cadastro/cadastro-produtoras/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);

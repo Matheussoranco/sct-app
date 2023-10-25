@@ -16,17 +16,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import { BASE_URL } from '../../config/axios';
 
-const baseURL = `${BASE_URL}/tipoTicket`;
+const baseURL = `${BASE_URL}/tiposTicket`;
 
 function ListagemTipoTicket() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`../adm/cadastro/cadastro-tipoTicket`);
+    navigate(`../adm/cadastro/cadastro-tiposTicket`);
   };
 
   const editar = (id) => {
-    navigate(`../adm/cadastro/cadastro-tipoTicket/${id}`);
+    navigate(`../adm/cadastro/cadastro-tiposTicket/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -84,7 +84,7 @@ function ListagemTipoTicket() {
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
-                      <td>{dado.disponivel}</td>
+                      <td>{dado.nome}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton

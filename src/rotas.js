@@ -21,10 +21,10 @@ import CadastroCinemas from "./views/cadastro/cadastro-cinemas";
 import CadastroSessoes from "./views/cadastro/cadastro-sessoes";
 import CadastroFilmes from "./views/cadastro/cadastro-filmes";
 import CadastroUsuarios from "./views/cadastro/cadastro-usuarios";
-import CadastroUsuarios from "./views/cadastro/cadastro-categorias";
-import CadastroUsuarios from "./views/cadastro/cadastro-produtoras";
-import CadastroUsuarios from "./views/cadastro/cadastro-tipoExibicao";
-import CadastroUsuarios from "./views/cadastro/cadastro-tipoTicket";
+import CadastroCategorias from "./views/cadastro/cadastro-categorias";
+import CadastroProdutoras from "./views/cadastro/cadastro-produtoras";
+import CadastrotipoExibicao from "./views/cadastro/cadastro-tiposExibicao";
+import CadastroTipoTicket from "./views/cadastro/cadastro-tiposTicket";
 
 
 
@@ -47,6 +47,23 @@ function Rotas(props) {
         <Route
           path="/cadastro/:idParam?"
           element={<CadastroUsuarios />}
+        />
+
+        <Route
+          path="/adm/cadastro/cadastro-categorias/:idParam?"
+          element={<CadastroCategorias />}
+        />
+        <Route
+          path="/adm/cadastro/cadastro-produtoras/:idParam?"
+          element={<CadastroProdutoras />}
+        />
+        <Route
+          path="/adm/cadastro/cadastro-tiposExibicao/:idParam?"
+          element={<CadastrotipoExibicao />}
+        />
+        <Route
+          path="/cadastro/cadastro-tiposTicket/:idParam?"
+          element={<CadastroTipoTicket />}
         />
 
 
