@@ -159,4 +159,4 @@ function CadastroAdministradores() {
   );
 }
 
-export default CadastroAluno;
+export default CadastroAdministradores;
