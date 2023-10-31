@@ -12,7 +12,7 @@ import '../../custom.css';
 
 import axios from 'axios';
 import { BASE_URL } from '../../config/axios';
-
+import { Save } from '@mui/icons-material';
 
 function CadastrotipoTicket() {
   const { idParam } = useParams();
@@ -22,31 +22,23 @@ function CadastrotipoTicket() {
   const baseURL = `${BASE_URL}/tiposTicket`;
 
   const [id, setId] = useState('');
-  const [nome, setNome] = useState('');
-  
+  const [tipo, setTipo] = useState('');
+
   const [dados, setDados] = React.useState([]);
 
-  function inicializar() {
-    if (idParam == null) {
-      setId('');
-      setNome('');
-    } else {
-      setId(dados.id);
-      setNome(dados.nome);
-    }
-  }
-
   async function salvar() {
-    let data = { id, nome};
+    let data = { id, tipo };
+    
     data = JSON.stringify(data);
+
     if (idParam == null) {
       await axios
         .post(baseURL, data, {
           headers: { 'Content-Type': 'application/json' },
         })
-        .then(function (response) {
-          mensagemSucesso(`Tipo de Ticket ${nome} cadastrado com sucesso!`);
-          navigate(`/listagem-tipoTicket`);
+        .then( () => {
+          mensagemSucesso(`Tipo de ticket ${tipo} cadastrado com sucesso!`);
+          navigate(`/adm/listagem-tiposTicket`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
@@ -56,9 +48,9 @@ function CadastrotipoTicket() {
         .put(`${baseURL}/${idParam}`, data, {
           headers: { 'Content-Type': 'application/json' },
         })
-        .then(function (response) {
-          mensagemSucesso(`tipoTicket ${nome} alterado com sucesso!`);
-          navigate(`/listagem-tipoTicket`);
+        .then( () => {
+          mensagemSucesso(`tipoTicket ${tipo} alterado com sucesso!`);
+          navigate(`/adm/listagem-tiposTicket`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
@@ -66,19 +58,20 @@ function CadastrotipoTicket() {
     }
   }
 
-  /*async function buscar() {
+  async function buscar() {
+    if(idParam == null) return;
     await axios.get(`${baseURL}/${idParam}`).then((response) => {
       setDados(response.data);
     });
     setId(dados.id);
-    setNome(dados.nome);
-  }*/
+    setTipo(dados.tipo);
+  }
 
-  /*const [dadosCursos, setDadosCursos] = React.useState(null);
+  const [dadosTipoTicket, setDadosTickets] = React.useState(null);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/cursos`).then((response) => {
-      setDadosCursos(response.data);
+    axios.get(`${BASE_URL}/tiposTicket`).then((response) => {
+      setDadosTickets(response.data);
     });
   }, []);
 
@@ -86,25 +79,25 @@ function CadastrotipoTicket() {
     buscar(); // eslint-disable-next-line
   }, [id]);
 
-  if (!dados) return null;
-  if (!dadosCursos) return null;*/
+  const retornarListagem = () => navigate(`/adm/listagem-tiposTicket`);
 
   return (
     <div className='listContainer'>
-      <Card title='Cadastro de Exibicoes'>
+      <Card title='Cadastro de Tipos de Tickets'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
-              <FormGroup label='Nome: *' htmlFor='inputNome'>
+              <FormGroup label='Tipo: *' htmlFor='inputTipo'>
                 <input
                   type='text'
-                  id='inputNome'
-                  value={nome}
+                  id='inputTipo'
+                  value={tipo}
                   className='form-control'
-                  name='nome'
-                  onChange={(e) => setNome(e.target.value)}
+                  name='tipo'
+                  onChange={(e) => setTipo(e.target.value)}
                 />
               </FormGroup>
+              
               <Stack spacing={1} padding={1} direction='row'>
                 <button
                   onClick={salvar}
@@ -114,7 +107,7 @@ function CadastrotipoTicket() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={retornarListagem}
                   type='button'
                   className='btn btn-danger'
                 >

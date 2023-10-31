@@ -67,7 +67,7 @@ function Rotas(props) {
           element={<CadastrotipoExibicao />}
         />
         <Route
-          path="/cadastro/cadastro-tiposTicket/:idParam?"
+          path="/adm/cadastro/cadastro-tiposTicket/:idParam?"
           element={<CadastroTipoTicket />}
         />
 

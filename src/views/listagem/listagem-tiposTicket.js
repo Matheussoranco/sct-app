@@ -71,7 +71,7 @@ function ListagemTipoTicket() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Assentos disponíveis
+                Cadastrar tipo de ticket
               </button>
               <table className='table table-hover'>
                 <thead>
