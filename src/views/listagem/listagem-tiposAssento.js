@@ -16,17 +16,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import { BASE_URL } from '../../config/axios';
 
-const baseURL = `${BASE_URL}/tipoAssento`;
+const baseURL = `${BASE_URL}/tiposAssento`;
 
 function ListagemTipoAssentos() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/../adm/cadastro/cadastro-tipoAssento`);
+    navigate(`/cadastro-TipoAssento`);
   };
 
   const editar = (id) => {
-    navigate(`/../adm/cadastro/cadastro-tipoAssento/${id}`);
+    navigate(`/cadastro-TipoAssento/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -40,7 +40,7 @@ function ListagemTipoAssentos() {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(function (response) {
-        mensagemSucesso(`tipo de assento excluído com sucesso!`);
+        mensagemSucesso(`Tipo de assento excluído com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -48,7 +48,7 @@ function ListagemTipoAssentos() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir o tipo de Assento`);
+        mensagemErro(`Erro ao excluir o Tipo de Assento`);
       });
   }
 
