@@ -19,7 +19,7 @@ function CadastrotipoAssento() {
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/tiposAssento`;
+  const baseURL = `${BASE_URL}/tipoAssento`;
 
   const [id, setId] = useState('');
   const [tipo, setTipo] = useState('');
@@ -38,7 +38,7 @@ function CadastrotipoAssento() {
         })
         .then( () => {
           mensagemSucesso(`Tipo de Assento ${tipo} cadastrado com sucesso!`);
-          navigate(`/adm/listagem-tiposAssento`);
+          navigate(`/adm/listagem-tipoAssento`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
@@ -50,7 +50,7 @@ function CadastrotipoAssento() {
         })
         .then( () => {
           mensagemSucesso(`tipoAssento ${tipo} alterado com sucesso!`);
-          navigate(`/adm/listagem-tiposAssento`);
+          navigate(`/adm/listagem-tipoAssento`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
@@ -70,7 +70,7 @@ function CadastrotipoAssento() {
   const [dadosTipoAssento, setDadosAssentos] = React.useState(null);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/tiposAssento`).then((response) => {
+    axios.get(`${BASE_URL}/tipoAssento`).then((response) => {
       setDadosAssentos(response.data);
     });
   }, []);
@@ -79,7 +79,7 @@ function CadastrotipoAssento() {
     buscar(); // eslint-disable-next-line
   }, [id]);
 
-  const retornarListagem = () => navigate(`/adm/listagem-tiposAssento`);
+  const retornarListagem = () => navigate(`/adm/listagem-tipoAssento`);
 
   return (
     <div className='listContainer'>
