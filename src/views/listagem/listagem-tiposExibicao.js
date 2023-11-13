@@ -18,7 +18,7 @@ import { BASE_URL } from '../../config/axios';
 
 const baseURL = `${BASE_URL}/tiposExibicao`;
 
-function ListagemTipoExibicao() {
+function ListagemTiposExibicao() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
@@ -113,4 +113,4 @@ function ListagemTipoExibicao() {
   );
 }
 
-export default ListagemTipoExibicao;
+export default ListagemTiposExibicao;
