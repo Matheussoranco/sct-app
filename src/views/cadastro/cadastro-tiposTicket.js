@@ -14,7 +14,7 @@ import axios from 'axios';
 import { BASE_URL } from '../../config/axios';
 import { Save } from '@mui/icons-material';
 
-function CadastrotipoTicket() {
+function CadastroTiposTicket() {
   const { idParam } = useParams();
 
   const navigate = useNavigate();
@@ -122,4 +122,4 @@ function CadastrotipoTicket() {
   );
 }
 
-export default CadastrotipoTicket;
+export default CadastroTiposTicket;

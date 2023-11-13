@@ -24,7 +24,7 @@ import CadastroUsuarios from "./views/cadastro/cadastro-usuarios";
 import CadastroCategorias from "./views/cadastro/cadastro-categorias";
 import CadastroProdutoras from "./views/cadastro/cadastro-produtoras";
 import CadastrotipoExibicao from "./views/cadastro/cadastro-tiposExibicao";
-import CadastroTipoTicket from "./views/cadastro/cadastro-tiposTicket";
+import CadastroTiposTicket from "./views/cadastro/cadastro-tiposTicket";
 import CadastroProprietario from "./views/cadastro/cadastro-proprietarios";
 import CadastroSalas from "./views/cadastro/cadastro-salas";
 import CadastrotipoAssento from "./views/cadastro/cadastro-tiposAssento";
@@ -74,7 +74,7 @@ function Rotas(props) {
         />
         <Route
           path="/adm/cadastro/cadastro-tiposTicket/:idParam?"
-          element={<CadastroTipoTicket />}
+          element={<CadastroTiposTicket />}
         />
         <Route
           path="/adm/cadastro/cadastro-tiposAssento/:idParam?"

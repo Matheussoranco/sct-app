@@ -18,7 +18,7 @@ import { BASE_URL } from '../../config/axios';
 
 const baseURL = `${BASE_URL}/tiposTicket`;
 
-function ListagemTipoTicket() {
+function ListagemTiposTicket() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
@@ -71,7 +71,7 @@ function ListagemTipoTicket() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Cadastrar tipo de ticket
+                Novo tipo de ticket
               </button>
               <table className='table table-hover'>
                 <thead>
@@ -113,4 +113,4 @@ function ListagemTipoTicket() {
   );
 }
 
-export default ListagemTipoTicket;
+export default ListagemTiposTicket;
