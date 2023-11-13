@@ -22,11 +22,11 @@ function ListagemSalas() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-salas`);
+    navigate(`../adm/cadastro/cadastro-salas`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-salas/${id}`);
+    navigate(`../adm/cadastro/cadastro-salas/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -40,7 +40,7 @@ function ListagemSalas() {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(function (response) {
-        mensagemSucesso(`Sala excluído com sucesso!`);
+        mensagemSucesso(`Sala excluída com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -48,7 +48,7 @@ function ListagemSalas() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir o sala`);
+        mensagemErro(`Erro ao excluir a sala`);
       });
   }
 
@@ -71,7 +71,7 @@ function ListagemSalas() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Assentos disponíveis
+                Nova sala
               </button>
               <table className='table table-hover'>
                 <thead>

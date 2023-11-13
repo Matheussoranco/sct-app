@@ -3,15 +3,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 
-import Card from '../components/card';
-import FormGroup from '../components/form-group';
+import Card from '../../components/card';
+import FormGroup from '../../components/form-group';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios';
+import { BASE_URL } from '../../config/axios';
+import { Save } from '@mui/icons-material';
 
 function CadastroSalas() {
   const { idParam } = useParams();
@@ -28,30 +29,18 @@ function CadastroSalas() {
 
   const [dados, setDados] = React.useState([]);
 
-  function inicializar() {
-    if (idParam == null) {
-      setId('');
-      setNumSala('');
-      setNumAssentos('');
-      setIdCinema(0);
-    } else {
-      setId(dados.id);
-      setNumSala(dados.numSala);
-      setNumAssentos(dados.numAssentos);
-      setIdCinema(dados.idCinema);
-    }
-  }
-
-  /*async function salvar() {
-    let data = { id, numSala, numAssentos, idCinema,};
+  async function salvar() {
+    let data = { id, numSala, numAssentos, idCinema };
+    
     data = JSON.stringify(data);
+
     if (idParam == null) {
       await axios
         .post(baseURL, data, {
           headers: { 'Content-Type': 'application/json' },
         })
-        .then(function (response) {
-          mensagemSucesso(`Sala ${nome} cadastrada com sucesso!`);
+        .then( () => {
+          mensagemSucesso(`Sala ${numSala} cadastrada com sucesso!`);
           navigate(`/adm/listagem-salas`);
         })
         .catch(function (error) {
@@ -62,7 +51,7 @@ function CadastroSalas() {
         .put(`${baseURL}/${idParam}`, data, {
           headers: { 'Content-Type': 'application/json' },
         })
-        .then(function (response) {
+        .then( () => {
           mensagemSucesso(`Sala ${numSala} alterada com sucesso!`);
           navigate(`/adm/listagem-salas`);
         })
@@ -73,6 +62,7 @@ function CadastroSalas() {
   }
 
   async function buscar() {
+    if(idParam == null) return;
     await axios.get(`${baseURL}/${idParam}`).then((response) => {
       setDados(response.data);
     });
@@ -80,13 +70,13 @@ function CadastroSalas() {
     setNumSala(dados.numSala);
     setNumAssentos(dados.numAssentos);
     setIdCinema(dados.idCinema);
-  }*/
+  }
 
-  const [dadosSalas, setDadosSalas] = React.useState(null);
+  const [dadosCinemas, setDadosCinemas] = React.useState(null);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/salas`).then((response) => {
-      setDadosSalas(response.data);
+    axios.get(`${BASE_URL}/cinemas`).then((response) => {
+      setDadosCinemas(response.data);
     });
   }, []);
 
@@ -95,25 +85,27 @@ function CadastroSalas() {
   }, [id]);
 
   if (!dados) return null;
-  if (!dadosSalas) return null;
+  if (!dadosCinemas) return null;
+
+  const retornarListagem = () => navigate(`/adm/listagem-salas`);
 
   return (
-    <div className='container'>
+    <div className='listContainer'>
       <Card title='Cadastro de Salas'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
-              <FormGroup label='Número da sala: *' htmlFor='inputNumSala'>
+              <FormGroup label='Numero da sala: *' htmlFor='inputNumSala'>
                 <input
                   type='text'
                   id='inputNumSala'
                   value={numSala}
                   className='form-control'
-                  name='NumSala'
+                  name='numSala'
                   onChange={(e) => setNumSala(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label='Numero de assentos: *' htmlFor='inputNumAssentos'>
+              <FormGroup label='Número de assentos: *' htmlFor='inputNumAssentos'>
                 <input
                   type='text'
                   id='inputNumAssentos'
@@ -123,7 +115,7 @@ function CadastroSalas() {
                   onChange={(e) => setNumAssentos(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label='Cinema:' htmlFor='selectCinema'>
+              <FormGroup label='Cinema: *' htmlFor='selectCinema'>
                 <select
                   className='form-select'
                   id='selectCinema'
@@ -141,7 +133,6 @@ function CadastroSalas() {
                   ))}
                 </select>
               </FormGroup>
-              
               <Stack spacing={1} padding={1} direction='row'>
                 <button
                   onClick={salvar}
@@ -151,7 +142,7 @@ function CadastroSalas() {
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={retornarListagem}
                   type='button'
                   className='btn btn-danger'
                 >
