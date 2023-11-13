@@ -18,15 +18,15 @@ import { BASE_URL } from '../../config/axios';
 
 const baseURL = `${BASE_URL}/tiposAssento`;
 
-function ListagemTipoAssentos() {
+function ListagemTiposAssentos() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-TipoAssento`);
+    navigate(`../adm/cadastro/cadastro-tiposAssento`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-TipoAssento/${id}`);
+    navigate(`../adm/cadastro/cadastro-tiposAssento/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -71,7 +71,7 @@ function ListagemTipoAssentos() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                 Tipos de assento
+                 Novo Tipo de assento
               </button>
               <table className='table table-hover'>
                 <thead>
@@ -113,4 +113,4 @@ function ListagemTipoAssentos() {
   );
 }
 
-export default ListagemTipoAssentos;
+export default ListagemTiposAssentos;

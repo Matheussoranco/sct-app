@@ -14,12 +14,12 @@ import axios from 'axios';
 import { BASE_URL } from '../../config/axios';
 import { Save } from '@mui/icons-material';
 
-function CadastrotipoAssento() {
+function CadastroTiposAssento() {
   const { idParam } = useParams();
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/tipoAssento`;
+  const baseURL = `${BASE_URL}/tiposAssento`;
 
   const [id, setId] = useState('');
   const [tipo, setTipo] = useState('');
@@ -38,7 +38,7 @@ function CadastrotipoAssento() {
         })
         .then( () => {
           mensagemSucesso(`Tipo de Assento ${tipo} cadastrado com sucesso!`);
-          navigate(`/adm/listagem-tipoAssento`);
+          navigate(`/adm/listagem-tiposAssento`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
@@ -49,8 +49,8 @@ function CadastrotipoAssento() {
           headers: { 'Content-Type': 'application/json' },
         })
         .then( () => {
-          mensagemSucesso(`tipoAssento ${tipo} alterado com sucesso!`);
-          navigate(`/adm/listagem-tipoAssento`);
+          mensagemSucesso(`Tipo de assento ${tipo} alterado com sucesso!`);
+          navigate(`/adm/listagem-tiposAssento`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
@@ -67,10 +67,10 @@ function CadastrotipoAssento() {
     setTipo(dados.tipo);
   }
 
-  const [dadosTipoAssento, setDadosAssentos] = React.useState(null);
+  const [dadosTiposAssento, setDadosAssentos] = React.useState(null);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/tipoAssento`).then((response) => {
+    axios.get(`${BASE_URL}/tiposAssento`).then((response) => {
       setDadosAssentos(response.data);
     });
   }, []);
@@ -79,7 +79,7 @@ function CadastrotipoAssento() {
     buscar(); // eslint-disable-next-line
   }, [id]);
 
-  const retornarListagem = () => navigate(`/adm/listagem-tipoAssento`);
+  const retornarListagem = () => navigate(`/adm/listagem-tiposAssento`);
 
   return (
     <div className='listContainer'>
@@ -122,4 +122,4 @@ function CadastrotipoAssento() {
   );
 }
 
-export default CadastrotipoAssento;
+export default CadastroTiposAssento;

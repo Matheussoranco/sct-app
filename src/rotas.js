@@ -27,7 +27,7 @@ import CadastrotipoExibicao from "./views/cadastro/cadastro-tiposExibicao";
 import CadastroTiposTicket from "./views/cadastro/cadastro-tiposTicket";
 import CadastroProprietario from "./views/cadastro/cadastro-proprietarios";
 import CadastroSalas from "./views/cadastro/cadastro-salas";
-import CadastrotipoAssento from "./views/cadastro/cadastro-tiposAssento";
+import CadastroTiposAssento from "./views/cadastro/cadastro-tiposAssento";
 
 
 
@@ -78,7 +78,7 @@ function Rotas(props) {
         />
         <Route
           path="/adm/cadastro/cadastro-tiposAssento/:idParam?"
-          element={<CadastrotipoAssento />}
+          element={<CadastroTiposAssento />}
         />
 
 
