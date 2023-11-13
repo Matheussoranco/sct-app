@@ -12,8 +12,9 @@ import '../../custom.css';
 
 import axios from 'axios';
 import { BASE_URL } from '../../config/axios';
+import { Save } from '@mui/icons-material';
 
-function CadastroCategoria() {
+function CadastroCategorias() {
   const { idParam } = useParams();
 
   const navigate = useNavigate();
@@ -25,68 +26,53 @@ function CadastroCategoria() {
   
   const [dados, setDados] = React.useState([]);
 
-  function inicializar() {
+  async function salvar() {
+    let data = { id, nome};
+    
+    data = JSON.stringify(data);
+
     if (idParam == null) {
-      setId('');
-      setNome('');
+      await axios
+        .post(baseURL, data, {
+          headers: { 'Content-Type': 'application/json' },
+        })
+        .then( () => {
+          mensagemSucesso(`Categoria ${nome} cadastrado com sucesso!`);
+          navigate(`/adm/listagem-categorias`);
+        })
+        .catch(function (error) {
+          mensagemErro(error.response.data);
+        });
     } else {
-      setId(dados.id);
-      setNome(dados.nome);
+      await axios
+        .put(`${baseURL}/${idParam}`, data, {
+          headers: { 'Content-Type': 'application/json' },
+        })
+        .then( () => {
+          mensagemSucesso(`Categoria ${nome} alterada com sucesso!`);
+          navigate(`/adm/listagem-categorias`);
+        })
+        .catch(function (error) {
+          mensagemErro(error.response.data);
+        });
     }
   }
 
-  // async function salvar() {
-  //   let data = { id, nome};
-  //   data = JSON.stringify(data);
-  //   if (idParam == null) {
-  //     await axios
-  //       .post(baseURL, data, {
-  //         headers: { 'Content-Type': 'application/json' },
-  //       })
-  //       .then(function (response) {
-  //         mensagemSucesso(`Categoria ${nome} cadastrada com sucesso!`);
-  //         navigate(`/listagem-categoria`);
-  //       })
-  //       .catch(function (error) {
-  //         mensagemErro(error.response.data);
-  //       });
-  //   } else {
-  //     await axios
-  //       .put(`${baseURL}/${idParam}`, data, {
-  //         headers: { 'Content-Type': 'application/json' },
-  //       })
-  //       .then(function (response) {
-  //         mensagemSucesso(`Categoria ${nome} alterado com sucesso!`);
-  //         navigate(`/listagem-categoria`);
-  //       })
-  //       .catch(function (error) {
-  //         mensagemErro(error.response.data);
-  //       });
-  //   }
-  // }
-
-  /*async function buscar() {
+  async function buscar() {
+    if(idParam == null) return;
     await axios.get(`${baseURL}/${idParam}`).then((response) => {
       setDados(response.data);
     });
     setId(dados.id);
     setNome(dados.nome);
-  }*/
-
-  /*const [dadosCursos, setDadosCursos] = React.useState(null);
-
-  useEffect(() => {
-    axios.get(`${BASE_URL}/cursos`).then((response) => {
-      setDadosCursos(response.data);
-    });
-  }, []);
+  }
 
   useEffect(() => {
     buscar(); // eslint-disable-next-line
   }, [id]);
 
-  if (!dados) return null;
-  if (!dadosCursos) return null;*/
+
+  const retornarListagem = () => navigate(`/adm/listagem-categorias`);
 
   return (
     <div className='listContainer'>
@@ -106,14 +92,14 @@ function CadastroCategoria() {
               </FormGroup>
               <Stack spacing={1} padding={1} direction='row'>
                 <button
-                  onClick={''}
+                  onClick={salvar}
                   type='button'
                   className='btn btn-success'
                 >
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={retornarListagem}
                   type='button'
                   className='btn btn-danger'
                 >
@@ -128,4 +114,4 @@ function CadastroCategoria() {
   );
 }
 
-export default CadastroCategoria;
+export default CadastroCategorias;
