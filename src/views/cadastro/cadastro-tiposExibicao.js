@@ -28,36 +28,6 @@ function CadastroTiposExibicao() {
 
   async function salvar() {
     let data = { id, nome};
-    data = JSON.stringify(data);
-    if (idParam == null) {
-      await axios
-        .post(baseURL, data, {
-          headers: { 'Content-Type': 'application/json' },
-        })
-        .then(function (response) {
-          mensagemSucesso(`Exibicao ${nome} cadastrada com sucesso!`);
-          navigate(`/listagem-Exibicao`);
-        })
-        .catch(function (error) {
-          mensagemErro(error.response.data);
-        });
-    } else {
-      await axios
-        .put(`${baseURL}/${idParam}`, data, {
-          headers: { 'Content-Type': 'application/json' },
-        })
-        .then(function (response) {
-          mensagemSucesso(`Exibicao ${nome} alterado com sucesso!`);
-          navigate(`/listagem-Exibicao`);
-        })
-        .catch(function (error) {
-          mensagemErro(error.response.data);
-        });
-    }
-  }
-
-  async function salvar() {
-    let data = { id, nome};
     
     data = JSON.stringify(data);
 
@@ -67,7 +37,7 @@ function CadastroTiposExibicao() {
           headers: { 'Content-Type': 'application/json' },
         })
         .then( () => {
-          mensagemSucesso(`Prorietario ${nome} cadastrado com sucesso!`);
+          mensagemSucesso(`Tipo de exibição ${nome} cadastrado com sucesso!`);
           navigate(`/adm/listagem-tiposExibicao`);
         })
         .catch(function (error) {
@@ -79,7 +49,7 @@ function CadastroTiposExibicao() {
           headers: { 'Content-Type': 'application/json' },
         })
         .then( () => {
-          mensagemSucesso(`Proprietario ${nome} alterado com sucesso!`);
+          mensagemSucesso(`Tipo de exibição ${nome} alterado com sucesso!`);
           navigate(`/adm/listagem-tiposExibicao`);
         })
         .catch(function (error) {

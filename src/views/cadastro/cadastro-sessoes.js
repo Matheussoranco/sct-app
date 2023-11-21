@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 import Card from '../../components/card';
 import FormGroup from '../../components/form-group';
 
-//import { mensagemSucesso, mensagemErro } from '../../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
 import '../../custom.css';
 
@@ -16,36 +16,93 @@ import { BASE_URL } from '../../config/axios';
 function CadastroSessoes() {
   const { idParam } = useParams();
 
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/cinemas`;
+  const baseURL = `${BASE_URL}/sessoes`;
 
   const [id, setId] = useState('');
-  const [dtExibicao, setDTExibicao] = useState('');
+  const [dtExibicao, setDtExibicao] = useState('');
   const [horarioInicial, setHorarioInicial] = useState('');
   const [valorTicketInteiro, setValorTicketInteiro] = useState('');
   const [reservaAssentoMeia, setReservaAssentoMeia] = useState('');
   const [descontoMeia, setDescontoMeia] = useState('');
+  const [idCinema, setIdCinema] = useState(0);
+  const [idFilme, setIdFilme] = useState(0);
 
   const [dados, setDados] = React.useState([]);
 
-  function inicializar() {
+  async function salvar() {
+    let data = { id, dtExibicao, horarioInicial, valorTicketInteiro,
+      reservaAssentoMeia, descontoMeia, idCinema, idFilme};
+    
+    data = JSON.stringify(data);
+
     if (idParam == null) {
-      setId('');
-      setDTExibicao('');
-      setHorarioInicial('');
-      setValorTicketInteiro('');
-      setReservaAssentoMeia('');
-      setDescontoMeia('')
+      await axios
+        .post(baseURL, data, {
+          headers: { 'Content-Type': 'application/json' },
+        })
+        .then( () => {
+          mensagemSucesso(`Sessão ${id} cadastrado com sucesso!`);
+          navigate(`/adm/listagem-sessoes`);
+        })
+        .catch(function (error) {
+          mensagemErro(error.response.data);
+        });
     } else {
-      setId(dados.id);
-      setDTExibicao(dados.dtExibicao);
-      setHorarioInicial(dados.horarioInicial);
-      setValorTicketInteiro(dados.valorTicketInteiro);
-      setReservaAssentoMeia(dados.reservaAssentoMeia);
-      setDescontoMeia(dados.descontoMeia);
+      await axios
+        .put(`${baseURL}/${idParam}`, data, {
+          headers: { 'Content-Type': 'application/json' },
+        })
+        .then( () => {
+          mensagemSucesso(`Sessão ${id} alterado com sucesso!`);
+          navigate(`/adm/listagem-proprietarios`);
+        })
+        .catch(function (error) {
+          mensagemErro(error.response.data);
+        });
     }
   }
+
+  async function buscar() {
+    if(idParam == null) return;
+    await axios.get(`${baseURL}/${idParam}`).then((response) => {
+      setDados(response.data);
+    });
+    setId(dados.id);
+    setDtExibicao(dados.dtExibicao);
+    setHorarioInicial(dados.horarioInicial);
+    setValorTicketInteiro(dados.valorTicketInteiro);
+    setReservaAssentoMeia(dados.reservaAssentoMeia);
+    setDescontoMeia(dados.descontoMeia);
+    setIdCinema(dados.idCinema);
+    setIdFilme(dados.idFilme);
+
+  }
+
+  const [dadosCinemas, setDadosCinemas] = React.useState(null);
+  const [dadosFilmes, setDadosFilmes] = React.useState(null);
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/cinemas`).then((response) => {
+      setDadosCinemas(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/filmes`).then((response) => {
+      setDadosFilmes(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    buscar(); // eslint-disable-next-line
+  }, [id]);
+
+  if (!dados) return null;
+  if (!dadosCinemas || !dadosFilmes) return null;
+
+  const retornarListagem = () => navigate(`/adm/listagem-sessoes`);
 
   return (
     <div className='listContainer'>
@@ -60,7 +117,7 @@ function CadastroSessoes() {
                   value={dtExibicao}
                   className='form-control'
                   name='dtExibicao '
-                  onChange={(e) => setDTExibicao(e.target.value)}
+                  onChange={(e) => setDtExibicao(e.target.value)}
                 />
               </FormGroup>
               <FormGroup label='Horário Inicial : *' htmlFor='inputHorarioInicial'>
@@ -107,16 +164,52 @@ function CadastroSessoes() {
                 />
              
               </FormGroup>
+              <FormGroup label='Cinema: *' htmlFor='selectCinema'>
+                <select
+                  className='form-select'
+                  id='selectCinema'
+                  name='idCinema'
+                  value={idCinema}
+                  onChange={(e) => setIdCinema(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosCinemas.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.nome}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
+              <FormGroup label='filme: *' htmlFor='selecFilme'>
+                <select
+                  className='form-select'
+                  id='selectFilme'
+                  name='idFilme'
+                  value={idFilme}
+                  onChange={(e) => setIdFilme(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosFilmes.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.titulo}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
               <Stack spacing={1} padding={1} direction='row'>
                 <button
-                  onClick={''}
+                  onClick={salvar}
                   type='button'
                   className='btn btn-success'
                 >
                   Salvar
                 </button>
                 <button
-                  onClick={inicializar}
+                  onClick={retornarListagem}
                   type='button'
                   className='btn btn-danger'
                 >

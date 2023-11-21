@@ -12,7 +12,7 @@ import '../../custom.css';
 
 import axios from 'axios';
 import { BASE_URL } from '../../config/axios';
-import { Save } from '@mui/icons-material';
+
 
 function CadastroProprietario() {
   const { idParam } = useParams();
