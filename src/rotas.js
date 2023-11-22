@@ -28,14 +28,13 @@ import CadastroTiposTicket from "./views/cadastro/cadastro-tiposTicket";
 import CadastroProprietario from "./views/cadastro/cadastro-proprietarios";
 import CadastroSalas from "./views/cadastro/cadastro-salas";
 import CadastroTiposAssento from "./views/cadastro/cadastro-tiposAssento";
-
-
+import CadastroAdministradores from "./views/cadastro/cadastro-administradores";
 
 function Rotas(props) {
   return (
     <BrowserRouter>
       <Routes>
-      <Route
+        <Route
           path="/adm/cadastro/cadastro-proprietarios/:idParam?"
           element={<CadastroProprietario />}
         />
@@ -55,10 +54,7 @@ function Rotas(props) {
           path="/adm/cadastro/cadastro-filmes/:idParam?"
           element={<CadastroFilmes />}
         />
-        <Route
-          path="/cadastro/:idParam?"
-          element={<CadastroUsuarios />}
-        />
+        <Route path="/cadastro/:idParam?" element={<CadastroUsuarios />} />
 
         <Route
           path="/adm/cadastro/cadastro-categorias/:idParam?"
@@ -81,6 +77,10 @@ function Rotas(props) {
           element={<CadastroTiposAssento />}
         />
 
+        <Route
+          path="/adm/cadastro/cadastro-administradores/:idParam?"
+          element={<CadastroAdministradores />}
+        />
 
         <Route path="/adm/listagem-usuarios" element={<ListagemUsuarios />} />
         <Route path="/adm/listagem-cinemas" element={<ListagemCinemas />} />

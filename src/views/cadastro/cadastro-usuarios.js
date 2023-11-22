@@ -6,19 +6,19 @@ import Stack from '@mui/material/Stack';
 import Card from '../../components/card';
 import FormGroup from '../../components/form-group';
 
-//import { mensagemSucesso, mensagemErro } from '../../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
 import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../../config/axios';
+import { BASE_URL } from '../../config/axios4';
 
 function CadastroUsuarios() {
   const { idParam } = useParams();
 
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/cadastro`;
+  const baseURL = `${BASE_URL}/usuarios`;
 
   const [id, setId] = useState('');
   const [nome, setNome] = useState('');
@@ -44,8 +44,6 @@ function CadastroUsuarios() {
       setCpf('');
       setEmail('');
       setTelefone('');
-      setSenha('');
-      setSenhaRepeticao('')
       // setLogradouro('');
       // setNumeroResidencia('');
       // setBairro('')
@@ -58,8 +56,6 @@ function CadastroUsuarios() {
       setCpf(dados.cpf);
       setEmail(dados.email);
       setTelefone(dados.telefone);
-      setSenha('');
-      setSenhaRepeticao('')
       // setLogradouro(dados.logradouro);
       // setNumeroResidencia(dados.numeroResidencia);
       // setBairro(dados.bairro);
@@ -68,6 +64,58 @@ function CadastroUsuarios() {
       // setCep(dados.cep)
     }
   }
+
+  async function salvar() {
+    let data = { id, nome, cpf, email, telefone};
+    
+    data = JSON.stringify(data);
+
+    if (idParam == null) {
+      await axios
+        .post(baseURL, data, {
+          headers: { 'Content-Type': 'application/json' },
+        })
+        .then( () => {
+          mensagemSucesso(`Usuario ${id} cadastrado com sucesso!`);
+          navigate(`/adm/listagem-cinemas`);
+        })
+        .catch(function (error) {
+          mensagemErro(error.response.data);
+        });
+    } else {
+      await axios
+        .put(`${baseURL}/${idParam}`, data, {
+          headers: { 'Content-Type': 'application/json' },
+        })
+        .then( () => {
+          mensagemSucesso(`Usuario ${id} alterado com sucesso!`);
+          navigate(`/adm/listagem-cinemas`);
+        })
+        .catch(function (error) {
+          mensagemErro(error.response.data);
+        });
+    }
+  }
+
+  async function buscar() {
+    if(idParam == null) return;
+    await axios.get(`${baseURL}/${idParam}`).then((response) => {
+      setDados(response.data);
+    });
+    setId(dados.id);
+    setNome(dados.nome);
+    setCpf(dados.cpf);
+    setEmail(dados.email);
+    setTelefone(dados.telefone);
+  }
+
+  
+  useEffect(() => {
+    buscar(); // eslint-disable-next-line
+  }, [id]);
+
+  if (!dados) return null;
+
 
   return (
     <div className='listContainer'>
@@ -138,7 +186,7 @@ function CadastroUsuarios() {
               </FormGroup>
               <Stack spacing={1} padding={1} direction='row'>
                 <button
-                  onClick={''}
+                  onClick={salvar}
                   type='button'
                   className='btn btn-success'
                 >

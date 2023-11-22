@@ -14,7 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
-import { BASE_URL } from '../../config/axios';
+import { BASE_URL } from '../../config/axios4';
 
 const baseURL = `${BASE_URL}/administradores`;
 
@@ -22,11 +22,11 @@ function ListagemAdm() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-administradores`);
+    navigate(`/adm/cadastro/cadastro-administradores`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-administradores/${id}`);
+    navigate(`/adm/cadastro/cadastro-administradores/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);
@@ -71,7 +71,7 @@ function ListagemAdm() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Administradores 
+                Novo Administrador 
               </button>
               <table className='table table-hover'>
                 <thead>
