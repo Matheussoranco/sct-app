@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 import Card from '../../components/card';
 import FormGroup from '../../components/form-group';
 
-//import { mensagemSucesso, mensagemErro } from '../../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
 import '../../custom.css';
 
@@ -16,7 +16,7 @@ import { BASE_URL } from '../../config/axios';
 function CadastroCinemas() {
   const { idParam } = useParams();
 
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const baseURL = `${BASE_URL}/cinemas`;
 
@@ -46,6 +46,59 @@ function CadastroCinemas() {
       setTelefone(dados.telefone);
     }
   }
+
+  async function salvar() {
+    let data = { id, nome, cnpj, email,
+      numSala, telefone};
+    
+    data = JSON.stringify(data);
+
+    if (idParam == null) {
+      await axios
+        .post(baseURL, data, {
+          headers: { 'Content-Type': 'application/json' },
+        })
+        .then( () => {
+          mensagemSucesso(`Cinema ${id} cadastrado com sucesso!`);
+          navigate(`/adm/listagem-cinemas`);
+        })
+        .catch(function (error) {
+          mensagemErro(error.response.data);
+        });
+    } else {
+      await axios
+        .put(`${baseURL}/${idParam}`, data, {
+          headers: { 'Content-Type': 'application/json' },
+        })
+        .then( () => {
+          mensagemSucesso(`Cinema ${id} alterado com sucesso!`);
+          navigate(`/adm/listagem-cinemas`);
+        })
+        .catch(function (error) {
+          mensagemErro(error.response.data);
+        });
+    }
+  }
+
+  async function buscar() {
+    if(idParam == null) return;
+    await axios.get(`${baseURL}/${idParam}`).then((response) => {
+      setDados(response.data);
+    });
+    setId(dados.id);
+    setNome(dados.nome);
+    setCnpj(dados.cnpj);
+    setEmail(dados.email);
+    setNumSala(dados.numSala);
+    setTelefone(dados.telefone);
+  }
+
+  
+  useEffect(() => {
+    buscar(); // eslint-disable-next-line
+  }, [id]);
+
+  if (!dados) return null;
 
   return (
     <div className='listContainer'>
@@ -107,7 +160,7 @@ function CadastroCinemas() {
               </FormGroup>
               <Stack spacing={1} padding={1} direction='row'>
                 <button
-                  onClick={''}
+                  onClick={salvar}
                   type='button'
                   className='btn btn-success'
                 >
