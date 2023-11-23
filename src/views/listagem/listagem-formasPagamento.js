@@ -40,7 +40,7 @@ function ListagemFormaPagamento() {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(function (response) {
-        mensagemSucesso(`formaPagamento excluído com sucesso!`);
+        mensagemSucesso(`Forma de Pagamento excluído com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -48,7 +48,7 @@ function ListagemFormaPagamento() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir o formaPagamento`);
+        mensagemErro(`Erro ao excluir o Forma de Pagamento`);
       });
   }
 
@@ -62,7 +62,7 @@ function ListagemFormaPagamento() {
 
   return (
     <div className='listContainer'>
-      <Card title='Listagem de formasPagamento'>
+      <Card title='Listagem de Formas de Pagamento'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
