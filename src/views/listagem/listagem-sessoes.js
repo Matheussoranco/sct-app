@@ -40,7 +40,7 @@ function ListagemFilmes() {
         headers: { 'Content-Type': 'application/json' },
       })
       .then(function (response) {
-        mensagemSucesso(`sessao excluída com sucesso!`);
+        mensagemSucesso(`sessão excluída com sucesso!`);
         setDados(
           dados.filter((dado) => {
             return dado.id !== id;
@@ -48,7 +48,7 @@ function ListagemFilmes() {
         );
       })
       .catch(function (error) {
-        mensagemErro(`Erro ao excluir a sessao`);
+        mensagemErro(`Erro ao excluir a sessão`);
       });
   }
 
@@ -62,7 +62,7 @@ function ListagemFilmes() {
 
   return (
     <div className='listContainer'>
-      <Card title='Listagem de sessoes'>
+      <Card title='Listagem de sessões'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
@@ -71,7 +71,7 @@ function ListagemFilmes() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Nova sessao
+                Nova sessão
               </button>
               <table className='table table-hover'>
                 <thead>
