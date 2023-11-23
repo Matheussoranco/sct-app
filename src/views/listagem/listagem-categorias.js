@@ -71,7 +71,7 @@ function ListagemCategorias() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Nova categorias
+                Nova categoria
               </button>
               <table className='table table-hover'>
                 <thead>
