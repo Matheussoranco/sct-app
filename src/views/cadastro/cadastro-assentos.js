@@ -3,30 +3,26 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 
-import Card from '../components/card';
-import FormGroup from '../components/form-group';
+import Card from '../../components/card';
+import FormGroup from '../../components/form-group';
 
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 
-import '../custom.css';
+import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../config/axios2';
+import { BASE_URL } from '../../config/axios2';
 
-function CadastroAluno() {
+function CadastroAssento() {
   const { idParam } = useParams();
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/alunos`;
+  const baseURL = `${BASE_URL}/assentos`;
 
   const [id, setId] = useState('');
-  const [matricula, setMatricula] = useState(0);
-  const [nome, setNome] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [email, setEmail] = useState('');
-  const [celular, setCelular] = useState('');
-  const [idCurso, setIdCurso] = useState(0);
+  const [tiposAssento, setTipoAssento] = useState(0);
+  
 
   const [dados, setDados] = React.useState([]);
 
@@ -207,4 +203,4 @@ function CadastroAluno() {
   );
 }
 
-export default CadastroAluno;
+export default CadastroAssento;

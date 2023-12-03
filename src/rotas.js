@@ -30,10 +30,17 @@ import CadastroSalas from "./views/cadastro/cadastro-salas";
 import CadastroTiposAssento from "./views/cadastro/cadastro-tiposAssento";
 import CadastroAdministradores from "./views/cadastro/cadastro-administradores";
 
+import Comprar from "./views/usuarios/comprar";
+
 function Rotas(props) {
   return (
     <BrowserRouter>
       <Routes>
+
+      <Route
+          path="/comprar"
+          element={<Comprar />}
+        />
         <Route
           path="/adm/cadastro/cadastro-proprietarios/:idParam?"
           element={<CadastroProprietario />}
