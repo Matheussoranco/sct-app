@@ -13,7 +13,7 @@ import '../../custom.css';
 import axios from 'axios';
 import { BASE_URL as BASE_URL1 } from '../../config/axios';
 import { BASE_URL as BASE_URL2 } from  '../../config/axios2'
-
+import { BASE_URL as BASE_URL3 } from  '../../config/axios3'
 
 function CadastroCompra() {
   const navigate = useNavigate();
@@ -25,37 +25,26 @@ function CadastroCompra() {
   const [idFilme, setIdFilme] = useState(0);
   const [idSessao, setIdSessao] = useState(0);
   const [idAssento, setIdAssento] = useState(0);
+  const [idTipoDeTicket, setIdTipoDeTicket] = useState(0);
+  const [quantidade, setQuantidade] = useState('');
+  const [idFormasDePagamento, setIdFormaDePagamento] = useState(0);
+  const [valor, setValor] = useState('');
   const [dtExibicao, setDtExibicao] = useState('');
   const [horarioInicial, setHorarioInicial] = useState('');
 
-  
-
   const [dados, setDados] = React.useState([]);
 
-  function inicializar(sessao){
-    setDtExibicao(sessao.dtExibicao);
-    setHorarioInicial(sessao.horarioInicial)
-  }
 
-  // function inicializar() {
-  //   if (idParam == null) {
-  //     setId('');
-  //     setMatricula(0);
-  //     setNome('');
-  //     setCpf('');
-  //     setEmail('');
-  //     setCelular('');
-  //     setIdCurso(0);
-  //   } else {
-  //     setId(dados.id);
-  //     setMatricula(dados.matricula);
-  //     setNome(dados.nome);
-  //     setCpf(dados.cpf);
-  //     setEmail(dados.email);
-  //     setCelular(dados.celular);
-  //     setIdCurso(dados.idCurso);
-  //   }
-  // }
+  function inicializar(sessao){
+    let data = new Date(
+      sessao.data.split('/').reverse().join('-')
+    ).toISOString().split('T')[0];
+    setDtExibicao(data);
+    setHorarioInicial(sessao.horario)
+
+    if(quantidade)
+      setValor( quantidade*parseFloat(sessao.valorTicket));
+  }
 
   async function salvar() {
     let data = {
@@ -65,18 +54,22 @@ function CadastroCompra() {
       idCinema: idCinema,
       idSessao: idSessao,
       idAssento: idAssento,
+      idTipoDeTicket: idTipoDeTicket,
+      quantidade: quantidade,
+      idFormasDePagamento: idFormasDePagamento,
       dtExibicao: dtExibicao,
       horarioInicial: horarioInicial
     }
     
-    let dadoNaoPreenchido = Object.keys(data).find(key => data[key] == null || data[key] == '' );
+    let dadoNaoPreenchido = Object.keys(data).find(key => {
+      return data[key] == null || data[key] == ''
+    });
     
-    mensagemErro(`${dadoNaoPreenchido}`)
     if(dadoNaoPreenchido)
       mensagemErro("Dado faltando");
     else{
       mensagemSucesso("Compra realizada com sucesso");
-      navigate('/');
+      navigate('http://localhost:3000/');
     }
       
   }
@@ -97,6 +90,8 @@ function CadastroCompra() {
   const [dadosFilmes, setDadosFilmes] = React.useState(null);
   const [dadosSessoes, setDadosSessoes] = React.useState(null);
   const [dadosAssentos, setDadosAssentos] = React.useState(null);
+  const [dadosTiposTicket, setDadosTiposTicket] = React.useState(null);
+  const [dadosFormasDePagamento, setDadosFormaDePagamento] = React.useState(null);
 
   useEffect(() => {
     // Fetch cinemas
@@ -116,8 +111,22 @@ function CadastroCompra() {
     axios.get(`${BASE_URL2}/assentos`).then((response) => {
       setDadosAssentos(response.data);
     });
+
+    axios.get(`${BASE_URL3}/tiposTicket`).then((response) => {
+      setDadosTiposTicket(response.data);
+    });
+
+    axios.get(`${BASE_URL3}/formasPagamento`).then((response) => {
+      setDadosFormaDePagamento(response.data);
+    });
   }, []);
 
+  useEffect(() => {
+    if(idSessao){
+      let sessao = dadosSessoes.find(sessao => sessao.id == idSessao);
+      inicializar(sessao)
+    }
+  })
   useEffect(() => {
     buscar(); // eslint-disable-next-line
   }, [id]);
@@ -125,7 +134,8 @@ function CadastroCompra() {
   const retornar = () => navigate(`/`);
 
   if (!dados) return null;
-  if (!dadosCinemas || !dadosFilmes || !dadosSessoes || !dadosAssentos) return null;
+  if (!dadosCinemas || !dadosFilmes || !dadosSessoes || !dadosAssentos || 
+      !dadosTiposTicket || !dadosFormasDePagamento ) return null;
 
   return (
     <div className='listContainer'>
@@ -171,7 +181,7 @@ function CadastroCompra() {
                   ))}
                 </select>
               </FormGroup>
-              <FormGroup label='filme: *' htmlFor='selecFilme'>
+              <FormGroup label='Filme: *' htmlFor='selecFilme'>
                 <select
                   className='form-select'
                   id='selectFilme'
@@ -189,7 +199,7 @@ function CadastroCompra() {
                   ))}
                 </select>
               </FormGroup>
-              <FormGroup label='sessao: *' htmlFor='selecSessao'>
+              <FormGroup label='Sessão: *' htmlFor='selecSessao'>
                 <select
                   className='form-select'
                   id='selectSessao'
@@ -207,7 +217,7 @@ function CadastroCompra() {
                   ))}
                 </select>
               </FormGroup>
-              <FormGroup label='assento: *' htmlFor='selecAssento'>
+              <FormGroup label='Assento: *' htmlFor='selecAssento'>
                 <select
                   className='form-select'
                   id='selectAssento'
@@ -225,7 +235,70 @@ function CadastroCompra() {
                   ))}
                 </select>
               </FormGroup>
-              <FormGroup label='data de exibição: *' htmlFor='inputDTExibicao'>
+              <FormGroup label='Tipo De ticket: *' htmlFor='selecTipoTicket'>
+                <select
+                  className='form-select'
+                  id='selecTipoTicket'
+                  name='Tipo de ticket'
+                  value={idTipoDeTicket}
+                  onChange={(e) => setIdTipoDeTicket(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosTiposTicket.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.nome}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
+              <FormGroup label='Quantidade de tickets: *' htmlFor='inputQuant'>
+                <input
+                  type='number'
+                  id='inputQuant'
+                  value={quantidade}
+                  className='form-control'
+                  name='quant'
+                  onChange={(e) => {
+                    const sanitizedValue = e.target.value.replace(/\D/g, '');
+                    setQuantidade(sanitizedValue)
+                  }
+                }
+                  pattern="[0-9]*"
+                />
+              </FormGroup>
+              <FormGroup label='Forma De Pagamento: *' htmlFor='selecFormPag'>
+                <select
+                  className='form-select'
+                  id='FormaDePag'
+                  name='Forma de pagamento'
+                  value={idFormasDePagamento}
+                  onChange={(e) => setIdFormaDePagamento(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosFormasDePagamento.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.nome}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
+              <FormGroup label='Valor: ' htmlFor='inputValor'>
+                <input
+                  type='number'
+                  step="0.01"
+                  id='inputValor'
+                  value={valor}
+                  className='form-control'
+                  name='Valor '
+                  onChange={(e) => setDtExibicao(e.target.value)}
+                  readOnly 
+                />
+              </FormGroup>
+              <FormGroup label='Data de exibição: ' htmlFor='inputDTExibicao'>
                 <input
                   type='date'
                   id='inputDTExibicao'
@@ -233,9 +306,10 @@ function CadastroCompra() {
                   className='form-control'
                   name='dtExibicao '
                   onChange={(e) => setDtExibicao(e.target.value)}
+                  readOnly 
                 />
               </FormGroup>
-              <FormGroup label='Horário Inicial : *' htmlFor='inputHorarioInicial'>
+              <FormGroup label='Horário Inicial : ' htmlFor='inputHorarioInicial'>
                 <input
                   type='time'
                   maxLength='11'
@@ -244,6 +318,7 @@ function CadastroCompra() {
                   className='form-control'
                   name='horarioInicial'
                   onChange={(e) => setHorarioInicial(e.target.value)}
+                  readOnly 
                 />
               </FormGroup>
               <Stack spacing={1} padding={1} direction='row'>

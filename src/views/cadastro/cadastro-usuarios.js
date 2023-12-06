@@ -77,7 +77,7 @@ function CadastroUsuarios() {
         })
         .then( () => {
           mensagemSucesso(`Usuario ${id} cadastrado com sucesso!`);
-          navigate(`/adm/listagem-cinemas`);
+          navigate(`/`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
@@ -89,7 +89,7 @@ function CadastroUsuarios() {
         })
         .then( () => {
           mensagemSucesso(`Usuario ${id} alterado com sucesso!`);
-          navigate(`/adm/listagem-cinemas`);
+          navigate(`/adm/listagem-usuarios`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);

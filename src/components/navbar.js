@@ -1,11 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import "bootswatch/dist/lux/bootstrap.css";
 import NavbarItem from "./navbarItem";
 import NavSearchBar from "./NavSearchBar";
 import userImage from "./avatar.png"; // Replace with the path to your user image
 import "../App.css";
-
+import axios from 'axios';
+import { BASE_URL as BASE_URL1 } from '../config/axios';
 
 
 function Navbar(props) {
@@ -35,6 +36,15 @@ function Navbar(props) {
     };
   }, []);
 
+  const [dadosCinemas, setDadosCinemas] = React.useState(null);
+
+  useEffect(() => {
+    // Fetch cinemas
+    axios.get(`${BASE_URL1}/cinemas`).then((response) => {
+      setDadosCinemas(response.data);
+    });
+  })
+
   return (
     <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <div className="container">
@@ -54,13 +64,30 @@ function Navbar(props) {
         </button>
         <div className="collapse navbar-collapse" id="navbarResponsive">
           <ul className="navbar-nav">
-            <NavbarItem render="true" href="/listagem-cinemas" label="Cinemas" />
+            <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownCinema"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Cinemas
+                </a>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdownCinema">
+                  {dadosCinemas &&
+                    dadosCinemas.map((cinema) => (
+                      <a key={cinema.id} className="dropdown-item" href="#">
+                        {cinema.nome}
+                      </a>
+                    ))}
+                </div>
+              </li>
           </ul>
           <ul className="navbar-nav">
             <NavbarItem render="true" href="/listagem-Filmes" label="Filmes" />
-          </ul>
-          <ul className="navbar-nav">
-            <NavbarItem render="true" href="/listagem-sessoes" label="Sessões" />
           </ul>
           <ul className="navbar-nav">
             <NavbarItem render="true" href="/Comprar" label="Comprar" />

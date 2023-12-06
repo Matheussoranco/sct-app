@@ -248,12 +248,17 @@ body {
   }
 
   .listContainer {
+  box-sizing: border-box;
   width: 100vw ;
   padding: 0; 
   margin: 0; 
   height: 100vh;
   z-index: 20; 
+  margin-top: -20vh;
   position: relative; 
+  overflow-y: auto;
+  height: 85vh ;
+  
   }
 .bs-component .form-group {
   margin-bottom: 10px; /* You can adjust this value to control the spacing */
