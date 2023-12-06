@@ -46,6 +46,8 @@ function CadastroCompra() {
       setValor( quantidade*parseFloat(sessao.valorTicket));
   }
 
+  const retornar = () =>window.location.href = "http://localhost:3000/";
+
   async function salvar() {
     let data = {
       nome: nome,
@@ -66,10 +68,10 @@ function CadastroCompra() {
     });
     
     if(dadoNaoPreenchido)
-      mensagemErro("Dado faltando");
+      mensagemErro("Dados faltando");
     else{
       mensagemSucesso("Compra realizada com sucesso");
-      navigate('http://localhost:3000/');
+      retornar();
     }
       
   }
@@ -131,7 +133,7 @@ function CadastroCompra() {
     buscar(); // eslint-disable-next-line
   }, [id]);
 
-  const retornar = () => navigate(`/`);
+  
 
   if (!dados) return null;
   if (!dadosCinemas || !dadosFilmes || !dadosSessoes || !dadosAssentos || 
