@@ -79,7 +79,7 @@ function Navbar(props) {
                 <div className="dropdown-menu" aria-labelledby="navbarDropdownCinema">
                   {dadosCinemas &&
                     dadosCinemas.map((cinema) => (
-                      <a key={cinema.id} className="dropdown-item" href="#">
+                      <a key={cinema.id} className="dropdown-item" href= {`/${cinema.nome}`} >
                         {cinema.nome}
                       </a>
                     ))}
