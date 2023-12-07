@@ -11,7 +11,8 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../../config/axios2';
+import { BASE_URL as  BASE_URL} from '../../config/axios2';
+import { BASE_URL as  BASE_URL2} from '../../config/axios';
 
 function CadastroSessoes() {
   const { idParam } = useParams();
@@ -84,13 +85,13 @@ function CadastroSessoes() {
   const [dadosFilmes, setDadosFilmes] = React.useState(null);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/cinemas`).then((response) => {
+    axios.get(`${BASE_URL2}/cinemas`).then((response) => {
       setDadosCinemas(response.data);
     });
   }, []);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/filmes`).then((response) => {
+    axios.get(`${BASE_URL2}/filmes`).then((response) => {
       setDadosFilmes(response.data);
     });
   }, []);
