@@ -22,11 +22,11 @@ function ListagemAssentos() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-assento`);
+    navigate(`../adm/cadastro/cadastro-assentos`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-assentos/${id}`);
+    navigate(`../adm/cadastro/cadastro-assentos/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import Navbar from "./components/navbar";
+
 
 import ListagemCinemas from "./views/listagem/listagem-cinemas";
 import ListagemFilmes from "./views/listagem/listagem-filmes";
@@ -29,6 +29,7 @@ import CadastroProprietario from "./views/cadastro/cadastro-proprietarios";
 import CadastroSalas from "./views/cadastro/cadastro-salas";
 import CadastroTiposAssento from "./views/cadastro/cadastro-tiposAssento";
 import CadastroAdministradores from "./views/cadastro/cadastro-administradores";
+import CadastroAssento from "./views/cadastro/cadastro-assentos";
 
 import Comprar from "./views/usuarios/comprar";
 
@@ -40,6 +41,10 @@ function Rotas(props) {
       <Route
           path="/comprar"
           element={<Comprar />}
+        />
+        <Route
+          path="/adm/cadastro/cadastro-assentos/:idParam?"
+          element={<CadastroAssento />}
         />
         <Route
           path="/adm/cadastro/cadastro-proprietarios/:idParam?"

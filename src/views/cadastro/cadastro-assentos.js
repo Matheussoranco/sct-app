@@ -11,43 +11,44 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../../config/axios2';
+import { BASE_URL as BASE_URL1 } from '../../config/axios2';
+import { BASE_URL as BASE_URL2 } from '../../config/axios';
 
 function CadastroAssento() {
   const { idParam } = useParams();
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/assentos`;
+  const baseURL = `${BASE_URL1}/assentos`;
+
 
   const [id, setId] = useState('');
-  const [tiposAssento, setTipoAssento] = useState(0);
-  
+  const [numero, setNumero] = useState('');
+  const [disponivel, setDisponivel] = useState('');
+  const [idTipoAssento, setIdTipoAssento] = useState(0);
+  const [idSala, setIdSala] = useState(0);
+  const diponibilidade = ["true", "false"];
 
   const [dados, setDados] = React.useState([]);
 
   function inicializar() {
     if (idParam == null) {
       setId('');
-      setMatricula(0);
-      setNome('');
-      setCpf('');
-      setEmail('');
-      setCelular('');
-      setIdCurso(0);
+      setNumero('');
+      setDisponivel('');
+      setIdSala(0);
+      setIdTipoAssento(0)
     } else {
       setId(dados.id);
-      setMatricula(dados.matricula);
-      setNome(dados.nome);
-      setCpf(dados.cpf);
-      setEmail(dados.email);
-      setCelular(dados.celular);
-      setIdCurso(dados.idCurso);
+      setNumero(dados.numero);
+      setDisponivel(dados.disponivel)
+      setIdSala(dados.idSala);
+      setIdTipoAssento(dados.idTipoAssento)
     }
   }
 
   async function salvar() {
-    let data = { id, matricula, nome, cpf, email, celular, idCurso };
+    let data = { id, numero, disponivel, idSala, idTipoAssento};
     data = JSON.stringify(data);
     if (idParam == null) {
       await axios
@@ -55,8 +56,8 @@ function CadastroAssento() {
           headers: { 'Content-Type': 'application/json' },
         })
         .then(function (response) {
-          mensagemSucesso(`Aluno ${nome} cadastrado com sucesso!`);
-          navigate(`/listagem-alunos`);
+          mensagemSucesso(`Assento cadastrado com sucesso!`);
+          navigate(`../adm/listagem-assentos`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
@@ -67,8 +68,8 @@ function CadastroAssento() {
           headers: { 'Content-Type': 'application/json' },
         })
         .then(function (response) {
-          mensagemSucesso(`Aluno ${nome} alterado com sucesso!`);
-          navigate(`/listagem-alunos`);
+          mensagemSucesso(`Assento alterado com sucesso!`);
+          navigate(`../adm/listagem-assentos`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
@@ -77,24 +78,31 @@ function CadastroAssento() {
   }
 
   async function buscar() {
+    if(idParam == null) return;
     await axios.get(`${baseURL}/${idParam}`).then((response) => {
       setDados(response.data);
     });
+
     setId(dados.id);
-    setMatricula(dados.matricula);
-    setNome(dados.nome);
-    setCpf(dados.cpf);
-    setEmail(dados.email);
-    setCelular(dados.celular);
-    setIdCurso(dados.idCurso);
+    setNumero(dados.numero);
+    setDisponivel(dados.disponivel)
+    setIdSala(dados.idSala);
+    setIdTipoAssento(dados.idTipoAssento)
   }
 
-  const [dadosCursos, setDadosCursos] = React.useState(null);
+  const [dadosTipoAssento, setDadosTipoAssento] = React.useState(null);
+  const [dadosSalas, setDadosSalas] = React.useState(null);
+ 
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/cursos`).then((response) => {
-      setDadosCursos(response.data);
+    axios.get(`${BASE_URL1}/tiposAssento`).then((response) => {
+      setDadosTipoAssento(response.data);
     });
+
+    axios.get(`${BASE_URL2}/salas`).then((response) => {
+      setDadosSalas(response.data);
+    });
+    
   }, []);
 
   useEffect(() => {
@@ -102,79 +110,72 @@ function CadastroAssento() {
   }, [id]);
 
   if (!dados) return null;
-  if (!dadosCursos) return null;
+  if (!dadosSalas || !dadosTipoAssento) return null;
 
   return (
-    <div className='container'>
-      <Card title='Cadastro de Aluno'>
+    <div className='listContainer'>
+      <Card title='Cadastro de Assentos'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
-              <FormGroup label='Matrícula: *' htmlFor='inputMatricula'>
+              <FormGroup label='Número: *' htmlFor='inputNumero'>
                 <input
-                  type='text'
-                  id='inputMatricula'
-                  value={matricula}
+                  type='number'
+                  id='inputNumero'
+                  value={numero}
                   className='form-control'
-                  name='matricula'
-                  onChange={(e) => setMatricula(e.target.value)}
+                  name='numero'
+                  onChange={(e) => setNumero(e.target.value)}
                 />
               </FormGroup>
-              <FormGroup label='Nome: *' htmlFor='inputNome'>
-                <input
-                  type='text'
-                  id='inputNome'
-                  value={nome}
-                  className='form-control'
-                  name='nome'
-                  onChange={(e) => setNome(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup label='CPF: *' htmlFor='inputCpf'>
-                <input
-                  type='text'
-                  maxLength='11'
-                  id='inputCpf'
-                  value={cpf}
-                  className='form-control'
-                  name='cpf'
-                  onChange={(e) => setCpf(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup label='Email: *' htmlFor='inputEmail'>
-                <input
-                  type='email'
-                  id='inputEmail'
-                  value={email}
-                  className='form-control'
-                  name='email'
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup label='Celular:' htmlFor='inputCelular'>
-                <input
-                  type='text'
-                  id='inputCelular'
-                  value={celular}
-                  className='form-control'
-                  name='celular'
-                  onChange={(e) => setCelular(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup label='Curso: *' htmlFor='selectCurso'>
+              <FormGroup label='Tipo de assento: *' htmlFor='selectTipoDeAssento'>
                 <select
                   className='form-select'
-                  id='selectCurso'
-                  name='idCurso'
-                  value={idCurso}
-                  onChange={(e) => setIdCurso(e.target.value)}
+                  id='selectTipoDeAssento'
+                  name='idTipoAssento'
+                  value={idTipoAssento}
+                  onChange={(e) => setIdTipoAssento(e.target.value)}
                 >
                   <option key='0' value='0'>
                     {' '}
                   </option>
-                  {dadosCursos.map((dado) => (
+                  {dadosTipoAssento.map((dado) => (
                     <option key={dado.id} value={dado.id}>
                       {dado.nome}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
+              <FormGroup label='Disponível: *' htmlFor='inputDisponível'>
+              <select
+                  className='form-select'
+                  id='selectDisp'
+                  name='disponibilidade'
+                  value={disponivel}
+                  onChange={(e) => setDisponivel(e.target.value)}
+                >
+
+                 {diponibilidade.map((disp) => (
+                    <option >
+                      {disp}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
+              <FormGroup label='Sala: *' htmlFor='selectSala'>
+                <select
+                  className='form-select'
+                  id='selectSala'
+                  name='idSala'
+                  value={idSala}
+                  onChange={(e) => setIdSala(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosSalas.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.numeroSala}
                     </option>
                   ))}
                 </select>
