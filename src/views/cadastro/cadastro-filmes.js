@@ -45,7 +45,7 @@ function CadastroFilmes() {
 
   return (
     <div className="listContainer">
-      <Card title="Cadastro de Sessões">
+      <Card title="Cadastro de Filmes">
         <div className="row">
           <div className="col-lg-12">
             <div className="bs-component">

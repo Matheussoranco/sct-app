@@ -115,7 +115,7 @@ function CadastroAdministradores() {
 
   return (
     <div className="listContainer">
-      <Card title="Cadastro">
+      <Card title="Cadastro de administradores">
         <div className="row">
           <div className="col-lg-12">
             <div className="bs-component">
