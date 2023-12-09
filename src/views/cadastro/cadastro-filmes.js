@@ -13,7 +13,8 @@ import "../../custom.css";
 import axios from "axios";
 import { BASE_URL as BASE_URL1 } from "../../config/axios";
 import { BASE_URL as BASE_URL2 } from "../../config/axios";
-import { BASE_URL as BASE_URL3 } from "../../config/axios";
+import { BASE_URL as BASE_URL3 } from "../../config/axios2";
+import { BASE_URL as  BASE_URL4} from '../../config/axios3';
 
 function CadastroFilmes() {
   const { idParam } = useParams();
@@ -98,15 +99,15 @@ function CadastroFilmes() {
   }
  
 
-  const [dadosCategoria, setDadosCategoria] = React.useState(null);
+  const [dadosCategorias, setDadosCategorias] = React.useState(null);
   const [dadosProdutora, setDadosProdutora] = React.useState(null);
 
 useEffect(() => {
   axios.get(`${BASE_URL2}/categorias`).then((response) => {
-    setDadosCategoria(response.data);
+    setDadosCategorias(response.data);
   });
 
-  axios.get(`${BASE_URL3}/produtoras`).then((response) => {
+  axios.get(`${BASE_URL4}/produtoras`).then((response) => {
     setDadosProdutora(response.data);
   });
   
@@ -181,7 +182,7 @@ if (!dados) return null;
                   <option key='0' value='0'>
                     {' '}
                   </option>
-                  {dadosCategoria.map((dado) => (
+                  {dadosCategorias.map((dado) => (
                     <option key={dado.id} value={dado.id}>
                       {dado.nome}
                     </option>

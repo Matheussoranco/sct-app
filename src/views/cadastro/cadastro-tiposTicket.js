@@ -23,7 +23,7 @@ function CadastroTiposTicket() {
   const baseURL = `${BASE_URL}/tiposTicket`;
 
   const [id, setId] = useState('');
-  const [idCinema, setIdCineme] = useState(0);
+  const [idCinema, setIdCinema] = useState(0);
   const [tipo, setTipo] = useState('');
   const [valor, setValor] = useState('');
 
@@ -32,7 +32,7 @@ function CadastroTiposTicket() {
   const [dados, setDados] = React.useState([]);
 
   async function salvar() {
-    let data = { id, tipo };
+    let data = { id, tipo, valor, idCinema };
     
     data = JSON.stringify(data);
 
@@ -70,15 +70,19 @@ function CadastroTiposTicket() {
     });
     setId(dados.id);
     setTipo(dados.tipo);
+    setIdCinema(dados.idCinema);
+    setValor(dados.valor);
   }
 
-  const [dadosTipoTicket, setDadosTickets] = React.useState(null);
+  const [dadosCinemas, setDadosCinemas] = React.useState(null);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/tiposTicket`).then((response) => {
-      setDadosTickets(response.data);
+    axios.get(`${BASE_URL}/cinemas`).then((response) => {
+      setDadosCinemas(response.data);
     });
+
   }, []);
+  
 
   useEffect(() => {
     buscar(); // eslint-disable-next-line
@@ -101,6 +105,34 @@ function CadastroTiposTicket() {
                   name='tipo'
                   onChange={(e) => setTipo(e.target.value)}
                 />
+              </FormGroup>
+              <FormGroup label='Valor: *' htmlFor='inputValor'>
+                <input
+                  type='text'
+                  id='inputValor'
+                  value={tipo}
+                  className='form-control'
+                  name='Valor'
+                  onChange={(e) => setValor(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup label='Cinema: *' htmlFor='selectCinema'>
+                <select
+                  className='form-select'
+                  id='selectCinema'
+                  name='idCinema'
+                  value={idCinema}
+                  onChange={(e) => setIdCinema(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosCinemas.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.nome}
+                    </option>
+                  ))}
+                </select>
               </FormGroup>
               
               <Stack spacing={1} padding={1} direction='row'>

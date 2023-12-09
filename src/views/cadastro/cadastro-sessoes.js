@@ -11,15 +11,17 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL as  BASE_URL} from '../../config/axios2';
-import { BASE_URL as  BASE_URL2} from '../../config/axios';
+import { BASE_URL as  BASE_URL} from '../../config/axios';
+import { BASE_URL as  BASE_URL2} from '../../config/axios2';
+import { BASE_URL as  BASE_URL3} from '../../config/axios3';
+import { BASE_URL as  BASE_URL4} from '../../config/axios4';
 
 function CadastroSessoes() {
   const { idParam } = useParams();
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/sessoes`;
+  const baseURL = `${BASE_URL2}/sessoes`;
 
   const [id, setId] = useState('');
   const [idCinema, setIdCinema] = useState(0);
@@ -36,8 +38,8 @@ function CadastroSessoes() {
   const [dados, setDados] = React.useState([]);
 
   async function salvar() {
-    let data = { id, dtExibicao, horarioInicial, idTipoDeTicket,
-      reservaAssentoMeia, idCinema, idFilme};
+    let data = { id, idCinema, idFilme, idTipoDeTicket, idTipoDeExibicao, dtExibicao, horarioInicial,
+      reservaAssentoMeia};
     
     data = JSON.stringify(data);
 
@@ -74,29 +76,54 @@ function CadastroSessoes() {
       setDados(response.data);
     });
     setId(dados.id);
+    setIdCinema(dados.idCinema);
+    setIdFilme(dados.idFilme);
+    setIdSala(dados.idSala);
+    setIdTipoDeTicket(dados.idTipoDeTicket);
+    setTipoDeExibicao(dados.idTipoDeExibicao);
     setDtExibicao(dados.dtExibicao);
     setHorarioInicial(dados.horarioInicial);
     setIdTipoDeTicket(dados.idTipoDeTicket);
     setReservaAssentoMeia(dados.reservaAssentoMeia);
-    setIdCinema(dados.idCinema);
-    setIdFilme(dados.idFilme);
 
   }
 
   const [dadosCinemas, setDadosCinemas] = React.useState(null);
   const [dadosFilmes, setDadosFilmes] = React.useState(null);
+  const [dadosSalas, setDadosSalas] = React.useState(null);
+  const [dadosTipoTicket, setDadosTipoTicket] = React.useState(null);
+  const [dadosTipoExibicao, setDadosTipoExibicao] = React.useState(null);
 
   useEffect(() => {
-    axios.get(`${BASE_URL2}/cinemas`).then((response) => {
+    axios.get(`${BASE_URL}/cinemas`).then((response) => {
       setDadosCinemas(response.data);
     });
   }, []);
 
   useEffect(() => {
-    axios.get(`${BASE_URL2}/filmes`).then((response) => {
+    axios.get(`${BASE_URL}/salas`).then((response) => {
+      setDadosSalas(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/filmes`).then((response) => {
       setDadosFilmes(response.data);
     });
   }, []);
+  
+  useEffect(() => {
+    axios.get(`${BASE_URL3}/tiposTickets`).then((response) => {
+      setDadosTipoTicket(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios.get(`${BASE_URL2}/tiposExibicao`).then((response) => {
+      setDadosTipoExibicao(response.data);
+    });
+  }, []);
+
 
   useEffect(() => {
     buscar(); // eslint-disable-next-line
@@ -131,6 +158,24 @@ function CadastroSessoes() {
                   ))}
                 </select>
               </FormGroup>
+              <FormGroup label='Sala: *' htmlFor='selecSala'>
+                <select
+                  className='form-select'
+                  id='selectSala'
+                  name='idSala'
+                  value={idSala}
+                  onChange={(e) => setIdSala(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosSalas.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.titulo}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
               <FormGroup label='filme: *' htmlFor='selecFilme'>
                 <select
                   className='form-select'
@@ -145,6 +190,42 @@ function CadastroSessoes() {
                   {dadosFilmes.map((dado) => (
                     <option key={dado.id} value={dado.id}>
                       {dado.titulo}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
+              <FormGroup label='Tipo de exibição: *' htmlFor='selectTipoExibicao'>
+                <select
+                  className='form-select'
+                  id='selectTipoDeExibicao'
+                  name='idTipoDeExibicao'
+                  value={idTipoDeExibicao}
+                  onChange={(e) => setTipoDeExibicao(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosTipoExibicao.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.nome}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
+              <FormGroup label='Tipo de ticket: *' htmlFor='selectTipoTicket'>
+                <select
+                  className='form-select'
+                  id='selectTipoDeTicket'
+                  name='idTipoDeTicket'
+                  value={idTipoDeTicket}
+                  onChange={(e) => setIdTipoDeTicket(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosTipoTicket.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.nome}
                     </option>
                   ))}
                 </select>
