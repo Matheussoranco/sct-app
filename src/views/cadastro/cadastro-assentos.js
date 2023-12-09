@@ -13,6 +13,7 @@ import '../../custom.css';
 import axios from 'axios';
 import { BASE_URL as BASE_URL1 } from '../../config/axios2';
 import { BASE_URL as BASE_URL2 } from '../../config/axios';
+import { BASE_URL as BASE_URL3 } from '../../config/axios';
 
 function CadastroAssento() {
   const { idParam } = useParams();
@@ -23,10 +24,10 @@ function CadastroAssento() {
 
 
   const [id, setId] = useState('');
-  const [numero, setNumero] = useState('');
-  const [idTipoAssento, setIdTipoAssento] = useState(0);
   const [idCinema, setIdCinema] = useState(0);
   const [idSala, setIdSala] = useState(0);
+  const [numero, setNumero] = useState('');
+  const [idTipoAssento, setIdTipoAssento] = useState(0);
   
 
   const [dados, setDados] = React.useState([]);
@@ -83,13 +84,15 @@ function CadastroAssento() {
     });
 
     setId(dados.id);
-    setNumero(dados.numero);
+    setIdCinema(dados.idCinema);
     setIdSala(dados.idSala);
+    setNumero(dados.numero);
     setIdTipoAssento(dados.idTipoAssento)
   }
 
   const [dadosTipoAssento, setDadosTipoAssento] = React.useState(null);
   const [dadosSalas, setDadosSalas] = React.useState(null);
+  const [dadosCinemas, setDadosCinemas] = React.useState(null);
  
 
   useEffect(() => {
@@ -99,6 +102,10 @@ function CadastroAssento() {
 
     axios.get(`${BASE_URL2}/salas`).then((response) => {
       setDadosSalas(response.data);
+    });
+
+    axios.get(`${BASE_URL3}/cinemas`).then((response) => {
+      setDadosCinemas(response.data);
     });
     
   }, []);
@@ -116,6 +123,24 @@ function CadastroAssento() {
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
+            <FormGroup label='Cinema: *' htmlFor='selectCinema'>
+                <select
+                  className='form-select'
+                  id='selectCinema'
+                  name='idCinema'
+                  value={idCinema}
+                  onChange={(e) => setIdCinema(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosCinemas.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.nome}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
               <FormGroup label='Número: *' htmlFor='inputNumero'>
                 <input
                   type='number'

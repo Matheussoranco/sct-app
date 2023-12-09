@@ -22,15 +22,15 @@ function CadastroSalas() {
   const baseURL = `${BASE_URL}/salas`;
 
   const [id, setId] = useState('');
+  const [idCinema, setIdCinema] = useState(0);
   const [numSala, setNumSala] = useState('');
   const [numAssentos, setNumAssentos] = useState('');
-  const [idCinema, setIdCinema] = useState(0);
 
 
   const [dados, setDados] = React.useState([]);
 
   async function salvar() {
-    let data = { id, numSala, numAssentos, idCinema };
+    let data = { id, idCinema, numSala, numAssentos };
     
     data = JSON.stringify(data);
 
@@ -67,9 +67,9 @@ function CadastroSalas() {
       setDados(response.data);
     });
     setId(dados.id);
+    setIdCinema(dados.idCinema);
     setNumSala(dados.numSala);
     setNumAssentos(dados.numAssentos);
-    setIdCinema(dados.idCinema);
   }
 
   const [dadosCinemas, setDadosCinemas] = React.useState(null);
@@ -95,6 +95,24 @@ function CadastroSalas() {
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
+            <FormGroup label='Cinema: *' htmlFor='selectCinema'>
+                <select
+                  className='form-select'
+                  id='selectCinema'
+                  name='idCinema'
+                  value={idCinema}
+                  onChange={(e) => setIdCinema(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosCinemas.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.nome}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
               <FormGroup label='Numero da sala: *' htmlFor='inputNumSala'>
                 <input
                   type='text'
@@ -114,24 +132,6 @@ function CadastroSalas() {
                   name='numAssentos'
                   onChange={(e) => setNumAssentos(e.target.value)}
                 />
-              </FormGroup>
-              <FormGroup label='Cinema: *' htmlFor='selectCinema'>
-                <select
-                  className='form-select'
-                  id='selectCinema'
-                  name='idCinema'
-                  value={idCinema}
-                  onChange={(e) => setIdCinema(e.target.value)}
-                >
-                  <option key='0' value='0'>
-                    {' '}
-                  </option>
-                  {dadosCinemas.map((dado) => (
-                    <option key={dado.id} value={dado.id}>
-                      {dado.nome}
-                    </option>
-                  ))}
-                </select>
               </FormGroup>
               <Stack spacing={1} padding={1} direction='row'>
                 <button

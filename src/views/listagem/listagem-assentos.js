@@ -71,20 +71,22 @@ function ListagemAssentos() {
                 className='btn btn-warning'
                 onClick={() => cadastrar()}
               >
-                Assentos 
+                Novo Assento 
               </button>
               <table className='table table-hover'>
                 <thead>
                   <tr>
                     <th scope='col'>Código</th>
-                    <th scope='col'>disponível</th>
+                    <th scope='col'>Sala</th>
+                    <th scope='col'>Cinema</th>
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
-                      <td>{dado.disponivel}</td>
+                      <td>{dado.Sala}</td>
+                      <td>{dado.cinemas}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
