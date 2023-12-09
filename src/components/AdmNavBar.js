@@ -136,17 +136,14 @@ function Navbar(props) {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownCinema"
               >
+                <a className="dropdown-item" href="/adm/listagem-usuarios">
+                  Usuarios
+                </a>
                 <a
                   className="dropdown-item"
                   href="/adm/listagem-administradores"
                 >
                   Administradores
-                </a>
-                <a className="dropdown-item" href="/adm/listagem-usuarios">
-                  Usuarios
-                </a>
-                <a className="dropdown-item" href="/adm/listagem-proprietarios">
-                  Proprietarios
                 </a>
               </div>
             </li>

@@ -12,6 +12,7 @@ import '../../custom.css';
 
 import axios from 'axios';
 import { BASE_URL } from '../../config/axios3';
+import { BASE_URL as  BASE_URL2} from '../../config/axios';
 import { Save } from '@mui/icons-material';
 
 function CadastroTiposTicket() {
@@ -22,7 +23,11 @@ function CadastroTiposTicket() {
   const baseURL = `${BASE_URL}/tiposTicket`;
 
   const [id, setId] = useState('');
+  const [idCinema, setIdCineme] = useState(0);
   const [tipo, setTipo] = useState('');
+  const [valor, setValor] = useState('');
+
+
 
   const [dados, setDados] = React.useState([]);
 

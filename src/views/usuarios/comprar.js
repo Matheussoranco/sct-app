@@ -22,8 +22,8 @@ function CadastroCompra() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [idCinema, setIdCinema] = useState(0);
-  const [idFilme, setIdFilme] = useState(0);
   const [idSessao, setIdSessao] = useState(0);
+  const [idFilme, setIdFilme] = useState(0);
   const [idAssento, setIdAssento] = useState(0);
   const [idTipoDeTicket, setIdTipoDeTicket] = useState(0);
   const [quantidade, setQuantidade] = useState('');
@@ -183,24 +183,6 @@ function CadastroCompra() {
                   ))}
                 </select>
               </FormGroup>
-              <FormGroup label='Filme: *' htmlFor='selecFilme'>
-                <select
-                  className='form-select'
-                  id='selectFilme'
-                  name='idFilme'
-                  value={idFilme}
-                  onChange={(e) => setIdFilme(e.target.value)}
-                >
-                  <option key='0' value='0'>
-                    {' '}
-                  </option>
-                  {dadosFilmes.map((dado) => (
-                    <option key={dado.id} value={dado.id}>
-                      {dado.titulo}
-                    </option>
-                  ))}
-                </select>
-              </FormGroup>
               <FormGroup label='Sessão: *' htmlFor='selecSessao'>
                 <select
                   className='form-select'
@@ -219,6 +201,25 @@ function CadastroCompra() {
                   ))}
                 </select>
               </FormGroup>
+              <FormGroup label='Filme: *' htmlFor='selecFilme'>
+                <select
+                  className='form-select'
+                  id='selectFilme'
+                  name='idFilme'
+                  value={idFilme}
+                  onChange={(e) => setIdFilme(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosFilmes.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.titulo}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
+              
               <FormGroup label='Assento: *' htmlFor='selecAssento'>
                 <select
                   className='form-select'

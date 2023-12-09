@@ -22,19 +22,22 @@ function CadastroSessoes() {
   const baseURL = `${BASE_URL}/sessoes`;
 
   const [id, setId] = useState('');
-  const [dtExibicao, setDtExibicao] = useState('');
-  const [horarioInicial, setHorarioInicial] = useState('');
-  const [valorTicketInteiro, setValorTicketInteiro] = useState('');
-  const [reservaAssentoMeia, setReservaAssentoMeia] = useState('');
-  const [descontoMeia, setDescontoMeia] = useState('');
   const [idCinema, setIdCinema] = useState(0);
   const [idFilme, setIdFilme] = useState(0);
+  const [idSala, setIdSala] = useState(0);
+  const [idTipoDeExibicao, setTipoDeExibicao] = useState(0);
+  const [idTipoDeTicket, setIdTipoDeTicket] = useState(0);
+  const [dtExibicao, setDtExibicao] = useState('');
+  const [horarioInicial, setHorarioInicial] = useState('');
+  const [reservaAssentoMeia, setReservaAssentoMeia] = useState('');
+ 
+ 
 
   const [dados, setDados] = React.useState([]);
 
   async function salvar() {
-    let data = { id, dtExibicao, horarioInicial, valorTicketInteiro,
-      reservaAssentoMeia, descontoMeia, idCinema, idFilme};
+    let data = { id, dtExibicao, horarioInicial, idTipoDeTicket,
+      reservaAssentoMeia, idCinema, idFilme};
     
     data = JSON.stringify(data);
 
@@ -73,9 +76,8 @@ function CadastroSessoes() {
     setId(dados.id);
     setDtExibicao(dados.dtExibicao);
     setHorarioInicial(dados.horarioInicial);
-    setValorTicketInteiro(dados.valorTicketInteiro);
+    setIdTipoDeTicket(dados.idTipoDeTicket);
     setReservaAssentoMeia(dados.reservaAssentoMeia);
-    setDescontoMeia(dados.descontoMeia);
     setIdCinema(dados.idCinema);
     setIdFilme(dados.idFilme);
 
@@ -111,61 +113,7 @@ function CadastroSessoes() {
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
-              <FormGroup label='data de exibição: *' htmlFor='inputDTExibicao'>
-                <input
-                  type='date'
-                  id='inputDTExibicao'
-                  value={dtExibicao}
-                  className='form-control'
-                  name='dtExibicao '
-                  onChange={(e) => setDtExibicao(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup label='Horário Inicial : *' htmlFor='inputHorarioInicial'>
-                <input
-                  type='time'
-                  maxLength='11'
-                  id='inputHorarioInicial'
-                  value={horarioInicial}
-                  className='form-control'
-                  name='horarioInicial'
-                  onChange={(e) => setHorarioInicial(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup label='Valor Ticket Inteiro: *' htmlFor='inputValorTicketInteiro'>
-                <input
-                  min="1" 
-                  step="any"
-                  type='number'
-                  id='inputValorTicketInteiro'
-                  value={valorTicketInteiro}
-                  className='form-control'
-                  name=' ValorTicketInteiro'
-                  onChange={(e) => setValorTicketInteiro(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup label='Reserva para assentos meia entrada:' htmlFor='inputReservaAssentoMeia'>
-                <input
-                  type="number" min="1" max="100"
-                  id='inputReservaAssentoMeia'
-                  value={reservaAssentoMeia}
-                  className='form-control'
-                  name='ReservaAssentoMeia '
-                  onChange={(e) => setReservaAssentoMeia(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup label='Desconto para meia entrada:' htmlFor='inputDescontoMeia'>
-                <input
-                  type="number" min="1" max="100"
-                  id='inputDescontoMeia'
-                  name='DescontoMeia'
-                  className='form-control'
-                  value={descontoMeia}
-                  onChange={(e) => setDescontoMeia(e.target.value)}
-                />
-             
-              </FormGroup>
-              <FormGroup label='Cinema: *' htmlFor='selectCinema'>
+            <FormGroup label='Cinema: *' htmlFor='selectCinema'>
                 <select
                   className='form-select'
                   id='selectCinema'
@@ -201,6 +149,39 @@ function CadastroSessoes() {
                   ))}
                 </select>
               </FormGroup>
+              <FormGroup label='data de exibição: *' htmlFor='inputDTExibicao'>
+                <input
+                  type='date'
+                  id='inputDTExibicao'
+                  value={dtExibicao}
+                  className='form-control'
+                  name='dtExibicao '
+                  onChange={(e) => setDtExibicao(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup label='Horário Inicial : *' htmlFor='inputHorarioInicial'>
+                <input
+                  type='time'
+                  maxLength='11'
+                  id='inputHorarioInicial'
+                  value={horarioInicial}
+                  className='form-control'
+                  name='horarioInicial'
+                  onChange={(e) => setHorarioInicial(e.target.value)}
+                />
+              </FormGroup>
+             
+              <FormGroup label='Reserva para assentos meia entrada:' htmlFor='inputReservaAssentoMeia'>
+                <input
+                  type="number" min="1" max="100"
+                  id='inputReservaAssentoMeia'
+                  value={reservaAssentoMeia}
+                  className='form-control'
+                  name='ReservaAssentoMeia '
+                  onChange={(e) => setReservaAssentoMeia(e.target.value)}
+                />
+              </FormGroup>
+             
               <Stack spacing={1} padding={1} direction='row'>
                 <button
                   onClick={salvar}

@@ -25,6 +25,9 @@ function CadastroFilmes() {
   const [sinopse, setSinopse] = useState("");
   const [faixaEtaria, setFaixaEtaria] = useState("");
   const [duracao, setDuracao] = useState("");
+  const [idCategoria, setIdCategoria] = useState(0);
+  const [idProdutora, setIdProdutora] = useState(0);
+
   const [dados, setDados] = React.useState([]);
 
   function inicializar() {

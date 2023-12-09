@@ -9,7 +9,6 @@ import ListagemUsuarios from "./views/listagem/listagem-usuarios";
 import ListagemAssentos from "./views/listagem/listagem-assentos";
 import ListagemCategorias from "./views/listagem/listagem-categorias";
 import ListagemProdutoras from "./views/listagem/listagem-produtoras";
-import ListagemProprietarios from "./views/listagem/listagem-proprietarios";
 import ListagemSalas from "./views/listagem/listagem-salas";
 import ListagemTiposAssento from "./views/listagem/listagem-tiposAssento";
 import ListagemTiposExibicao from "./views/listagem/listagem-tiposExibicao";
@@ -25,7 +24,6 @@ import CadastroCategorias from "./views/cadastro/cadastro-categorias";
 import CadastroProdutoras from "./views/cadastro/cadastro-produtoras";
 import CadastroTiposExibicao from "./views/cadastro/cadastro-tiposExibicao";
 import CadastroTiposTicket from "./views/cadastro/cadastro-tiposTicket";
-import CadastroProprietario from "./views/cadastro/cadastro-proprietarios";
 import CadastroSalas from "./views/cadastro/cadastro-salas";
 import CadastroTiposAssento from "./views/cadastro/cadastro-tiposAssento";
 import CadastroAdministradores from "./views/cadastro/cadastro-administradores";
@@ -46,10 +44,7 @@ function Rotas(props) {
           path="/adm/cadastro/cadastro-assentos/:idParam?"
           element={<CadastroAssento />}
         />
-        <Route
-          path="/adm/cadastro/cadastro-proprietarios/:idParam?"
-          element={<CadastroProprietario />}
-        />
+        
         <Route
           path="/adm/cadastro/cadastro-salas/:idParam?"
           element={<CadastroSalas />}
@@ -107,10 +102,7 @@ function Rotas(props) {
           path="/adm/listagem-produtoras"
           element={<ListagemProdutoras />}
         />
-        <Route
-          path="/adm/listagem-proprietarios"
-          element={<ListagemProprietarios />}
-        />
+        
         <Route path="/adm/listagem-salas" element={<ListagemSalas />} />
         <Route
           path="/adm/listagem-tiposAssento"

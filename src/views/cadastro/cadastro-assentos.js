@@ -24,10 +24,10 @@ function CadastroAssento() {
 
   const [id, setId] = useState('');
   const [numero, setNumero] = useState('');
-  const [disponivel, setDisponivel] = useState('');
   const [idTipoAssento, setIdTipoAssento] = useState(0);
+  const [idCinema, setIdCinema] = useState(0);
   const [idSala, setIdSala] = useState(0);
-  const diponibilidade = ["true", "false"];
+  
 
   const [dados, setDados] = React.useState([]);
 
@@ -35,20 +35,19 @@ function CadastroAssento() {
     if (idParam == null) {
       setId('');
       setNumero('');
-      setDisponivel('');
+  
       setIdSala(0);
       setIdTipoAssento(0)
     } else {
       setId(dados.id);
       setNumero(dados.numero);
-      setDisponivel(dados.disponivel)
       setIdSala(dados.idSala);
       setIdTipoAssento(dados.idTipoAssento)
     }
   }
 
   async function salvar() {
-    let data = { id, numero, disponivel, idSala, idTipoAssento};
+    let data = { id, numero, idSala, idTipoAssento};
     data = JSON.stringify(data);
     if (idParam == null) {
       await axios
@@ -85,7 +84,6 @@ function CadastroAssento() {
 
     setId(dados.id);
     setNumero(dados.numero);
-    setDisponivel(dados.disponivel)
     setIdSala(dados.idSala);
     setIdTipoAssento(dados.idTipoAssento)
   }
@@ -142,22 +140,6 @@ function CadastroAssento() {
                   {dadosTipoAssento.map((dado) => (
                     <option key={dado.id} value={dado.id}>
                       {dado.nome}
-                    </option>
-                  ))}
-                </select>
-              </FormGroup>
-              <FormGroup label='Disponível: *' htmlFor='inputDisponível'>
-              <select
-                  className='form-select'
-                  id='selectDisp'
-                  name='disponibilidade'
-                  value={disponivel}
-                  onChange={(e) => setDisponivel(e.target.value)}
-                >
-
-                 {diponibilidade.map((disp) => (
-                    <option >
-                      {disp}
                     </option>
                   ))}
                 </select>
