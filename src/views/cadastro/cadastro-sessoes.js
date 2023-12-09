@@ -14,7 +14,6 @@ import axios from 'axios';
 import { BASE_URL as  BASE_URL} from '../../config/axios';
 import { BASE_URL as  BASE_URL2} from '../../config/axios2';
 import { BASE_URL as  BASE_URL3} from '../../config/axios3';
-import { BASE_URL as  BASE_URL4} from '../../config/axios4';
 
 function CadastroSessoes() {
   const { idParam } = useParams();
@@ -113,7 +112,7 @@ function CadastroSessoes() {
   }, []);
   
   useEffect(() => {
-    axios.get(`${BASE_URL3}/tiposTickets`).then((response) => {
+    axios.get(`${BASE_URL3}/tiposTicket`).then((response) => {
       setDadosTipoTicket(response.data);
     });
   }, []);

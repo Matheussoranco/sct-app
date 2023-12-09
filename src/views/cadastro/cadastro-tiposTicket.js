@@ -77,7 +77,7 @@ function CadastroTiposTicket() {
   const [dadosCinemas, setDadosCinemas] = React.useState(null);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/cinemas`).then((response) => {
+    axios.get(`${BASE_URL2}/cinemas`).then((response) => {
       setDadosCinemas(response.data);
     });
 
