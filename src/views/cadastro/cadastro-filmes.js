@@ -118,6 +118,8 @@ useEffect(() => {
 }, [id]);
 
 if (!dados) return null;
+if (!dadosCategorias) return null;
+if (!dadosProdutora) return null;
 
   return (
     <div className="listContainer">

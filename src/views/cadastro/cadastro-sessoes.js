@@ -131,6 +131,8 @@ function CadastroSessoes() {
 
   if (!dados) return null;
   if (!dadosCinemas || !dadosFilmes) return null;
+  if (!dadosTipoExibicao) return null;
+  if (!dadosTipoTicket) return null;
 
   const retornarListagem = () => navigate(`/adm/listagem-sessoes`);
 
@@ -158,7 +160,7 @@ function CadastroSessoes() {
                   ))}
                 </select>
               </FormGroup>
-              <FormGroup label='Sala: *' htmlFor='selecSala'>
+              <FormGroup label='Sala: *' htmlFor='selectSala'>
                 <select
                   className='form-select'
                   id='selectSala'
@@ -176,7 +178,7 @@ function CadastroSessoes() {
                   ))}
                 </select>
               </FormGroup>
-              <FormGroup label='filme: *' htmlFor='selecFilme'>
+              <FormGroup label='filme: *' htmlFor='selectFilme'>
                 <select
                   className='form-select'
                   id='selectFilme'

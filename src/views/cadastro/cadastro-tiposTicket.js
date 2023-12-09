@@ -88,6 +88,9 @@ function CadastroTiposTicket() {
     buscar(); // eslint-disable-next-line
   }, [id]);
 
+  if (!dados) return null;
+  if (!dadosCinemas) return null;
+
   const retornarListagem = () => navigate(`/adm/listagem-tiposTicket`);
 
   return (
