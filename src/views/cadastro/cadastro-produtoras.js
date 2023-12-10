@@ -46,7 +46,7 @@ function CadastroProdutora() {
         })
         .then(function (response) {
           mensagemSucesso(`Produtora ${nome} cadastrada com sucesso!`);
-          navigate(`/listagem-produtora`);
+          navigate(`/adm/listagem-produtoras`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
@@ -58,7 +58,7 @@ function CadastroProdutora() {
         })
         .then(function (response) {
           mensagemSucesso(`Produtora ${nome} alterado com sucesso!`);
-          navigate(`/listagem-produtora`);
+          navigate(`/adm/listagem-produtoras`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
