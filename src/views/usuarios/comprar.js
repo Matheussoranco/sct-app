@@ -48,7 +48,7 @@ function CadastroCompra() {
       setValor( quantidade*valorInteira);
   }
 
-  const retornar = () =>window.location.href = "http://localhost:3000/";
+  const retornar = () => window.location.href = "http://localhost:3000/";
 
   async function salvar() {
     let data = {
@@ -73,6 +73,7 @@ function CadastroCompra() {
       mensagemErro("Dados faltando");
     else{
       mensagemSucesso("Compra realizada com sucesso");
+  
       retornar();
     }
       
@@ -332,7 +333,7 @@ function CadastroCompra() {
                   type='button'
                   className='btn btn-success'
                 >
-                  Salvar
+                  Comprar
                 </button>
                 <button
                   onClick={retornar}
