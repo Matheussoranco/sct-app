@@ -87,7 +87,7 @@ function Navbar(props) {
               </li>
           </ul>
           <ul className="navbar-nav">
-            <NavbarItem render="true" href="/listagem-Filmes" label="Filmes" />
+            <NavbarItem render="true" href="/listagem-filmes" label="Filmes" />
           </ul>
           <ul className="navbar-nav">
             <NavbarItem render="true" href="/Comprar" label="Comprar" />

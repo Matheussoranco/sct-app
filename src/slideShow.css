@@ -1,10 +1,11 @@
 * {box-sizing:border-box}
 
+
 /* Slideshow container */
 .slideshow-container {
-  max-width: 1000px;
   position: relative;
-  margin: auto;
+  margin-right: 40vh;
+  margin-bottom: 2vh;
 }
 
 /* Hide the images by default */

@@ -15,6 +15,7 @@ import ListagemTiposExibicao from "./views/listagem/listagem-tiposExibicao";
 import ListagemTiposTicket from "./views/listagem/listagem-tiposTicket";
 import ListagemAdministradores from "./views/listagem/listagem-administradores";
 import ListagemFormasPagamento from "./views/listagem/listagem-formasPagamento";
+import ListagemFilmesUsuario from "./views/usuarios/listagem-filmes"
 
 import CadastroCinemas from "./views/cadastro/cadastro-cinemas";
 import CadastroSessoes from "./views/cadastro/cadastro-sessoes";
@@ -94,6 +95,7 @@ function Rotas(props) {
         <Route path="/adm/listagem-filmes" element={<ListagemFilmes />} />
         <Route path="/adm/listagem-sessoes" element={<ListagemSessoes />} />
         <Route path="/adm/listagem-assentos" element={<ListagemAssentos />} />
+        <Route path="//listagem-filmes" element={<ListagemFilmesUsuario/>}/>
         <Route
           path="/adm/listagem-categorias"
           element={<ListagemCategorias />}
