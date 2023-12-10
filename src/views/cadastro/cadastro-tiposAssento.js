@@ -64,7 +64,7 @@ function CadastroTiposAssento() {
       setDados(response.data);
     });
     setId(dados.id);
-    setTipo(dados.tipo);
+    setTipo(dados.nome);
   }
 
   const [dadosTiposAssento, setDadosAssentos] = React.useState(null);

@@ -51,14 +51,20 @@ function ListagemSalas() {
         mensagemErro(`Erro ao excluir a sala`);
       });
   }
+  const [dadosCinemas, setDadosCinemas] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
+    axios.get(`${BASE_URL}/salas`).then((response) => {
       setDados(response.data);
+    });
+
+    axios.get(`${BASE_URL}/cinemas`).then((response) => {
+      setDadosCinemas(response.data);
     });
   }, []);
 
   if (!dados) return null;
+  if (!dadosCinemas) return;
 
   return (
     <div className='listContainer'>
@@ -77,6 +83,7 @@ function ListagemSalas() {
                 <thead>
                   <tr>
                     <th scope='col'>Código</th>
+                    <th scope='col'>Cinema</th>
                     <th scope='col'>número</th>
                     <th scope='col'>Quantidade de Assentos</th>
                   </tr>
@@ -85,8 +92,9 @@ function ListagemSalas() {
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
-                      <td>{dado.numeroSala}</td>
-                      <td>{dado.qtdAssentos}</td>
+                      <td>{dadosCinemas.find((cinema) => cinema.id === dado.idCinema)?.nome || 'Cinema not found'}</td> 
+                      <td>{dado.numSala}</td>
+                      <td>{dado.numAssentos}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton

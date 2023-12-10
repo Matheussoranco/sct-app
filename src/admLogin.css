@@ -1,12 +1,13 @@
-src/AdminLogin.css
+
 .admin-login-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    min-height: 100vh; /* Ensure the container takes the full height of the viewport */
     z-index: 1;
+    margin-right: 40vh;
+    padding-bottom: 19vh;
   }
   
   form {

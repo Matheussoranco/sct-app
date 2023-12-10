@@ -36,6 +36,7 @@ function CadastroSalas() {
       setNumSala('');
       setNumAssentos('');
     } else {
+      
       setId(dados.id);
       setIdCinema(dados.idCinema);
       setNumSala(dados.numSala);
@@ -81,6 +82,7 @@ function CadastroSalas() {
     await axios.get(`${baseURL}/${idParam}`).then((response) => {
       setDados(response.data);
     });
+   
     setId(dados.id);
     setIdCinema(dados.idCinema);
     setNumSala(dados.numSala);

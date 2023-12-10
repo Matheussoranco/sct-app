@@ -106,7 +106,7 @@ function CadastroSessoes() {
     setTipoDeExibicao(dados.idTipoDeExibicao);
     setDtExibicao(dados.dtExibicao);
     setHorarioInicial(dados.horarioInicial);
-    setIdTipoDeTicket(dados.idTipoDeTicket);
+    setIdTipoDeTicket(dados.tiposDeTicket);
     setReservaAssentoMeia(dados.reservaAssentoMeia);
 
   }
@@ -121,41 +121,31 @@ function CadastroSessoes() {
     axios.get(`${BASE_URL}/cinemas`).then((response) => {
       setDadosCinemas(response.data);
     });
-  }, []);
-
-  useEffect(() => {
+  
     axios.get(`${BASE_URL}/salas`).then((response) => {
       setDadosSalas(response.data);
-    });
-  }, []);
-
-  useEffect(() => {
+    })
+    
     axios.get(`${BASE_URL}/filmes`).then((response) => {
       setDadosFilmes(response.data);
     });
-  }, []);
-  
-  useEffect(() => {
+
     axios.get(`${BASE_URL3}/tiposTicket`).then((response) => {
       setDadosTipoTicket(response.data);
     });
-  }, []);
 
-  useEffect(() => {
     axios.get(`${BASE_URL2}/tiposExibicao`).then((response) => {
       setDadosTipoExibicao(response.data);
     });
   }, []);
-
 
   useEffect(() => {
     buscar(); // eslint-disable-next-line
   }, [id]);
 
   if (!dados) return null;
-  if (!dadosCinemas || !dadosFilmes) return null;
-  if (!dadosTipoExibicao) return null;
-  if (!dadosTipoTicket) return null;
+  if (!dadosCinemas || !dadosFilmes || !dadosTipoExibicao || 
+      !dadosTipoTicket || !dadosSalas) return null;
 
   return (
     <div className='listContainer'>
@@ -194,7 +184,7 @@ function CadastroSessoes() {
                   </option>
                   {dadosSalas.map((dado) => (
                     <option key={dado.id} value={dado.id}>
-                      {dado.titulo}
+                      {dado.id}
                     </option>
                   ))}
                 </select>
@@ -235,27 +225,28 @@ function CadastroSessoes() {
                   ))}
                 </select>
               </FormGroup>
-              <FormGroup label='Tipo de ticket: *' htmlFor='selectTipoTicket'>
+              <FormGroup label='Tipos de ticket: *' htmlFor='selectTipoTicket'>
                 <select
                   className='form-select'
                   id='selectTipoDeTicket'
                   name='idTipoDeTicket'
                   value={idTipoDeTicket}
                   onChange={(e) => setIdTipoDeTicket(e.target.value)}
+                  
                 >
                   <option key='0' value='0'>
                     {' '}
                   </option>
                   {dadosTipoTicket.map((dado) => (
                     <option key={dado.id} value={dado.id}>
-                      {dado.nome}
+                      {dado.tipo}
                     </option>
                   ))}
                 </select>
               </FormGroup>
               <FormGroup label='data de exibição: *' htmlFor='inputDTExibicao'>
                 <input
-                  type='date'
+                  type='text'
                   id='inputDTExibicao'
                   value={dtExibicao}
                   className='form-control'

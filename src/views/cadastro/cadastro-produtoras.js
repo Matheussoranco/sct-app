@@ -66,28 +66,20 @@ function CadastroProdutora() {
     }
   }
 
-  /*async function buscar() {
+  async function buscar() {
     await axios.get(`${baseURL}/${idParam}`).then((response) => {
       setDados(response.data);
     });
     setId(dados.id);
     setNome(dados.nome);
-  }*/
-
-  /*const [dadosCursos, setDadosCursos] = React.useState(null);
-
-  useEffect(() => {
-    axios.get(`${BASE_URL}/cursos`).then((response) => {
-      setDadosCursos(response.data);
-    });
-  }, []);
+  }
 
   useEffect(() => {
     buscar(); // eslint-disable-next-line
   }, [id]);
 
   if (!dados) return null;
-  if (!dadosCursos) return null;*/
+  
 
   return (
     <div className='listContainer'>

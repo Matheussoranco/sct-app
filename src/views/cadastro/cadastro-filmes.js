@@ -11,9 +11,8 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import "../../custom.css";
 
 import axios from "axios";
+
 import { BASE_URL as BASE_URL1 } from "../../config/axios";
-import { BASE_URL as BASE_URL2 } from "../../config/axios";
-import { BASE_URL as BASE_URL3 } from "../../config/axios2";
 import { BASE_URL as  BASE_URL4} from '../../config/axios3';
 
 function CadastroFilmes() {
@@ -21,13 +20,14 @@ function CadastroFilmes() {
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL1}/cinemas`;
+  const baseURL = `${BASE_URL1}/filmes`;
 
   const [id, setId] = useState("");
   const [titulo, setTitulo] = useState("");
   const [sinopse, setSinopse] = useState("");
   const [faixaEtaria, setFaixaEtaria] = useState("");
   const [duracao, setDuracao] = useState("");
+  const [capa, setCapa] = useState("");
   const [idCategoria, setIdCategoria] = useState(0);
   const [idProdutora, setIdProdutora] = useState(0);
 
@@ -103,7 +103,7 @@ function CadastroFilmes() {
   const [dadosProdutora, setDadosProdutora] = React.useState(null);
 
 useEffect(() => {
-  axios.get(`${BASE_URL2}/categorias`).then((response) => {
+  axios.get(`${BASE_URL1}/categorias`).then((response) => {
     setDadosCategorias(response.data);
   });
 
@@ -165,7 +165,7 @@ if (!dadosProdutora) return null;
                 htmlFor="inputDuracao"
               >
                 <input
-                  type="time"
+                  type="text"
                   id="inputDuracao"
                   value={duracao}
                   className="form-control"
@@ -208,6 +208,16 @@ if (!dadosProdutora) return null;
                     </option>
                   ))}
                 </select>
+              </FormGroup>
+              <FormGroup label="Capa: *" htmlFor="inputSinopse">
+                <input
+                  type="file"
+                  id="inputCapa"
+                  value={capa}
+                  className="form-control"
+                  name="Capa"
+                  onChange={(e) => setSinopse(e.target.value)}
+                />
               </FormGroup>
               <Stack spacing={1} padding={1} direction="row">
                 <button onClick={salvar} type="button" className="btn btn-success">

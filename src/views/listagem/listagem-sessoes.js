@@ -14,6 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
+import { BASE_URL as BASE_URL2 } from '../../config/axios';
 import { BASE_URL } from '../../config/axios2';
 
 const baseURL = `${BASE_URL}/sessoes`;
@@ -52,13 +53,30 @@ function ListagemFilmes() {
       });
   }
 
+  const [dadosCinemas, setDadosCinemas] = React.useState(null);
+  const [dadosFilmes, setDadosFilmes] = React.useState(null);
+  const [dadosSalas, setDadosSalas] = React.useState(null);
+
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {
       setDados(response.data);
     });
+
+    axios.get(`${BASE_URL2}/cinemas`).then((response) => {
+      setDadosCinemas(response.data);
+    });
+  
+    axios.get(`${BASE_URL2}/salas`).then((response) => {
+      setDadosSalas(response.data);
+    })
+    
+    axios.get(`${BASE_URL2}/filmes`).then((response) => {
+      setDadosFilmes(response.data);
+    });
+    
   }, []);
 
-  if (!dados) return null;
+  if (!dados || !dadosCinemas || !dadosFilmes || !dadosSalas ) return null;
 
   return (
     <div className='listContainer'>
@@ -88,11 +106,11 @@ function ListagemFilmes() {
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
-                      <td>{dado.cinema}</td>
-                      <td>{dado.sala}</td>
-                      <td>{dado.filme}</td>
-                      <td>{dado.data}</td>
-                      <td>{dado.horario}</td>
+                      <td>{dadosCinemas.find(cinema => cinema.id === dado.idCinema).nome}</td>
+                      <td>{dadosSalas.find(sala => sala.id == dado.idSala).numSala}</td>
+                      <td>{dadosFilmes.find(filme => filme.id == dado.idFilme).titulo}</td>
+                      <td>{dado.dtExibicao}</td>
+                      <td>{dado.horarioInicial}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton

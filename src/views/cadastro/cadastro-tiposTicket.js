@@ -110,27 +110,7 @@ function CadastroTiposTicket() {
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
-              <FormGroup label='Tipo: *' htmlFor='inputTipo'>
-                <input
-                  type='text'
-                  id='inputTipo'
-                  value={tipo}
-                  className='form-control'
-                  name='tipo'
-                  onChange={(e) => setTipo(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup label='Valor: *' htmlFor='inputValor'>
-                <input
-                  type='text'
-                  id='inputValor'
-                  value={tipo}
-                  className='form-control'
-                  name='Valor'
-                  onChange={(e) => setValor(e.target.value)}
-                />
-              </FormGroup>
-              <FormGroup label='Cinema: *' htmlFor='selectCinema'>
+            <FormGroup label='Cinema: *' htmlFor='selectCinema'>
                 <select
                   className='form-select'
                   id='selectCinema'
@@ -149,6 +129,27 @@ function CadastroTiposTicket() {
                 </select>
               </FormGroup>
               
+              <FormGroup label='Tipo: *' htmlFor='inputTipo'>
+                <input
+                  type='text'
+                  id='inputTipo'
+                  value={tipo}
+                  className='form-control'
+                  name='tipo'
+                  onChange={(e) => setTipo(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup label='Valor: *' htmlFor='inputValor'>
+                <input
+                  type='text'
+                  id='inputValor'
+                  value={valor}
+                  className='form-control'
+                  name='Valor'
+                  onChange={(e) => setValor(e.target.value)}
+                />
+              </FormGroup>
+             
               <Stack spacing={1} padding={1} direction='row'>
                 <button
                   onClick={salvar}

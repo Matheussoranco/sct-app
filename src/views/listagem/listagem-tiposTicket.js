@@ -15,6 +15,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
 import { BASE_URL } from '../../config/axios3';
+import { BASE_URL as  BASE_URL2} from '../../config/axios';
 
 const baseURL = `${BASE_URL}/tiposTicket`;
 
@@ -52,13 +53,19 @@ function ListagemTiposTicket() {
       });
   }
 
+  const [dadosCinemas, setDadosCinemas] = React.useState(null);
+
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {
       setDados(response.data);
     });
+
+    axios.get(`${BASE_URL2}/cinemas`).then((response) => {
+      setDadosCinemas(response.data);
+    });
   }, []);
 
-  if (!dados) return null;
+  if (!dados || !dadosCinemas) return null;
 
   return (
     <div className='listContainer'>
@@ -77,14 +84,18 @@ function ListagemTiposTicket() {
                 <thead>
                   <tr>
                     <th scope='col'>Código</th>
-                    <th scope='col'>Nome</th>
+                    <th scope='col'>Cinema</th>
+                    <th scope='col'>Tipo</th>
+                    <th scope='col'>Valor</th>
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
-                      <td>{dado.nome}</td>
+                      <td>{dadosCinemas.find(cinema => cinema.id === dado.idCinema).nome}</td>
+                      <td>{dado.tipo}</td>
+                      <td>{dado.valor}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton
