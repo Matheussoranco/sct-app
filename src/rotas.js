@@ -31,11 +31,17 @@ import CadastroAdministradores from "./views/cadastro/cadastro-administradores";
 import CadastroAssento from "./views/cadastro/cadastro-assentos";
 
 import Comprar from "./views/usuarios/comprar";
+import RecuperarSenha from "./views/usuarios/recuperar-senha";
 
 function Rotas(props) {
   return (
     <BrowserRouter>
       <Routes>
+
+      <Route
+          path="/recuperarSenha"
+          element={<RecuperarSenha />}
+        /> 
 
       <Route
           path="/comprar"
