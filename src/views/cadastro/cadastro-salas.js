@@ -29,6 +29,21 @@ function CadastroSalas() {
 
   const [dados, setDados] = React.useState([]);
 
+  function inicializar() {
+    if (idParam == null) {
+      setId('');
+      setIdCinema('');
+      setNumSala('');
+      setNumAssentos('');
+    } else {
+      setId(dados.id);
+      setIdCinema(dados.idCinema);
+      setNumSala(dados.numSala);
+      setNumAssentos(dados.numAssentos);
+    }
+  }
+
+
   async function salvar() {
     let data = { id, idCinema, numSala, numAssentos };
     
@@ -87,8 +102,6 @@ function CadastroSalas() {
   if (!dados) return null;
   if (!dadosCinemas) return null;
 
-  const retornarListagem = () => navigate(`/adm/listagem-salas`);
-
   return (
     <div className='listContainer'>
       <Card title='Cadastro de Salas'>
@@ -142,7 +155,7 @@ function CadastroSalas() {
                   Salvar
                 </button>
                 <button
-                  onClick={retornarListagem}
+                  onClick={inicializar}
                   type='button'
                   className='btn btn-danger'
                 >

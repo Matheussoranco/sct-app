@@ -36,6 +36,30 @@ function CadastroSessoes() {
 
   const [dados, setDados] = React.useState([]);
 
+  function inicializar() {
+    if (idParam == null) {
+      setId('');
+      setIdCinema('');
+      setIdFilme('');
+      setIdSala('');
+      setTipoDeExibicao('');
+      setIdTipoDeTicket('');
+      setDtExibicao('');
+      setHorarioInicial('');
+      setReservaAssentoMeia('');
+    } else {
+      setId(dados.id);
+      setIdCinema(dados.idCinema);
+      setIdFilme(dados.idFilme);
+      setIdSala(dados.idSala);
+      setTipoDeExibicao(dados.idTipoDeExibicao);
+      setIdTipoDeTicket(dados.idTipoDeTicket);
+      setDtExibicao(dados.dtExibicao);
+      setHorarioInicial(dados.horarioInicial);
+      setReservaAssentoMeia(dados.reservaAssentoMeia);
+    }
+  }
+
   async function salvar() {
     let data = { id, idCinema, idFilme, idTipoDeTicket, idTipoDeExibicao, dtExibicao, horarioInicial,
       reservaAssentoMeia};
@@ -132,8 +156,6 @@ function CadastroSessoes() {
   if (!dadosCinemas || !dadosFilmes) return null;
   if (!dadosTipoExibicao) return null;
   if (!dadosTipoTicket) return null;
-
-  const retornarListagem = () => navigate(`/adm/listagem-sessoes`);
 
   return (
     <div className='listContainer'>
@@ -273,7 +295,7 @@ function CadastroSessoes() {
                   Salvar
                 </button>
                 <button
-                  onClick={retornarListagem}
+                  onClick={inicializar}
                   type='button'
                   className='btn btn-danger'
                 >
