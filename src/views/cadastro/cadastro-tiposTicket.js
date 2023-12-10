@@ -27,9 +27,21 @@ function CadastroTiposTicket() {
   const [tipo, setTipo] = useState('');
   const [valor, setValor] = useState('');
 
-
-
   const [dados, setDados] = React.useState([]);
+
+  function inicializar() {
+    if (idParam == null) {
+      setId('');
+      setIdCinema('');
+      setTipo('');
+      setValor('');
+    } else {
+      setId(dados.id);
+      setIdCinema(dados.idCinema);
+      setTipo(dados.tipo);
+      setValor(dados.valor);
+    }
+  }
 
   async function salvar() {
     let data = { id, tipo, valor, idCinema };
@@ -91,7 +103,6 @@ function CadastroTiposTicket() {
   if (!dados) return null;
   if (!dadosCinemas) return null;
 
-  const retornarListagem = () => navigate(`/adm/listagem-tiposTicket`);
 
   return (
     <div className='listContainer'>
@@ -147,7 +158,7 @@ function CadastroTiposTicket() {
                   Salvar
                 </button>
                 <button
-                  onClick={retornarListagem}
+                  onClick={inicializar}
                   type='button'
                   className='btn btn-danger'
                 >

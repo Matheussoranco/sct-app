@@ -26,6 +26,17 @@ function CadastroCategorias() {
   
   const [dados, setDados] = React.useState([]);
 
+  function inicializar() {
+    if (idParam == null) {
+      setId('');
+      setNome('');
+    } else {
+      setId(dados.id);
+      setNome(dados.nome);
+
+    }
+  }
+
   async function salvar() {
     let data = { id, nome};
     
@@ -71,9 +82,6 @@ function CadastroCategorias() {
     buscar(); // eslint-disable-next-line
   }, [id]);
 
-
-  const retornarListagem = () => navigate(`/adm/listagem-categorias`);
-
   return (
     <div className='listContainer'>
       <Card title='Cadastro de Categorias'>
@@ -99,7 +107,7 @@ function CadastroCategorias() {
                   Salvar
                 </button>
                 <button
-                  onClick={retornarListagem}
+                  onClick={inicializar}
                   type='button'
                   className='btn btn-danger'
                 >
