@@ -36,14 +36,16 @@ function CadastroCompra() {
 
 
   function inicializar(sessao){
-    let data = new Date(
-      sessao.data.split('/').reverse().join('-')
-    ).toISOString().split('T')[0];
-    setDtExibicao(data);
-    setHorarioInicial(sessao.horario)
+    // let data = new Date(
+    //   sessao.data.split('/').reverse().join('-')
+    // ).toISOString().split('T')[0];
+    setDtExibicao(sessao.dtExibicao);
+    setHorarioInicial(sessao.horarioInicial)
+    let valorInteira;
 
-    if(quantidade)
-      setValor( quantidade*parseFloat(sessao.valorTicket));
+    if(quantidade && dadosTiposTicket && idTipoDeTicket )
+      valorInteira = dadosTiposTicket.find(tipo => tipo.id == idTipoDeTicket).valor
+      setValor( quantidade*valorInteira);
   }
 
   const retornar = () =>window.location.href = "http://localhost:3000/";
@@ -196,7 +198,7 @@ function CadastroCompra() {
                   </option>
                   {dadosSessoes.map((dado) => (
                     <option key={dado.id} value={dado.id}>
-                      {dado.data + " " + dado.horario}
+                      {dado.dtExibicao + " " + dado.horarioInicial}
                     </option>
                   ))}
                 </select>
@@ -251,7 +253,7 @@ function CadastroCompra() {
                   </option>
                   {dadosTiposTicket.map((dado) => (
                     <option key={dado.id} value={dado.id}>
-                      {dado.nome}
+                      {dado.tipo}
                     </option>
                   ))}
                 </select>
@@ -303,7 +305,7 @@ function CadastroCompra() {
               </FormGroup>
               <FormGroup label='Data de exibição: ' htmlFor='inputDTExibicao'>
                 <input
-                  type='date'
+                  type='text'
                   id='inputDTExibicao'
                   value={dtExibicao}
                   className='form-control'
