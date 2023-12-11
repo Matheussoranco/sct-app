@@ -62,7 +62,7 @@ function ListagemTiposAssentos() {
 
   return (
     <div className='listContainer'>
-      <Card title='Listagem de assentos'>
+      <Card title='Listagem de tipos de assentos'>
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
