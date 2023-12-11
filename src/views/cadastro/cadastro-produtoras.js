@@ -14,7 +14,7 @@ import axios from 'axios';
 import { BASE_URL } from '../../config/axios3';
 
 
-function CadastroProdutora() {
+function CadastroProdutoras() {
   const { idParam } = useParams();
 
   const navigate = useNavigate();
@@ -121,4 +121,4 @@ function CadastroProdutora() {
   );
 }
 
-export default CadastroProdutora;
+export default CadastroProdutoras;
