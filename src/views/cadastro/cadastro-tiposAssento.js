@@ -26,6 +26,16 @@ function CadastroTiposAssento() {
 
   const [dados, setDados] = React.useState([]);
 
+  function inicializar() {
+    if (idParam == null) {
+      setId('');
+      setTipo('');
+    } else {
+      setId(dados.id);
+      setTipo(dados.tipo);
+    }
+  }
+
   async function salvar() {
     let data = { id, tipo };
     
@@ -79,7 +89,6 @@ function CadastroTiposAssento() {
     buscar(); // eslint-disable-next-line
   }, [id]);
 
-  const retornarListagem = () => navigate(`/adm/listagem-tiposAssento`);
 
   return (
     <div className='listContainer'>
@@ -107,7 +116,7 @@ function CadastroTiposAssento() {
                   Salvar
                 </button>
                 <button
-                  onClick={retornarListagem}
+                  onClick={inicializar}
                   type='button'
                   className='btn btn-danger'
                 >
