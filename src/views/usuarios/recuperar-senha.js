@@ -48,7 +48,7 @@ function RecuperarSenha() {
                   type='button'
                   className='btn btn-success'
                 >
-                  Salvar
+                  Enviar
                 </button>
                 <button
                   onClick={retornar}

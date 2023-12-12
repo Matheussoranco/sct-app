@@ -22,11 +22,11 @@ function ListagemFormaPagamento() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate(`/cadastro-formaPagamento`);
+    navigate(`/adm/cadastro/cadastro-formaPagamento`);
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-formaPagamento/${id}`);
+    navigate(`/adm/cadastro/cadastro-formaPagamento/${id}`);
   };
 
   const [dados, setDados] = React.useState(null);

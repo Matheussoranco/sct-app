@@ -186,24 +186,6 @@ function CadastroCompra() {
                   ))}
                 </select>
               </FormGroup>
-              <FormGroup label='Sessão: *' htmlFor='selecSessao'>
-                <select
-                  className='form-select'
-                  id='selectSessao'
-                  name='idSessao'
-                  value={idSessao}
-                  onChange={(e) => setIdSessao(e.target.value)}
-                >
-                  <option key='0' value='0'>
-                    {' '}
-                  </option>
-                  {dadosSessoes.map((dado) => (
-                    <option key={dado.id} value={dado.id}>
-                      {dado.dtExibicao + " " + dado.horarioInicial}
-                    </option>
-                  ))}
-                </select>
-              </FormGroup>
               <FormGroup label='Filme: *' htmlFor='selecFilme'>
                 <select
                   className='form-select'
@@ -222,6 +204,25 @@ function CadastroCompra() {
                   ))}
                 </select>
               </FormGroup>
+              <FormGroup label='Sessão: *' htmlFor='selecSessao'>
+                <select
+                  className='form-select'
+                  id='selectSessao'
+                  name='idSessao'
+                  value={idSessao}
+                  onChange={(e) => setIdSessao(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosSessoes.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.dtExibicao + " " + dado.horarioInicial}
+                    </option>
+                  ))}
+                </select>
+              </FormGroup>
+              
               
               <FormGroup label='Assento: *' htmlFor='selecAssento'>
                 <select

@@ -29,6 +29,7 @@ import CadastroSalas from "./views/cadastro/cadastro-salas";
 import CadastroTiposAssento from "./views/cadastro/cadastro-tiposAssento";
 import CadastroAdministradores from "./views/cadastro/cadastro-administradores";
 import CadastroAssento from "./views/cadastro/cadastro-assentos";
+import CadastroFormaPagamento from "./views/cadastro/cadastro-formasPagamento"
 
 import Comprar from "./views/usuarios/comprar";
 import RecuperarSenha from "./views/usuarios/recuperar-senha";
@@ -37,6 +38,11 @@ function Rotas(props) {
   return (
     <BrowserRouter>
       <Routes>
+
+      <Route
+          path="/adm/cadastro/cadastro-formaPagamento/:idParam?"
+          element={<CadastroFormaPagamento />}
+        />
 
       <Route
           path="/recuperarSenha"

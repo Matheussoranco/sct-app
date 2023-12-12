@@ -115,7 +115,7 @@ function CadastroAssento() {
   }, [id]);
 
   if (!dados) return null;
-  if (!dadosSalas || !dadosTipoAssento) return null;
+  if (!dadosSalas || !dadosTipoAssento || !dadosCinemas) return null;
 
   return (
     <div className='listContainer'>
@@ -141,16 +141,25 @@ function CadastroAssento() {
                   ))}
                 </select>
               </FormGroup>
-              <FormGroup label='Número: *' htmlFor='inputNumero'>
-                <input
-                  type='number'
-                  id='inputNumero'
-                  value={numero}
-                  className='form-control'
-                  name='numero'
-                  onChange={(e) => setNumero(e.target.value)}
-                />
+              <FormGroup label='Sala: *' htmlFor='selectSala'>
+                <select
+                  className='form-select'
+                  id='selectSala'
+                  name='idSala'
+                  value={idSala}
+                  onChange={(e) => setIdSala(e.target.value)}
+                >
+                  <option key='0' value='0'>
+                    {' '}
+                  </option>
+                  {dadosSalas.map((dado) => (
+                    <option key={dado.id} value={dado.id}>
+                      {dado.numSala}
+                    </option>
+                  ))}
+                </select>
               </FormGroup>
+
               <FormGroup label='Tipo de assento: *' htmlFor='selectTipoDeAssento'>
                 <select
                   className='form-select'
@@ -169,24 +178,17 @@ function CadastroAssento() {
                   ))}
                 </select>
               </FormGroup>
-              <FormGroup label='Sala: *' htmlFor='selectSala'>
-                <select
-                  className='form-select'
-                  id='selectSala'
-                  name='idSala'
-                  value={idSala}
-                  onChange={(e) => setIdSala(e.target.value)}
-                >
-                  <option key='0' value='0'>
-                    {' '}
-                  </option>
-                  {dadosSalas.map((dado) => (
-                    <option key={dado.id} value={dado.id}>
-                      {dado.numeroSala}
-                    </option>
-                  ))}
-                </select>
+              <FormGroup label='Número: *' htmlFor='inputNumero'>
+                <input
+                  type='number'
+                  id='inputNumero'
+                  value={numero}
+                  className='form-control'
+                  name='numero'
+                  onChange={(e) => setNumero(e.target.value)}
+                />
               </FormGroup>
+             
               <Stack spacing={1} padding={1} direction='row'>
                 <button
                   onClick={salvar}

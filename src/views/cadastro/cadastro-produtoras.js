@@ -67,6 +67,7 @@ function CadastroProdutora() {
   }
 
   async function buscar() {
+    if(idParam == null) return;
     await axios.get(`${baseURL}/${idParam}`).then((response) => {
       setDados(response.data);
     });
