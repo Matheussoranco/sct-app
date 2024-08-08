@@ -14,7 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import axios from 'axios';
-import { BASE_URL } from '../../config/axios3';
+import { BASE_URL } from '../../config/axios';
 import { BASE_URL as  BASE_URL2} from '../../config/axios';
 
 const baseURL = `${BASE_URL}/tiposTickets`;
