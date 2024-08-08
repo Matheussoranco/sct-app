@@ -16,7 +16,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import { BASE_URL } from '../../config/axios2';
 
-const baseURL = `${BASE_URL}/tiposExibicao`;
+const baseURL = `${BASE_URL}/tiposExibicoes`;
 
 function ListagemTiposExibicao() {
   const navigate = useNavigate();

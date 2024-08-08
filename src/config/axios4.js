@@ -1,2 +1,3 @@
 export const BASE_URL = 
-'https://my-json-server.typicode.com/Trabalhos-IF/PeopleFakeServer';
+'http://localhost:8080/api/v1';
+//'https://my-json-server.typicode.com/Trabalhos-IF/PeopleFakeServer';

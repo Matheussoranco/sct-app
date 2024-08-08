@@ -16,7 +16,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import { BASE_URL } from '../../config/axios2';
 
-const baseURL = `${BASE_URL}/tiposAssento`;
+const baseURL = `${BASE_URL}/tiposAssentos`;
 
 function ListagemTiposAssentos() {
   const navigate = useNavigate();
