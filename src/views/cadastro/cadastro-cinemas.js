@@ -24,7 +24,7 @@ function CadastroCinemas() {
   const [nome, setNome] = useState('');
   const [cnpj, setCnpj] = useState('');
   const [email, setEmail] = useState('');
-  const [numSala, setNumSala] = useState('');
+  const [numSalas, setNumSalas] = useState('');
   const [telefone, setTelefone] = useState('');
 
   const [dados, setDados] = React.useState([]);
@@ -35,21 +35,21 @@ function CadastroCinemas() {
       setNome('');
       setCnpj('');
       setEmail('');
-      setNumSala('');
+      setNumSalas('');
       setTelefone('')
     } else {
       setId(dados.id);
       setNome(dados.nome);
       setCnpj(dados.cnpj);
       setEmail(dados.email);
-      setNumSala(dados.numSala);
+      setNumSalas(dados.numSalas);
       setTelefone(dados.telefone);
     }
   }
 
   async function salvar() {
     let data = { id, nome, cnpj, email,
-      numSala, telefone};
+      numSalas, telefone};
     
     data = JSON.stringify(data);
 
@@ -89,7 +89,7 @@ function CadastroCinemas() {
     setNome(dados.nome);
     setCnpj(dados.cnpj);
     setEmail(dados.email);
-    setNumSala(dados.numSala);
+    setNumSalas(dados.numSalas);
     setTelefone(dados.telefone);
   }
 
@@ -143,8 +143,8 @@ function CadastroCinemas() {
                   id='inputNumSala'
                   value={numSala}
                   className='form-control'
-                  name='numSala'
-                  onChange={(e) => setNumSala(e.target.value)}
+                  name='numSalas'
+                  onChange={(e) => setNumSalas(e.target.value)}
                 />
               </FormGroup>
               <FormGroup label='Telefone:' htmlFor='inputTelefone'>
