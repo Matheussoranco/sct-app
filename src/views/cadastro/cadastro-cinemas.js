@@ -141,7 +141,7 @@ function CadastroCinemas() {
                 <input
                   type='text'
                   id='inputNumSala'
-                  value={numSala}
+                  value={numSalas}
                   className='form-control'
                   name='numSalas'
                   onChange={(e) => setNumSalas(e.target.value)}
