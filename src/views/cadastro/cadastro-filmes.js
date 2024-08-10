@@ -12,15 +12,15 @@ import "../../custom.css";
 
 import axios from "axios";
 
-import { BASE_URL as BASE_URL1 } from "../../config/axios";
-import { BASE_URL as  BASE_URL4} from '../../config/axios3';
+import { BASE_URL } from "../../config/axios";
+
 
 function CadastroFilmes() {
   const { idParam } = useParams();
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL1}/filmes`;
+  const baseURL = `${BASE_URL}/filmes`;
 
   const [id, setId] = useState("");
   const [titulo, setTitulo] = useState("");
@@ -103,11 +103,11 @@ function CadastroFilmes() {
   const [dadosProdutora, setDadosProdutora] = React.useState(null);
 
 useEffect(() => {
-  axios.get(`${BASE_URL1}/categorias`).then((response) => {
+  axios.get(`${BASE_URL}/categorias`).then((response) => {
     setDadosCategorias(response.data);
   });
 
-  axios.get(`${BASE_URL4}/produtoras`).then((response) => {
+  axios.get(`${BASE_URL}/produtoras`).then((response) => {
     setDadosProdutora(response.data);
   });
   
@@ -209,7 +209,7 @@ if (!dadosProdutora) return null;
                   ))}
                 </select>
               </FormGroup>
-              <FormGroup label="Capa: *" htmlFor="inputSinopse">
+              <FormGroup label="Capa" htmlFor="inputSinopse">
                 <input
                   type="file"
                   id="inputCapa"

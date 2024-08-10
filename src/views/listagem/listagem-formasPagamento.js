@@ -16,7 +16,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import { BASE_URL } from '../../config/axios';
 
-const baseURL = `${BASE_URL}/formasPagamento`;
+const baseURL = `${BASE_URL}/formaPagamentos`;
 
 function ListagemFormaPagamento() {
   const navigate = useNavigate();
@@ -77,14 +77,14 @@ function ListagemFormaPagamento() {
                 <thead>
                   <tr>
                     <th scope='col'>Código</th>
-                    <th scope='col'>nome</th>
+                    <th scope='col'>Tipo</th>
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
                       <td>{dado.id}</td>
-                      <td>{dado.nome}</td>
+                      <td>{dado.tipo}</td>
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton

@@ -11,9 +11,8 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL as BASE_URL1 } from '../../config/axios';
-import { BASE_URL as BASE_URL2 } from  '../../config/axios2'
-import { BASE_URL as BASE_URL3 } from  '../../config/axios3'
+import { BASE_URL } from '../../config/axios';
+
 
 function CadastroCompra() {
   const navigate = useNavigate();
@@ -23,28 +22,21 @@ function CadastroCompra() {
   const [email, setEmail] = useState('');
   const [idCinema, setIdCinema] = useState(0);
   const [idSessao, setIdSessao] = useState(0);
-  const [idFilme, setIdFilme] = useState(0);
   const [idAssento, setIdAssento] = useState(0);
   const [idTipoDeTicket, setIdTipoDeTicket] = useState(0);
   const [quantidade, setQuantidade] = useState('');
   const [idFormasDePagamento, setIdFormaDePagamento] = useState(0);
   const [valor, setValor] = useState('');
-  const [dtExibicao, setDtExibicao] = useState('');
-  const [horarioInicial, setHorarioInicial] = useState('');
 
   const [dados, setDados] = React.useState([]);
 
 
   function inicializar(sessao){
-    // let data = new Date(
-    //   sessao.data.split('/').reverse().join('-')
-    // ).toISOString().split('T')[0];
-    setDtExibicao(sessao.dtExibicao);
-    setHorarioInicial(sessao.horarioInicial)
+ 
     let valorInteira;
 
     if(quantidade && dadosTiposTicket && idTipoDeTicket )
-      valorInteira = dadosTiposTicket.find(tipo => tipo.id == idTipoDeTicket).valor
+      valorInteira = 30;
       setValor( quantidade*valorInteira);
   }
 
@@ -54,15 +46,12 @@ function CadastroCompra() {
     let data = {
       nome: nome,
       email: email,
-      idFilme: idFilme,
       idCinema: idCinema,
       idSessao: idSessao,
       idAssento: idAssento,
       idTipoDeTicket: idTipoDeTicket,
       quantidade: quantidade,
       idFormasDePagamento: idFormasDePagamento,
-      dtExibicao: dtExibicao,
-      horarioInicial: horarioInicial
     }
     
     let dadoNaoPreenchido = Object.keys(data).find(key => {
@@ -81,7 +70,7 @@ function CadastroCompra() {
 
   async function buscar() {
     try {
-      const response = await axios.get(`${BASE_URL2}`);
+      const response = await axios.get(`${BASE_URL}`);
       setDados(response.data);
       setDtExibicao(response.data.data);
       setHorarioInicial(response.data.horario);
@@ -92,7 +81,6 @@ function CadastroCompra() {
   }
 
   const [dadosCinemas, setDadosCinemas] = React.useState(null);
-  const [dadosFilmes, setDadosFilmes] = React.useState(null);
   const [dadosSessoes, setDadosSessoes] = React.useState(null);
   const [dadosAssentos, setDadosAssentos] = React.useState(null);
   const [dadosTiposTicket, setDadosTiposTicket] = React.useState(null);
@@ -100,28 +88,24 @@ function CadastroCompra() {
 
   useEffect(() => {
     // Fetch cinemas
-    axios.get(`${BASE_URL1}/cinemas`).then((response) => {
+    axios.get(`${BASE_URL}/cinemas`).then((response) => {
       setDadosCinemas(response.data);
     });
   
-    // Fetch filmes
-    axios.get(`${BASE_URL1}/filmes`).then((response) => {
-      setDadosFilmes(response.data);
-    });
 
-    axios.get(`${BASE_URL2}/sessoes`).then((response) => {
+    axios.get(`${BASE_URL}/sessoes`).then((response) => {
       setDadosSessoes(response.data);
     });
 
-    axios.get(`${BASE_URL2}/assentos`).then((response) => {
+    axios.get(`${BASE_URL}/assentos`).then((response) => {
       setDadosAssentos(response.data);
     });
 
-    axios.get(`${BASE_URL3}/tiposTicket`).then((response) => {
+    axios.get(`${BASE_URL}/tiposTickets`).then((response) => {
       setDadosTiposTicket(response.data);
     });
 
-    axios.get(`${BASE_URL3}/formasPagamento`).then((response) => {
+    axios.get(`${BASE_URL}/formaPagamentos`).then((response) => {
       setDadosFormaDePagamento(response.data);
     });
   }, []);
@@ -129,7 +113,7 @@ function CadastroCompra() {
   useEffect(() => {
     if(idSessao){
       let sessao = dadosSessoes.find(sessao => sessao.id == idSessao);
-      inicializar(sessao)
+      inicializar();
     }
   })
   useEffect(() => {
@@ -139,7 +123,7 @@ function CadastroCompra() {
   
 
   if (!dados) return null;
-  if (!dadosCinemas || !dadosFilmes || !dadosSessoes || !dadosAssentos || 
+  if (!dadosCinemas || !dadosSessoes || !dadosAssentos || 
       !dadosTiposTicket || !dadosFormasDePagamento ) return null;
 
   return (
@@ -182,24 +166,6 @@ function CadastroCompra() {
                   {dadosCinemas.map((dado) => (
                     <option key={dado.id} value={dado.id}>
                       {dado.nome}
-                    </option>
-                  ))}
-                </select>
-              </FormGroup>
-              <FormGroup label='Filme: *' htmlFor='selecFilme'>
-                <select
-                  className='form-select'
-                  id='selectFilme'
-                  name='idFilme'
-                  value={idFilme}
-                  onChange={(e) => setIdFilme(e.target.value)}
-                >
-                  <option key='0' value='0'>
-                    {' '}
-                  </option>
-                  {dadosFilmes.map((dado) => (
-                    <option key={dado.id} value={dado.id}>
-                      {dado.titulo}
                     </option>
                   ))}
                 </select>
@@ -302,29 +268,6 @@ function CadastroCompra() {
                   className='form-control'
                   name='Valor '
                   onChange={(e) => setDtExibicao(e.target.value)}
-                  readOnly 
-                />
-              </FormGroup>
-              <FormGroup label='Data de exibição: ' htmlFor='inputDTExibicao'>
-                <input
-                  type='text'
-                  id='inputDTExibicao'
-                  value={dtExibicao}
-                  className='form-control'
-                  name='dtExibicao '
-                  onChange={(e) => setDtExibicao(e.target.value)}
-                  readOnly 
-                />
-              </FormGroup>
-              <FormGroup label='Horário Inicial : ' htmlFor='inputHorarioInicial'>
-                <input
-                  type='time'
-                  maxLength='11'
-                  id='inputHorarioInicial'
-                  value={horarioInicial}
-                  className='form-control'
-                  name='horarioInicial'
-                  onChange={(e) => setHorarioInicial(e.target.value)}
                   readOnly 
                 />
               </FormGroup>

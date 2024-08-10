@@ -11,8 +11,8 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../../config/axios3';
-import { BASE_URL as  BASE_URL2} from '../../config/axios';
+
+import { BASE_URL} from '../../config/axios';
 import { Save } from '@mui/icons-material';
 
 function CadastroTiposTicket() {
@@ -20,7 +20,7 @@ function CadastroTiposTicket() {
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/tiposTicket`;
+  const baseURL = `${BASE_URL}/tiposTickets`;
 
   const [id, setId] = useState('');
   const [idCinema, setIdCinema] = useState(0);
@@ -45,13 +45,12 @@ function CadastroTiposTicket() {
 
   async function salvar() {
     let data = { id, tipo, valor, idCinema };
-    
     data = JSON.stringify(data);
 
     if (idParam == null) {
       await axios
-        .post(baseURL, data, {
-          headers: { 'Content-Type': 'application/json' },
+      .post(baseURL, data, {
+        headers: { 'Content-Type': 'application/json' },
         })
         .then( () => {
           mensagemSucesso(`Tipo de ticket ${tipo} cadastrado com sucesso!`);
@@ -73,6 +72,7 @@ function CadastroTiposTicket() {
           mensagemErro(error.response.data);
         });
     }
+    console.log("a")
   }
 
   async function buscar() {
@@ -89,7 +89,7 @@ function CadastroTiposTicket() {
   const [dadosCinemas, setDadosCinemas] = React.useState(null);
 
   useEffect(() => {
-    axios.get(`${BASE_URL2}/cinemas`).then((response) => {
+    axios.get(`${BASE_URL}/cinemas`).then((response) => {
       setDadosCinemas(response.data);
     });
 

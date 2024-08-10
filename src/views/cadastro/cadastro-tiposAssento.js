@@ -11,7 +11,7 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../../config/axios2';
+import { BASE_URL } from '../../config/axios';
 import { Save } from '@mui/icons-material';
 
 function CadastroTiposAssento() {

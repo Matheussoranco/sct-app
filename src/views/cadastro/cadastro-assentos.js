@@ -11,16 +11,15 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL as BASE_URL1 } from '../../config/axios2';
-import { BASE_URL as BASE_URL2 } from '../../config/axios';
-import { BASE_URL as BASE_URL3 } from '../../config/axios';
+
+import { BASE_URL } from '../../config/axios';
 
 function CadastroAssento() {
   const { idParam } = useParams();
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL1}/assentos`;
+  const baseURL = `${BASE_URL}/assentos`;
 
 
   const [id, setId] = useState('');
@@ -96,15 +95,15 @@ function CadastroAssento() {
  
 
   useEffect(() => {
-    axios.get(`${BASE_URL1}/tiposAssento`).then((response) => {
+    axios.get(`${BASE_URL}/tiposAssento`).then((response) => {
       setDadosTipoAssento(response.data);
     });
 
-    axios.get(`${BASE_URL2}/salas`).then((response) => {
+    axios.get(`${BASE_URL}/salas`).then((response) => {
       setDadosSalas(response.data);
     });
 
-    axios.get(`${BASE_URL3}/cinemas`).then((response) => {
+    axios.get(`${BASE_URL}/cinemas`).then((response) => {
       setDadosCinemas(response.data);
     });
     

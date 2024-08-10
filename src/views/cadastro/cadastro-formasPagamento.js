@@ -11,17 +11,17 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../../config/axios3';
+import { BASE_URL } from '../../config/axios';
 
 function CadastroAluno() {
   const { idParam } = useParams();
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/formasPagamento`;
+  const baseURL = `${BASE_URL}/formaPagamentos`;
 
   const [id, setId] = useState('');
-  const [nome, setNome] = useState('');
+  const [tipo, setTipo] = useState('');
  
 
   const [dados, setDados] = React.useState([]);
@@ -29,17 +29,17 @@ function CadastroAluno() {
   function inicializar() {
     if (idParam == null) {
       setId('');
-      setNome('');
+      setTipo('');
      
     } else {
       setId(dados.id);
-      setNome(dados.nome);
+      setTipo(dados.tipo);
       
     }
   }
 
   async function salvar() {
-    let data = { id, nome };
+    let data = { id, tipo };
     data = JSON.stringify(data);
     if (idParam == null) {
       await axios
@@ -47,8 +47,8 @@ function CadastroAluno() {
           headers: { 'Content-Type': 'application/json' },
         })
         .then(function (response) {
-          mensagemSucesso(`Aluno ${nome} cadastrado com sucesso!`);
-          navigate(`/listagem-alunos`);
+          mensagemSucesso(`Aluno ${tipo} cadastrado com sucesso!`);
+          navigate(`adm/listagem-formasPagamento`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
@@ -59,7 +59,7 @@ function CadastroAluno() {
           headers: { 'Content-Type': 'application/json' },
         })
         .then(function (response) {
-          mensagemSucesso(`Aluno ${nome} alterado com sucesso!`);
+          mensagemSucesso(`Aluno ${tipo} alterado com sucesso!`);
           navigate(`/listagem-alunos`);
         })
         .catch(function (error) {
@@ -74,7 +74,7 @@ function CadastroAluno() {
       setDados(response.data);
     });
     setId(dados.id);
-    setNome(dados.nome);
+    setTipo(dados.tipo);
     
   }
 
@@ -91,14 +91,14 @@ function CadastroAluno() {
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
-              <FormGroup label='Nome: *' htmlFor='inputNome'>
+              <FormGroup label='Tipo: *' htmlFor='inputTipo'>
                 <input
                   type='text'
-                  id='inputNome'
-                  value={nome}
+                  id='inputTipo'
+                  value={tipo}
                   className='form-control'
-                  name='nome'
-                  onChange={(e) => setNome(e.target.value)}
+                  name='tipo'
+                  onChange={(e) => setTipo(e.target.value)}
                 />
               </FormGroup>
               <Stack spacing={1} padding={1} direction='row'>

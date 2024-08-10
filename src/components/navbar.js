@@ -6,7 +6,7 @@ import NavSearchBar from "./NavSearchBar";
 import userImage from "./avatar.png"; // Replace with the path to your user image
 import "../App.css";
 import axios from 'axios';
-import { BASE_URL as BASE_URL1 } from '../config/axios';
+import { BASE_URL } from '../config/axios';
 
 
 function Navbar(props) {
@@ -40,10 +40,10 @@ function Navbar(props) {
 
   useEffect(() => {
     // Fetch cinemas
-    axios.get(`${BASE_URL1}/cinemas`).then((response) => {
+    axios.get(`${BASE_URL}/cinemas`).then((response) => {
       setDadosCinemas(response.data);
     });
-  })
+  }, [])
 
   return (
     <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">

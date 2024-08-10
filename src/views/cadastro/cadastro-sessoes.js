@@ -11,16 +11,14 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL as  BASE_URL} from '../../config/axios';
-import { BASE_URL as  BASE_URL2} from '../../config/axios2';
-import { BASE_URL as  BASE_URL3} from '../../config/axios3';
+import { BASE_URL } from '../../config/axios';
 
 function CadastroSessoes() {
   const { idParam } = useParams();
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL2}/sessoes`;
+  const baseURL = `${BASE_URL}/sessoes`;
 
   const [id, setId] = useState('');
   const [idCinema, setIdCinema] = useState(0);
@@ -130,11 +128,11 @@ function CadastroSessoes() {
       setDadosFilmes(response.data);
     });
 
-    axios.get(`${BASE_URL3}/tiposTicket`).then((response) => {
+    axios.get(`${BASE_URL}/tiposTickets`).then((response) => {
       setDadosTipoTicket(response.data);
     });
 
-    axios.get(`${BASE_URL2}/tiposExibicao`).then((response) => {
+    axios.get(`${BASE_URL}/tiposExibicoes`).then((response) => {
       setDadosTipoExibicao(response.data);
     });
   }, []);
@@ -246,7 +244,7 @@ function CadastroSessoes() {
               </FormGroup>
               <FormGroup label='data de exibição: *' htmlFor='inputDTExibicao'>
                 <input
-                  type='text'
+                  type='date'
                   id='inputDTExibicao'
                   value={dtExibicao}
                   className='form-control'

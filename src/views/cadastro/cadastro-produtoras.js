@@ -11,7 +11,7 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../../config/axios3';
+import { BASE_URL } from '../../config/axios';
 
 
 function CadastroProdutoras() {

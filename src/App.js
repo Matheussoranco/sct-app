@@ -45,7 +45,7 @@ class App extends Component {
     return (
       <div className={`app-container ${isAdminLoggedIn ? 'adm-background' : ''}`}>
         <Rotas />
-        {isAdminLoggedIn ? null : <StarryBackground />}
+        {isAdminLoggedIn }
         <div className={`container ${isAdminLoggedIn ? 'adm-background' : ''}`}>
           {isAdminLoggedIn ? <AdmNavBar /> : <Navbar />}
           {showAdminLogin && !isAdminLoggedIn ? (

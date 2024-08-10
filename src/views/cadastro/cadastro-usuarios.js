@@ -11,14 +11,14 @@ import { mensagemSucesso, mensagemErro } from '../../components/toastr';
 import '../../custom.css';
 
 import axios from 'axios';
-import { BASE_URL } from '../../config/axios4';
+import { BASE_URL } from '../../config/axios';
 
 function CadastroUsuarios() {
   const { idParam } = useParams();
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/usuarios`;
+  const baseURL = `${BASE_URL}/clientes`;
 
   const [id, setId] = useState('');
   const [nome, setNome] = useState('');
@@ -77,7 +77,7 @@ function CadastroUsuarios() {
         })
         .then( () => {
           mensagemSucesso(`Usuario ${id} cadastrado com sucesso!`);
-          navigate(`/`);
+          navigate(`/adm/listagem-usuarios`);
         })
         .catch(function (error) {
           mensagemErro(error.response.data);
