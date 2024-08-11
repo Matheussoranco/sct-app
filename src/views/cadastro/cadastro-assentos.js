@@ -23,7 +23,6 @@ function CadastroAssento() {
 
 
   const [id, setId] = useState('');
-  const [idCinema, setIdCinema] = useState(0);
   const [idSala, setIdSala] = useState(0);
   const [numero, setNumero] = useState('');
   const [idTipoAssento, setIdTipoAssento] = useState(0);
@@ -35,7 +34,6 @@ function CadastroAssento() {
     if (idParam == null) {
       setId('');
       setNumero('');
-  
       setIdSala(0);
       setIdTipoAssento(0)
     } else {
@@ -83,7 +81,6 @@ function CadastroAssento() {
     });
 
     setId(dados.id);
-    setIdCinema(dados.idCinema);
     setIdSala(dados.idSala);
     setNumero(dados.numero);
     setIdTipoAssento(dados.idTipoAssento)
@@ -91,20 +88,15 @@ function CadastroAssento() {
 
   const [dadosTipoAssento, setDadosTipoAssento] = React.useState(null);
   const [dadosSalas, setDadosSalas] = React.useState(null);
-  const [dadosCinemas, setDadosCinemas] = React.useState(null);
- 
 
+ 
   useEffect(() => {
-    axios.get(`${BASE_URL}/tiposAssento`).then((response) => {
+    axios.get(`${BASE_URL}/tiposAssentos`).then((response) => {
       setDadosTipoAssento(response.data);
     });
 
     axios.get(`${BASE_URL}/salas`).then((response) => {
       setDadosSalas(response.data);
-    });
-
-    axios.get(`${BASE_URL}/cinemas`).then((response) => {
-      setDadosCinemas(response.data);
     });
     
   }, []);
@@ -114,7 +106,7 @@ function CadastroAssento() {
   }, [id]);
 
   if (!dados) return null;
-  if (!dadosSalas || !dadosTipoAssento || !dadosCinemas) return null;
+  if (!dadosSalas || !dadosTipoAssento ) return null;
 
   return (
     <div className='listContainer'>
@@ -122,23 +114,15 @@ function CadastroAssento() {
         <div className='row'>
           <div className='col-lg-12'>
             <div className='bs-component'>
-            <FormGroup label='Cinema: *' htmlFor='selectCinema'>
-                <select
-                  className='form-select'
-                  id='selectCinema'
-                  name='idCinema'
-                  value={idCinema}
-                  onChange={(e) => setIdCinema(e.target.value)}
-                >
-                  <option key='0' value='0'>
-                    {' '}
-                  </option>
-                  {dadosCinemas.map((dado) => (
-                    <option key={dado.id} value={dado.id}>
-                      {dado.nome}
-                    </option>
-                  ))}
-                </select>
+            <FormGroup label='Número: *' htmlFor='inputNumero'>
+                <input
+                  type='number'
+                  id='inputNumero'
+                  value={numero}
+                  className='form-control'
+                  name='numero'
+                  onChange={(e) => setNumero(e.target.value)}
+                />
               </FormGroup>
               <FormGroup label='Sala: *' htmlFor='selectSala'>
                 <select
@@ -172,21 +156,12 @@ function CadastroAssento() {
                   </option>
                   {dadosTipoAssento.map((dado) => (
                     <option key={dado.id} value={dado.id}>
-                      {dado.nome}
+                      {dado.tipo}
                     </option>
                   ))}
                 </select>
               </FormGroup>
-              <FormGroup label='Número: *' htmlFor='inputNumero'>
-                <input
-                  type='number'
-                  id='inputNumero'
-                  value={numero}
-                  className='form-control'
-                  name='numero'
-                  onChange={(e) => setNumero(e.target.value)}
-                />
-              </FormGroup>
+             
              
               <Stack spacing={1} padding={1} direction='row'>
                 <button

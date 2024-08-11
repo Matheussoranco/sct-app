@@ -19,7 +19,7 @@ function CadastroTiposExibicao() {
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/tiposExibicao`;
+  const baseURL = `${BASE_URL}/tiposExibicoes`;
 
   const [id, setId] = useState('');
   const [nome, setNome] = useState('');

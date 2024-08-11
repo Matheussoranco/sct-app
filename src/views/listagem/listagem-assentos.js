@@ -59,7 +59,7 @@ function ListagemAssentos() {
   }, []);
 
   if (!dados) return null;
-
+ 
   return (
     <div className='listContainer'>
       <Card title='Listagem de assentos'>
@@ -76,17 +76,17 @@ function ListagemAssentos() {
               <table className='table table-hover'>
                 <thead>
                   <tr>
-                    <th scope='col'>Código</th>
+                    <th scope='col'>Número</th>
                     <th scope='col'>Sala</th>
-                    <th scope='col'>Cinema</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
                   {dados.map((dado) => (
                     <tr key={dado.id}>
-                      <td>{dado.id}</td>
-                      <td>{dado.Sala}</td>
-                      <td>{dado.cinemas}</td>
+                      <td>{dado.numero}</td>
+                      <td>{dado.idSala}</td>
+                      
                       <td>
                         <Stack spacing={1} padding={0} direction='row'>
                           <IconButton

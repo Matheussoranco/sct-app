@@ -19,7 +19,7 @@ function CadastroTiposAssento() {
 
   const navigate = useNavigate();
 
-  const baseURL = `${BASE_URL}/tiposAssento`;
+  const baseURL = `${BASE_URL}/tiposAssentos`;
 
   const [id, setId] = useState('');
   const [tipo, setTipo] = useState('');
@@ -80,7 +80,7 @@ function CadastroTiposAssento() {
   const [dadosTiposAssento, setDadosAssentos] = React.useState(null);
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/tiposAssento`).then((response) => {
+    axios.get(`${BASE_URL}/tiposAssentos`).then((response) => {
       setDadosAssentos(response.data);
     });
   }, []);
